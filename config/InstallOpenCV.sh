@@ -7,23 +7,24 @@ cd ~
 #
 # Update packages
 sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get upgrade -y
 sudo rpi-update # Update Raspberry Pi firmware
 #
 # Install basic tools
-sudo apt-get install build-essential cmake pkg-config
+sudo apt-get install -y build-essential pkg-config
+sudo apt-get install -y cmake
 #
 # Install graphic libraries
-sudo apt-get install libjpeg8-dev libtiff4-dev libjasper-dev libpng12-dev
+sudo apt-get install -y libjpeg8-dev libtiff4-dev libjasper-dev libpng12-dev
 #
 # Install GUI library
-sudo apt-get install libgtk2.0-dev
+sudo apt-get install -y libgtk2.0-dev
 #
 # Install video libraries
-sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
 #
 # Install calculation libraries
-sudo apt-get install libatlas-base-dev gfortran
+sudo apt-get install -y libatlas-base-dev gfortran
 #
 # Install pip
 wget https://bootstrap.pypa.io/get-pip.py
@@ -39,17 +40,18 @@ echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.profile
 # Reload .profile
 source ~/.profile
 #
-# Setup virtualenv
+# Setup virtualenv and activate
 mkvirtualenv cv
+workon cv
 #
 # Install python dev tools
-sudo apt-get install python2.7-dev
-sudo pip install numpy
+sudo apt-get install -y python2.7-dev
+pip install numpy # Install numpy in virtualenv
 #
 # Download OpenCV
 wget -O opencv-2.4.10.zip http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.10/opencv-2.4.10.zip/download
 unzip opencv-2.4.10.zip
-cv opencv-2.4.10
+cd opencv-2.4.10
 #
 # Configure
 mkdir build
