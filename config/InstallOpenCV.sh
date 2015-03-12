@@ -66,7 +66,7 @@ sudo make install
 sudo ldconfig
 #
 # Link OpenCV library to virtualenv
-cd ~./virtualenvs/cv/lib/python2.7/site-packages/
+cd ~/.virtualenvs/cv/lib/python2.7/site-packages/
 ln -s /usr/local/lib/python2.7/site-packages/cv2.so cv2.so
 ln -s /usr/local/lib/python2.7/site-packages/cv.py cv.py
 
