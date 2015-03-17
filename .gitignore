@@ -1,3 +1,6 @@
+# Directories
+bin/
+
 # Picture formats
 *.jpg
 *.png
