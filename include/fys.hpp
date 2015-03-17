@@ -4,6 +4,9 @@
 //
 // General header file of this software.
 
+#ifndef _H_FYS
+#define _H_FYS
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -23,4 +26,6 @@ namespace fys{
 enum Features {null};
 
 } // namespace fys
+
+#endif // _H_FYS
 
