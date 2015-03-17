@@ -2,7 +2,7 @@
  
 # define variables
 CC = g++
-SOURCES = main.cpp
+SOURCES = json_handler.cpp main.cpp
 OBJS = fys
 CFLAGS = -O2
 LDFLAGS = -I/usr/local/lib

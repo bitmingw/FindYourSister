@@ -17,3 +17,10 @@
 
 #include <unistd.h>
 
+// Declarations of classes
+namespace fys{
+
+enum Features {null};
+
+} // namespace fys
+
