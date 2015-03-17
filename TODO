@@ -1,0 +1,32 @@
+[ ] Construct the framework
+    [ ] Draw the graph of dependency
+	[ ] Add json parser
+	[ ] Write helper functions
+	[ ] Write main program
+	[ ] Write corresponding json config files
+	[ ] Debug
+	[ ] Test
+
+[ ] Add a test case
+    [ ] Setup image config files
+	[ ] Convert XML labels to json
+	[ ] Read labels & locations from json
+	[ ] Compute new matching
+	[ ] Search for classify conditions
+	[ ] Check image pairs
+	[ ] Optimize the results
+
+[ ] Porting
+    [ ] Use cmake to replace Makefile
+	[ ] Test in GCC, MinGW & MSVC
+
+[ ] Documents
+    [ ] README
+	[ ] Installing scripts for dependent packages
+	[ ] HTML docs
+
+[ ] Thesis
+    [ ] Principles
+	[ ] Results
+	[ ] Reference
+	[ ] Presentation
