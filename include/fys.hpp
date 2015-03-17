@@ -20,12 +20,7 @@
 
 #include <unistd.h>
 
-// Declarations of classes
-namespace fys{
-
-enum Features {null};
-
-} // namespace fys
+#define MAX_LINE 255 // max characters in one line
 
 #endif // _H_FYS
 

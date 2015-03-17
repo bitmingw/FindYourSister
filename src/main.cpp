@@ -1,6 +1,7 @@
 // Copyright (c) 2015, Ming Wen
 
 #include "../include/fys.hpp"
+#include "../include/json_handler.hpp"
 
 using namespace cv;
 
@@ -25,5 +26,8 @@ int main(int argc, char* argv[]) {
     }
 
     std::cout << features_config_file << " " << images_config_file << std::endl;
+
+    fys::JsonFeatures jf = fys::JsonFeatures(features_config_file);
+
     exit(EXIT_SUCCESS);
 }
