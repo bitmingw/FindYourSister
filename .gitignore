@@ -1,0 +1,18 @@
+# Picture formats
+*.jpg
+*.png
+*.tiff
+
+# C/C++
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.elf
+*.exe
+
+# Python
+*.py[cod]
+
