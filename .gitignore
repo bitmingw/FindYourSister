@@ -4,6 +4,7 @@
 *.tiff
 
 # C/C++
+*.swp
 *.o
 *.obj
 *.a
