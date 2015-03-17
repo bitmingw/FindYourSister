@@ -7,8 +7,8 @@ using namespace cv;
 int main(int argc, char* argv[]) {
     
     // read command-line arguments
-    char* features_config_file = "features.json";
-    char* images_config_file = "images.json";
+    string features_config_file = "features.json";
+    string images_config_file = "images.json";
 
     int option = 0;
     while ((option = getopt(argc, argv, "f:i:")) != -1) {
