@@ -13,7 +13,7 @@ JsonHandler::JsonHandler(string filename)
 JsonHandler::~JsonHandler() {}
 
 void
-JsonHandler::readJson()
+JsonHandler::readJsonFile()
 {
     string fullPath = "../config/" + this->jsonFilename;
     ifstream stream_r;
@@ -27,13 +27,45 @@ JsonHandler::readJson()
             bufStr = buf;
             this->jsonStr += bufStr;
         }
+        stream_r.close();
+    }
+    else {
+        std::cerr << "Error: can\'t open " << this->jsonFilename << " for reading!" << std::endl;
     }
 }
 
 string
-JsonHandler::getJsonStr()
+JsonHandler::getFileStr()
 {
     return this->jsonStr;
+}
+
+string
+JsonHandler::getDocStr(rapidjson::StringBuffer& buffer)
+{
+    return buffer.GetString();
+}
+
+void
+JsonHandler::updateStr(rapidjson::StringBuffer& buffer)
+{
+    this->jsonStr = buffer.GetString();
+}
+
+void
+JsonHandler::writeJsonFile()
+{
+    string fullPath = "../config/" + this->jsonFilename;
+    ofstream stream_w;
+    stream_w.open(fullPath.c_str(), ios_base::out);
+
+    if (stream_w.is_open()) {
+        stream_w << this->jsonStr;
+        stream_w.close();
+    }
+    else {
+        std::cerr << "Error: can\'t open " << this->jsonFilename << " for writing!" << std::endl;
+    }
 }
 
 JsonFeatures::JsonFeatures(string filename) 

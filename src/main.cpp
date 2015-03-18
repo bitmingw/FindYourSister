@@ -28,8 +28,24 @@ int main(int argc, char* argv[]) {
     std::cout << features_config_file << " " << images_config_file << std::endl;
 
     fys::JsonFeatures jf = fys::JsonFeatures(features_config_file);
-    jf.readJson();
-    std::cout << jf.getJsonStr() << std::endl;
+    jf.readJsonFile();
+    std::cout << jf.getFileStr() << std::endl;
+
+    rapidjson::Document doc;
+    doc.Parse(jf.getFileStr().c_str());
+
+    if (doc["detector"].IsNull()) {
+        rapidjson::Value& detector = doc["detector"];
+        detector.SetString("SIFT");
+    }
+
+    rapidjson::StringBuffer buffer;
+    rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
+    doc.Accept(writer);
+
+    std::cout << jf.getDocStr(buffer) << std::endl;
+    jf.updateStr(buffer);
+    jf.writeJsonFile();
 
     exit(EXIT_SUCCESS);
 }

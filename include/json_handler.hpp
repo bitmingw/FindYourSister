@@ -5,6 +5,7 @@
 
 #include <rapidjson/document.h>
 #include <rapidjson/writer.h>
+#include <rapidjson/prettywriter.h>
 #include <rapidjson/stringbuffer.h>
 
 using namespace std;
@@ -18,8 +19,11 @@ class JsonHandler
 public:
     JsonHandler(string filename);
     ~JsonHandler();
-    void readJson();
-    string getJsonStr();
+    void readJsonFile(); // open & read json file
+    string getFileStr(); // return json file as string
+    string getDocStr(rapidjson::StringBuffer& buffer); // return json document as string
+    void updateStr(rapidjson::StringBuffer& buffer); // update this->jsonStr
+    void writeJsonFile(); // open & write json file
 
 private:
     string jsonFilename;
