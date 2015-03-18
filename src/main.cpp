@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
     rapidjson::Document doc;
     doc.Parse(jf.getFileStr().c_str());
 
-    if (doc["detector"].IsNull()) {
+    if (doc.HasMember("detector") && doc["detector"].IsNull()) {
         rapidjson::Value& detector = doc["detector"];
         detector.SetString("SIFT");
     }

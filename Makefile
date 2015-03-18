@@ -4,7 +4,7 @@
 CC = g++
 SOURCES = json_handler.cpp main.cpp
 OBJS = fys
-CFLAGS = -O2
+CFLAGS = -g
 LDFLAGS = -I/usr/local/lib
 LDLIBS = -l opencv_core -l opencv_highgui -l opencv_features2d -l opencv_nonfree
 
