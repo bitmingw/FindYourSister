@@ -12,6 +12,40 @@ using namespace std;
 
 namespace fys{
 
+// helper class
+class ImageSize
+{
+public:
+    ImageSize();
+    ImageSize(int nrows, int ncols);
+    ~ImageSize();
+    int nrows;
+    int ncols;
+};
+
+class ImageRegion
+{
+public:
+    ImageRegion();
+    ImageRegion(int xmin, int xmax, int ymin, int ymax);
+    ~ImageRegion();
+    int xmin;
+    int xmax;
+    int ymin;
+    int ymax;
+};
+
+class ImageObject
+{
+public:
+    ImageObject(string name, int id, ImageRegion& region);
+    ~ImageObject(); // note: deallocate region first
+    string name;
+    int id;
+    ImageRegion region;
+};
+
+
 // base class
 class JsonHandler
 {
@@ -31,28 +65,47 @@ private:
 };
 
 
+// features class
 class JsonFeatures : public JsonHandler
 {
 
 public:
     JsonFeatures(string filename);
     ~JsonFeatures();
-    int getDetectorType();
-    void setDetectorType(int type_enum);
-    int getDescriptorType();
-    void setDescriptorType(int type_enum);
-    int getMatcherType();
-    void setMatcherType(int type_enum);
+    string getDetectorType();
+    void setDetectorType(string type);
+    string getDescriptorType();
+    void setDescriptorType(string type);
+    string getMatcherType();
+    void setMatcherType(string type);
 
 private:
-    int detectorType;
-    int descriptorType;
-    int matcherType;
+    string detectorType;
+    string descriptorType;
+    string matcherType;
 };
 
-enum Detectors {null_t};
-enum Descriptors {null_c};
-enum Matchers {null_m};
+//enum Detectors {null_t};
+//enum Descriptors {null_c};
+//enum Matchers {null_m};
+
+
+// images class
+class JsonImages: public JsonHandler
+{
+
+public:
+    JsonImages(string filename);
+    ~JsonImages();
+    int getNumImages();
+    string getFilename(int imageIdx);
+    string getFolderName(int imageIdx);
+    ImageSize getImageSize(int imageIdx);
+    int getNumObjects();
+    string getObjectName(int imageIdx, int objectIdx);
+    int getObjectId(int imageIdx, int objectIdx);
+    ImageRegion getObjectRegion(int imageIdx, int objectIdx);
+};
 
 } // namespace fys
 
