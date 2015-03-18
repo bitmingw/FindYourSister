@@ -3,18 +3,36 @@
 #ifndef _H_JSON_HANDLER
 #define _H_JSON_HANDLER
 
+#include <rapidjson/document.h>
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
+
 using namespace std;
 
 namespace fys{
 
-class JsonFeatures
+// base class
+class JsonHandler
 {
 
-// function declarations
+public:
+    JsonHandler(string filename);
+    ~JsonHandler();
+    void readJson();
+    string getJsonStr();
+
+private:
+    string jsonFilename;
+    string jsonStr;
+};
+
+
+class JsonFeatures : public JsonHandler
+{
+
 public:
     JsonFeatures(string filename);
-    void openJson();
-    void readJson();
+    ~JsonFeatures();
     int getDetectorType();
     void setDetectorType(int type_enum);
     int getDescriptorType();
@@ -22,10 +40,7 @@ public:
     int getMatcherType();
     void setMatcherType(int type_enum);
 
-// variables
 private:
-    string jsonFilename;
-    string jsonStr;
     int detectorType;
     int descriptorType;
     int matcherType;

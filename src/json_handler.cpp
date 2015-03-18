@@ -7,34 +7,39 @@ using namespace std;
 
 namespace fys{
 
-JsonFeatures::JsonFeatures(string filename) 
+JsonHandler::JsonHandler(string filename) 
     : jsonFilename(filename) {}
 
-#if 0
-void JsonFeatures::openJson()
-{
-    if (stream.is_open()) {
-        std::cerr << "Warning: features file has been opened." << std::endl;
-    }
-    else {
-        string fullPath = "../config/" + this->jsonFilename;
-        this->stream.open(fullPath.c_str(), ios::in | ios::out);
-    }
-}
+JsonHandler::~JsonHandler() {}
 
-void JsonFeatures::readJson()
+void
+JsonHandler::readJson()
 {
-    if (stream.is_open()) {
+    string fullPath = "../config/" + this->jsonFilename;
+    ifstream stream_r;
+    stream_r.open(fullPath.c_str(), ios_base::in);
+
+    if (stream_r.is_open()) {
         char buf[MAX_LINE];
         string bufStr = "";
-        while (!stream.eof()) {
-            stream.getline(buf, MAX_LINE);
+        while (!stream_r.eof()) {
+            stream_r.getline(buf, MAX_LINE);
             bufStr = buf;
-            jsonStr += bufStr;
+            this->jsonStr += bufStr;
         }
     }
 }
-#endif
+
+string
+JsonHandler::getJsonStr()
+{
+    return this->jsonStr;
+}
+
+JsonFeatures::JsonFeatures(string filename) 
+    : JsonHandler(filename) {}
+
+JsonFeatures::~JsonFeatures() {}
 
 } // namespace fys
 

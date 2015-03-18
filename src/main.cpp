@@ -28,6 +28,8 @@ int main(int argc, char* argv[]) {
     std::cout << features_config_file << " " << images_config_file << std::endl;
 
     fys::JsonFeatures jf = fys::JsonFeatures(features_config_file);
+    jf.readJson();
+    std::cout << jf.getJsonStr() << std::endl;
 
     exit(EXIT_SUCCESS);
 }
