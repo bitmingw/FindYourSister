@@ -7,6 +7,24 @@ using namespace std;
 
 namespace fys{
 
+// helper class
+ImageSize::ImageSize()
+    : nrows(0), ncols(0) {}
+ImageSize::ImageSize(int nrows, int ncols)
+    : nrows(nrows), ncols(ncols) {}
+ImageSize::~ImageSize() {}
+
+ImageRegion::ImageRegion()
+    : xmin(0), xmax(0), ymin(0), ymax(0) {}
+ImageRegion::ImageRegion(int xmin, int xmax, int ymin, int ymax)
+    : xmin(xmin), xmax(xmax), ymin(ymin), ymax(ymax) {}
+ImageRegion::~ImageRegion() {}
+
+ImageObject::ImageObject(string name, int id, ImageRegion& region)
+    : name(name), id(id), region(region) {}
+ImageObject::~ImageObject() {}
+
+// base class
 JsonHandler::JsonHandler(string filename) 
     : jsonFilename(filename) {}
 

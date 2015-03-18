@@ -39,7 +39,7 @@ class ImageObject
 {
 public:
     ImageObject(string name, int id, ImageRegion& region);
-    ~ImageObject(); // note: deallocate region first
+    ~ImageObject(); 
     string name;
     int id;
     ImageRegion region;
