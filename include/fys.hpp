@@ -11,6 +11,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <cctype>
 #include <cstdlib>
 
 #include <opencv2/core/core.hpp>
@@ -21,6 +22,15 @@
 #include <unistd.h>
 
 #define MAX_LINE 256 // max characters in one line
+
+using namespace std;
+
+namespace fys {
+
+// some utility functions
+int checkDigit(string str);
+
+} // namespce fys
 
 #endif // _H_FYS
 

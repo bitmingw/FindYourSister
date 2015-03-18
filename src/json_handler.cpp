@@ -24,6 +24,7 @@ ImageObject::ImageObject(string name, int id, ImageRegion& region)
     : name(name), id(id), region(region) {}
 ImageObject::~ImageObject() {}
 
+
 // base class
 JsonHandler::JsonHandler(string filename) 
     : jsonFilename(filename) {}
@@ -86,10 +87,64 @@ JsonHandler::writeJsonFile()
     }
 }
 
+int
+JsonHandler::getIntVal(rapidjson::Document& doc, vector<string> position)
+{
+    // Note: an index number is represented as a string
+    // So we need to check digits before reference
+    int checkVal = -1;
+    string subVal = "";
+    if ((checkVal = checkDigit(position[0])) == -1) {
+        subVal = position[0];
+        rapidjson::Value& tmp = doc[position[0].c_str()];
+        for (int i = 1; i < position.size(); ++i) {
+            if ((checkVal = checkDigit(position[i])) == -1) {
+                tmp = tmp[position[i].c_str()];
+            }
+            else {
+                tmp = tmp[checkVal];
+            }
+        }
+        if (tmp.IsInt()) {
+            return tmp.GetInt();
+        }
+        else {
+            std::cerr << "Error: retrieved value is not of type \'int\'!" << std::endl;
+            return -1;
+        }
+    }
+    else {
+        rapidjson::Value& tmp = doc[checkVal];
+        for (int i = 1; i < position.size(); ++i) {
+            if ((checkVal = checkDigit(position[i])) == -1) {
+                tmp = tmp[position[i].c_str()];
+            }
+            else {
+                tmp = tmp[checkVal];
+            }
+        }
+        if (tmp.IsInt()) {
+            return tmp.GetInt();
+        }
+        else {
+            std::cerr << "Error: retrieved value is not of type \'int\'!" << std::endl;
+            return -1;
+        }
+    }
+}
+
+
+// feature class
 JsonFeatures::JsonFeatures(string filename) 
     : JsonHandler(filename) {}
 
 JsonFeatures::~JsonFeatures() {}
+
+string
+JsonFeatures::getDetectorType()
+{
+    
+}
 
 } // namespace fys
 

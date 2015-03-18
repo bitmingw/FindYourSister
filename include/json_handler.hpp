@@ -59,6 +59,13 @@ public:
     void updateStr(rapidjson::StringBuffer& buffer); // update this->jsonStr
     void writeJsonFile(); // open & write json file
 
+    int getIntVal(rapidjson::Document& doc, vector<string> position);
+    void setIntVal(rapidjson::Document& doc, vector<string> position, int newVal);
+    double getDoubleVal(rapidjson::Document& doc, vector<string> position);
+    void setDoubleVal(rapidjson::Document& doc, vector<string> position, double newVal);
+    string getStrVal(rapidjson::Document& doc, vector<string> position);
+    void setStrVal(rapidjson::Document& doc, vector<string> position, string newVal);
+
 private:
     string jsonFilename;
     string jsonStr;
