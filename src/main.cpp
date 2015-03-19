@@ -27,7 +27,8 @@ int main(int argc, char* argv[]) {
     }
 
     //fys::testBasicIO(featuresConfigFile);
-    fys::testGetSet(imagesConfigFile);
+    //fys::testGetSet(imagesConfigFile);
+    fys::testFeatureType(featuresConfigFile);
 
     exit(EXIT_SUCCESS);
 }

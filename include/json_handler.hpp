@@ -79,14 +79,17 @@ class JsonFeatures : public JsonHandler
 public:
     JsonFeatures(string filename);
     ~JsonFeatures();
-    string getDetectorType();
-    void setDetectorType(string type);
-    string getDescriptorType();
-    void setDescriptorType(string type);
-    string getMatcherType();
-    void setMatcherType(string type);
+    string getDetectorType(const rapidjson::Value& doc);
+    void setDetectorType(rapidjson::Value& doc, string newType);
+    string getDescriptorType(const rapidjson::Value& doc);
+    void setDescriptorType(rapidjson::Value& doc, string newType);
+    string getMatcherType(const rapidjson::Value& doc);
+    void setMatcherType(rapidjson::Value& doc, string newType);
 
 private:
+    vector<string> detectorTypePath;
+    vector<string> descriptorTypePath;
+    vector<string> matcherTypePath;
     string detectorType;
     string descriptorType;
     string matcherType;

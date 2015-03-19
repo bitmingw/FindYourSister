@@ -11,7 +11,7 @@ void testBasicIO(string featuresFile)
 {
     std::cout << "==== Test Start: BasicIO ====" << std::endl;
 
-    fys::JsonFeatures jf = fys::JsonFeatures(featuresFile);
+    JsonFeatures jf = JsonFeatures(featuresFile);
     jf.readJsonFile();
     std::cout << jf.getFileStr() << std::endl;
 
@@ -38,7 +38,7 @@ void testGetSet(string imageFile)
 {
     std::cout << "==== Test Start: Getter and Setter ====" << std::endl;
 
-    fys::JsonImages ji = fys::JsonImages(imageFile);
+    JsonImages ji = JsonImages(imageFile);
     ji.readJsonFile();
     
     rapidjson::Document doc;
@@ -79,6 +79,28 @@ void testGetSet(string imageFile)
     std::cout << "Json string after change: " << ji.getDocStr(buffer) << std::endl;
 
     std::cout << "==== Test End: Getter and Setter ====" << std::endl;
+}
+
+void testFeatureType(string featuresFile)
+{
+    std::cout << "Test Start: Feature Types ====" << std::endl;
+
+    JsonFeatures jf = JsonFeatures(featuresFile);
+    jf.readJsonFile();
+
+    rapidjson::Document doc;
+    doc.Parse(jf.getFileStr().c_str());
+
+    std::cout << "Original: detector type: " << jf.getDetectorType(doc) << std::endl;
+    jf.setDetectorType(doc, "SURF");
+    std::cout << "New: detector type: " << jf.getDetectorType(doc) << std::endl;
+    
+    rapidjson::StringBuffer buffer;
+    rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
+    doc.Accept(writer);
+    std::cout << "Json string after change: " << jf.getDocStr(buffer) << std::endl;
+
+    std::cout << "==== Test End: Feature Types ====" << std::endl;
 }
 
 } // namespace fys
