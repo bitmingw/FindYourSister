@@ -1,6 +1,6 @@
 // Copyright (c) 2015, Ming Wen
 
-#include "../include/fys.hpp"
+#include "fys.hpp"
 
 using namespace std;
 

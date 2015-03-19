@@ -1,17 +1,19 @@
 // Copyright (c) 2015, Ming Wen
 
-#include "../include/fys.hpp"
-#include "../include/json_handler.hpp"
+#include "fys.hpp"
+#include "json_handler.hpp"
 
 using namespace std;
+
+namespace fys {
 
 void testBasicIO(string featuresFile)
 {
     std::cout << "==== Test Start: BasicIO ====" << std::endl;
 
-    fys::JsonFeature jf = new fys::JsonFeatures(featuresFile);
+    fys::JsonFeatures jf = fys::JsonFeatures(featuresFile);
     jf.readJsonFile();
-    std::cout << jf.getFileStr();
+    std::cout << jf.getFileStr() << std::endl;
 
     rapidjson::Document doc;
     doc.Parse(jf.getFileStr().c_str());
@@ -26,8 +28,11 @@ void testBasicIO(string featuresFile)
     doc.Accept(writer);
 
     jf.updateStr(buffer);
-    std::cout << jf.getFileStr();
+    std::cout << jf.getFileStr() << std::endl;
     jf.writeJsonFile();
 
     std::cout << "==== Test End: BasicIO ====" << std::endl;
 }
+
+} // namespace fys
+

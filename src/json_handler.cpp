@@ -1,7 +1,7 @@
 // Copyright (c) 2015, Ming Wen
 
-#include "../include/fys.hpp"
-#include "../include/json_handler.hpp"
+#include "fys.hpp"
+#include "json_handler.hpp"
 
 using namespace std;
 
@@ -97,7 +97,7 @@ JsonHandler::getIntVal(rapidjson::Document& doc, vector<string> position)
     if ((checkVal = checkDigit(position[0])) == -1) {
         subVal = position[0];
         rapidjson::Value& tmp = doc[position[0].c_str()];
-        for (int i = 1; i < position.size(); ++i) {
+        for (unsigned int i = 1; i < position.size(); ++i) {
             if ((checkVal = checkDigit(position[i])) == -1) {
                 tmp = tmp[position[i].c_str()];
             }
@@ -115,7 +115,7 @@ JsonHandler::getIntVal(rapidjson::Document& doc, vector<string> position)
     }
     else {
         rapidjson::Value& tmp = doc[checkVal];
-        for (int i = 1; i < position.size(); ++i) {
+        for (unsigned int i = 1; i < position.size(); ++i) {
             if ((checkVal = checkDigit(position[i])) == -1) {
                 tmp = tmp[position[i].c_str()];
             }
@@ -131,6 +131,8 @@ JsonHandler::getIntVal(rapidjson::Document& doc, vector<string> position)
             return -1;
         }
     }
+    // should never reach here
+    //return -1;
 }
 
 
@@ -143,7 +145,7 @@ JsonFeatures::~JsonFeatures() {}
 string
 JsonFeatures::getDetectorType()
 {
-    
+    return "";    
 }
 
 } // namespace fys

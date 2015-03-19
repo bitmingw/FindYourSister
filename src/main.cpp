@@ -1,7 +1,7 @@
 // Copyright (c) 2015, Ming Wen
 
-#include "../include/fys.hpp"
-#include "../include/json_handler.hpp"
+#include "fys.hpp"
+#include "json_handler.hpp"
 
 using namespace cv;
 
@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    testBasicIO();
+    fys::testBasicIO(featuresConfigFile);
 
     exit(EXIT_SUCCESS);
 }

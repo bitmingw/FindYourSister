@@ -1,8 +1,4 @@
 // Copyright (c) 2015, Ming Wen
-//
-// fys.hpp
-//
-// General header file of this software.
 
 #ifndef _H_FYS
 #define _H_FYS
@@ -29,6 +25,9 @@ namespace fys {
 
 // some utility functions
 int checkDigit(string str);
+
+// test functions
+void testBasicIO(string featuresFile);
 
 } // namespce fys
 
