@@ -1,21 +1,38 @@
 # Copyright (c) 2015, Ming Wen
- 
-# define variables
-CC = g++
-SOURCES = util.cpp json_handler.cpp main.cpp
-OBJS = fys
-CFLAGS = -g
-LDFLAGS = -I/usr/local/lib
-LDLIBS = -l opencv_core -l opencv_highgui -l opencv_features2d -l opencv_nonfree
+.SUFFIXES: 
+
+CXX := g++
+CXXFLAGS := -Wall -g
+INCLUDES := -Iinclude -I/usr/local/lib
+LIBS := -l opencv_core -l opencv_highgui -l opencv_features2d -l opencv_nonfree
+TARGET := fys
+
+INCLUDEDIR := include
+OBJDIR := bin
+SRCDIR := src
+TESTDIR := test
+INCLUDESOURCE := $(wildcard $(INCLUDEDIR)/*.hpp)
+SRCOBJ := $(patsubst %.cpp, %.o, $(wildcard $(SRCDIR)/*.cpp))
+TESTOBJ := $(patsubst %.cpp, %.o, $(wildcard $(TESTDIR)/*.cpp))
+
+.PHONY: all clean`
 
 # make target
-all:
-	mkdir -p bin
-	cd src; \
-	$(CC) $(CFLAGS) $(SOURCES) -o $(OBJS) $(LDFLAGS) $(LDLIBS); \
-	mv $(OBJS) ../bin/
+all: $(SRCOBJ) $(TESTOBJ)
+	$(CXX) $(INCLUDES) $(CXXFLAGS) $(LIBS) $^ -o $@
+	@mkdir -p bin
+	@mv $@ bin/$@
+
+$(SRCOBJ): $(SRCDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CXX) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
+$(TESTOBJ): $(TESTDIR)/%.o: $(TESTDIR)/%.cpp
+	$(CXX) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
+
+$(SRCDIR)/%.cpp: $(INCLUDESOURCE)
+$(TESTDIR)/%.cpp: $(INCLUDESOURCE)
 
 clean:
-	cd bin; \
-	rm -f *
+	@rm -f bin/*
+	@rm -f src/*.o
+	@rm -f test/*.o
 
