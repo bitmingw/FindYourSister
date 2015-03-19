@@ -88,26 +88,44 @@ JsonHandler::writeJsonFile()
 }
 
 int
-JsonHandler::getIntVal(rapidjson::Document& doc, vector<string> position)
+JsonHandler::getIntVal(const rapidjson::Value& doc, vector<string> position)
 {
+    assert(position.size() >= 1);
+
     int checkVal; // convert string to number if necessary
-    rapidjson::Value& tmp = doc[position[0].c_str()]; // root node is guaranteed to be string
-    std::cout << position[0] << std::endl;
-    for (unsigned int i = 1; i < position.size(); ++i) {
-        std::cout << position[i] << std::endl;
-        if ((checkVal = checkDigit(position[i])) == -1) {
-            tmp = tmp[position[i].c_str()];
+    if ((checkVal = checkDigit(position[0])) == -1) {
+        // position[0] is a string
+        const rapidjson::Value& tmp = doc[position[0].c_str()]; 
+        if (position.size() == 1 && tmp.IsInt()) {
+            return tmp.GetInt();
+        }
+        else if (position.size() == 1 && (!tmp.IsInt())) {
+            std::cerr << "Error: retrieved value if not of type \'int\'!" << std::endl;
+            return -1;
         }
         else {
-            tmp = tmp[checkVal];
+            vector<string>::iterator it = position.begin();
+            it++;
+            vector<string> lessPosition(it, position.end());
+            return getIntVal(tmp, lessPosition);
         }
     }
-    if (tmp.IsInt()) {
-        return tmp.GetInt();
-    }
     else {
-        std::cerr << "Error: retrieved value is not of type \'int\'!" << std::endl;
-        return -1;
+         // position[0] is a number
+        const rapidjson::Value& tmp = doc[checkVal]; 
+        if (position.size() == 1 && tmp.IsInt()) {
+            return tmp.GetInt();
+        }
+        else if (position.size() == 1 && (!tmp.IsInt())) {
+            std::cerr << "Error: retrieved value if not of type \'int\'!" << std::endl;
+            return -1;
+        }
+        else {
+            vector<string>::iterator it = position.begin();
+            it++;
+            vector<string> lessPosition(it, position.end());
+            return getIntVal(tmp, lessPosition);
+        }
     }
 }
 

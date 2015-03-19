@@ -51,12 +51,12 @@ void testGetSet(string imageFile)
     path1.push_back("size");
     path1.push_back("nrows");
     std::cout << "Number of rows in the image: " << ji.getIntVal(doc, path1) << std::endl;
+
     rapidjson::StringBuffer buffer;
     rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
     doc.Accept(writer);
     std::cout << "Json string after parse: " << ji.getDocStr(buffer) << std::endl;
 
-    doc.Parse(ji.getFileStr().c_str());
     vector<string> path2 = vector<string>();
     path2.push_back("train");
     path2.push_back("0");
