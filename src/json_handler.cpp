@@ -90,49 +90,25 @@ JsonHandler::writeJsonFile()
 int
 JsonHandler::getIntVal(rapidjson::Document& doc, vector<string> position)
 {
-    // Note: an index number is represented as a string
-    // So we need to check digits before reference
-    int checkVal = -1;
-    string subVal = "";
-    if ((checkVal = checkDigit(position[0])) == -1) {
-        subVal = position[0];
-        rapidjson::Value& tmp = doc[position[0].c_str()];
-        for (unsigned int i = 1; i < position.size(); ++i) {
-            if ((checkVal = checkDigit(position[i])) == -1) {
-                tmp = tmp[position[i].c_str()];
-            }
-            else {
-                tmp = tmp[checkVal];
-            }
-        }
-        if (tmp.IsInt()) {
-            return tmp.GetInt();
+    int checkVal; // convert string to number if necessary
+    rapidjson::Value& tmp = doc[position[0].c_str()]; // root node is guaranteed to be string
+    std::cout << position[0] << std::endl;
+    for (unsigned int i = 1; i < position.size(); ++i) {
+        std::cout << position[i] << std::endl;
+        if ((checkVal = checkDigit(position[i])) == -1) {
+            tmp = tmp[position[i].c_str()];
         }
         else {
-            std::cerr << "Error: retrieved value is not of type \'int\'!" << std::endl;
-            return -1;
+            tmp = tmp[checkVal];
         }
+    }
+    if (tmp.IsInt()) {
+        return tmp.GetInt();
     }
     else {
-        rapidjson::Value& tmp = doc[checkVal];
-        for (unsigned int i = 1; i < position.size(); ++i) {
-            if ((checkVal = checkDigit(position[i])) == -1) {
-                tmp = tmp[position[i].c_str()];
-            }
-            else {
-                tmp = tmp[checkVal];
-            }
-        }
-        if (tmp.IsInt()) {
-            return tmp.GetInt();
-        }
-        else {
-            std::cerr << "Error: retrieved value is not of type \'int\'!" << std::endl;
-            return -1;
-        }
+        std::cerr << "Error: retrieved value is not of type \'int\'!" << std::endl;
+        return -1;
     }
-    // should never reach here
-    //return -1;
 }
 
 
@@ -147,6 +123,13 @@ JsonFeatures::getDetectorType()
 {
     return "";    
 }
+
+
+// image class
+JsonImages::JsonImages(string filename)
+    : JsonHandler(filename) {}
+
+JsonImages::~JsonImages() {}
 
 } // namespace fys
 
