@@ -64,10 +64,19 @@ void testGetSet(string imageFile)
     ji.setDoubleVal(doc, path2, 10);
     std::cout << "New: min y value of the object: " << ji.getDoubleVal(doc, path2) << std::endl;
 
+    // getStrVal & setStrVal
+    vector<string> path3 = vector<string>();
+    path3.push_back("train");
+    path3.push_back("0");
+    path3.push_back("filename");
+    std::cout << "Original: file name of image: " << ji.getStrVal(doc, path3) << std::endl;
+    ji.setStrVal(doc, path3, "ff.jpg");
+    std::cout << "New: file name of image: " << ji.getStrVal(doc, path3) << std::endl;
+
     rapidjson::StringBuffer buffer;
     rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
     doc.Accept(writer);
-    std::cout << "Json string after parse: " << ji.getDocStr(buffer) << std::endl;
+    std::cout << "Json string after change: " << ji.getDocStr(buffer) << std::endl;
 
     std::cout << "==== Test End: Getter and Setter ====" << std::endl;
 }
