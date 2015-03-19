@@ -34,5 +34,10 @@ void testBasicIO(string featuresFile)
     std::cout << "==== Test End: BasicIO ====" << std::endl;
 }
 
+void testGetSet(string imageFile) 
+{
+
+}
+
 } // namespace fys
 

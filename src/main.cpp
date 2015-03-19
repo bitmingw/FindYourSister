@@ -2,6 +2,7 @@
 
 #include "fys.hpp"
 #include "json_handler.hpp"
+#include "test.hpp"
 
 using namespace cv;
 

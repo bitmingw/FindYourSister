@@ -26,9 +26,6 @@ namespace fys {
 // some utility functions
 int checkDigit(string str);
 
-// test functions
-void testBasicIO(string featuresFile);
-
 } // namespce fys
 
 #endif // _H_FYS
