@@ -52,11 +52,6 @@ void testGetSet(string imageFile)
     path1.push_back("nrows");
     std::cout << "Number of rows in the image: " << ji.getIntVal(doc, path1) << std::endl;
 
-    rapidjson::StringBuffer buffer;
-    rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
-    doc.Accept(writer);
-    std::cout << "Json string after parse: " << ji.getDocStr(buffer) << std::endl;
-
     vector<string> path2 = vector<string>();
     path2.push_back("train");
     path2.push_back("0");
@@ -64,7 +59,14 @@ void testGetSet(string imageFile)
     path2.push_back("0");
     path2.push_back("region");
     path2.push_back("ymin");
-    std::cout << "min y value of the object: " << ji.getIntVal(doc, path2) << std::endl;
+    std::cout << "Original: min y value of the object: " << ji.getIntVal(doc, path2) << std::endl;
+    ji.setIntVal(doc, path2, 10);
+    std::cout << "New: min y value of the object: " << ji.getIntVal(doc, path2) << std::endl;
+
+    rapidjson::StringBuffer buffer;
+    rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
+    doc.Accept(writer);
+    std::cout << "Json string after parse: " << ji.getDocStr(buffer) << std::endl;
 
     std::cout << "==== Test End: Getter and Setter ====" << std::endl;
 }

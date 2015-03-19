@@ -60,11 +60,11 @@ public:
     void writeJsonFile(); // open & write json file
 
     int getIntVal(const rapidjson::Value& doc, vector<string> position);
-    void setIntVal(const rapidjson::Document& doc, vector<string> position, int newVal);
-    double getDoubleVal(const rapidjson::Document& doc, vector<string> position);
-    void setDoubleVal(const rapidjson::Document& doc, vector<string> position, double newVal);
-    string getStrVal(const rapidjson::Document& doc, vector<string> position);
-    void setStrVal(const rapidjson::Document& doc, vector<string> position, string newVal);
+    void setIntVal(rapidjson::Value& doc, vector<string> position, int newVal);
+    double getDoubleVal(const rapidjson::Value& doc, vector<string> position);
+    void setDoubleVal(rapidjson::Value& doc, vector<string> position, double newVal);
+    string getStrVal(const rapidjson::Value& doc, vector<string> position);
+    void setStrVal(rapidjson::Value& doc, vector<string> position, string newVal);
 
 private:
     string jsonFilename;
