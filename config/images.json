@@ -1,5 +1,5 @@
 {
-    "descriptions": [
+    "train": [
         {
             "filename": "1.jpg",
             "folder": "images",
@@ -20,5 +20,7 @@
                 }
             ]
         }
-    ]
+    ],
+    "validate": [],
+    "test": []
 }
