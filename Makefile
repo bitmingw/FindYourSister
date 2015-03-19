@@ -18,7 +18,9 @@ TESTOBJ := $(patsubst %.cpp, %.o, $(wildcard $(TESTDIR)/*.cpp))
 .PHONY: all clean`
 
 # make target
-all: $(SRCOBJ) $(TESTOBJ)
+all: $(TARGET)
+
+$(TARGET): $(SRCOBJ) $(TESTOBJ)
 	$(CXX) $(INCLUDES) $(CXXFLAGS) $(LIBS) $^ -o $@
 	@mkdir -p bin
 	@mv $@ bin/$@
