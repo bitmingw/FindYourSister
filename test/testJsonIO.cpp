@@ -126,6 +126,12 @@ void testImageProperties(string imagesFile)
     std::cout << "Rows: " << is.nrows << std::endl;
     std::cout << "Columns: " << is.ncols << std::endl;
 
+    vector<ImageObject> oblist = ji.getObjectList(doc, TRAIN_TYPE, 0);
+    std::cout << "Object name: " << oblist[0].name << std::endl;
+    std::cout << "Object ID: " << oblist[0].id << std::endl;
+    std::cout << "Object region: " << oblist[0].region.xmin << " " << oblist[0].region.xmax << " " \
+        << oblist[0].region.ymin << " " << oblist[0].region.ymax << std::endl;
+
     std::cout << "==== Test End: Number of Images ====" << std::endl;
 }
 
