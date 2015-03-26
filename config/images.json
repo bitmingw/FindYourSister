@@ -9,7 +9,7 @@
             },
             "objects": [
                 {
-                    "name": "signal",
+                    "class": "signal",
                     "id": 0,
                     "region": {
                         "xmin": 0,
