@@ -438,5 +438,28 @@ JsonImages::getNumImage(const rapidjson::Value& doc)
     return ImageSample(train, validate, test);
 }
 
+string
+JsonImages::getFilename(const rapidjson::Value& doc, int imageType, int imageIdx)
+{
+    vector<string> searchPath;
+    switch (imageType) {
+        case TRAIN_TYPE:
+            searchPath = trainImagePath;
+            break;
+        case VALIDATE_TYPE:
+            searchPath = validateImagePath;
+            break;
+        case TEST_TYPE:
+            searchPath = testImagePath;
+            break;
+        default:
+            std::cerr << "Invalid image category!" << std::endl;
+            return "";
+    }
+    searchPath.push_back(itoa(imageIdx));
+    searchPath.push_back("filename");
+    return getStrVal(doc, searchPath);
+}
+
 } // namespace fys
 

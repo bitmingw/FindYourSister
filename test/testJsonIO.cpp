@@ -118,6 +118,8 @@ void testNumImage(string imagesFile)
     std::cout << "Validation set: " << stat.validate << std::endl;
     std::cout << "Test set: " << stat.test << std::endl;
     std::cout << "Total: " << stat.total << std::endl;
+    std::cout << std::endl;
+    std::cout << "File name of image 0: " << ji.getFilename(doc, TRAIN_TYPE, 0) << std::endl;
 
     std::cout << "==== Test End: Number of Images ====" << std::endl;
 }
