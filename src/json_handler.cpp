@@ -106,7 +106,7 @@ JsonHandler::getIntVal(const rapidjson::Value& doc, vector<string> position)
             return tmp.GetInt();
         }
         else if (position.size() == 1 && (!tmp.IsInt())) {
-            std::cerr << "Error: retrieved value if not of type \'int\'!" << std::endl;
+            std::cerr << "Error: retrieved value is not type \'int\'!" << std::endl;
             return -1;
         }
         else {
@@ -123,7 +123,7 @@ JsonHandler::getIntVal(const rapidjson::Value& doc, vector<string> position)
             return tmp.GetInt();
         }
         else if (position.size() == 1 && (!tmp.IsInt())) {
-            std::cerr << "Error: retrieved value if not of type \'int\'!" << std::endl;
+            std::cerr << "Error: retrieved value is not type \'int\'!" << std::endl;
             return -1;
         }
         else {
@@ -184,7 +184,7 @@ JsonHandler::getDoubleVal(const rapidjson::Value& doc, vector<string> position)
             return tmp.GetDouble();
         }
         else if (position.size() == 1 && (!tmp.IsDouble())) {
-            std::cerr << "Error: retrieved value if not of type \'double\'!" << std::endl;
+            std::cerr << "Error: retrieved value is not type \'double\'!" << std::endl;
             return -1.0;
         }
         else {
@@ -201,7 +201,7 @@ JsonHandler::getDoubleVal(const rapidjson::Value& doc, vector<string> position)
             return tmp.GetDouble();
         }
         else if (position.size() == 1 && (!tmp.IsDouble())) {
-            std::cerr << "Error: retrieved value if not of type \'double\'!" << std::endl;
+            std::cerr << "Error: retrieved value is not type \'double\'!" << std::endl;
             return -1.0;
         }
         else {
@@ -262,7 +262,7 @@ JsonHandler::getStrVal(const rapidjson::Value& doc, vector<string> position)
             return tmp.GetString();
         }
         else if (position.size() == 1 && (!tmp.IsString())) {
-            std::cerr << "Error: retrieved value if not of type \'string\'!" << std::endl;
+            std::cerr << "Error: retrieved value is not type \'string\'!" << std::endl;
             return "";
         }
         else {
@@ -279,7 +279,7 @@ JsonHandler::getStrVal(const rapidjson::Value& doc, vector<string> position)
             return tmp.GetString();
         }
         else if (position.size() == 1 && (!tmp.IsString())) {
-            std::cerr << "Error: retrieved value if not of type \'string\'!" << std::endl;
+            std::cerr << "Error: retrieved value is not type \'string\'!" << std::endl;
             return "";
         }
         else {
@@ -323,6 +323,48 @@ JsonHandler::setStrVal(rapidjson::Value& doc, vector<string> position, string ne
             it++;
             vector<string> lessPosition(it, position.end());
             setStrVal(tmp, lessPosition, newVal);
+        }
+    }
+}
+
+size_t
+JsonHandler::getArraySize(const rapidjson::Value& doc, vector<string> position)
+{
+    assert(position.size() >= 1);
+
+    int checkVal; // convert string to number if necessary
+    if ((checkVal = checkDigit(position[0])) == -1) {
+        // position[0] is a string
+        const rapidjson::Value& tmp = doc[position[0].c_str()]; 
+        if (position.size() == 1 && tmp.IsArray()) {
+            return tmp.Size();
+        }
+        else if (position.size() == 1 && (!tmp.IsArray())) {
+            std::cerr << "Error: retrieved value is not type \'array\'!" << std::endl;
+            return 0;
+        }
+        else {
+            vector<string>::iterator it = position.begin();
+            it++;
+            vector<string> lessPosition(it, position.end());
+            return getArraySize(tmp, lessPosition);
+        }
+    }
+    else {
+         // position[0] is a number
+        const rapidjson::Value& tmp = doc[checkVal]; 
+        if (position.size() == 1 && tmp.IsArray()) {
+            return tmp.IsArray();
+        }
+        else if (position.size() == 1 && (!tmp.IsArray())) {
+            std::cerr << "Error: retrieved value is not type \'array\'!" << std::endl;
+            return 0;
+        }
+        else {
+            vector<string>::iterator it = position.begin();
+            it++;
+            vector<string> lessPosition(it, position.end());
+            return getArraySize(tmp, lessPosition);
         }
     }
 }
@@ -378,9 +420,23 @@ JsonFeatures::setMatcherType(rapidjson::Value& doc, string newType)
 
 // image class
 JsonImages::JsonImages(string filename)
-    : JsonHandler(filename) {}
+    : JsonHandler(filename) 
+{
+    trainImagePath.push_back("train");
+    validateImagePath.push_back("validate");
+    testImagePath.push_back("test");
+}
 
 JsonImages::~JsonImages() {}
+
+ImageSample
+JsonImages::getNumImage(const rapidjson::Value& doc)
+{
+    int train = getArraySize(doc, trainImagePath);
+    int validate = getArraySize(doc, validateImagePath);
+    int test = getArraySize(doc, testImagePath);
+    return ImageSample(train, validate, test);
+}
 
 } // namespace fys
 

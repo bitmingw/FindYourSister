@@ -76,6 +76,7 @@ public:
     void setDoubleVal(rapidjson::Value& doc, vector<string> position, double newVal);
     string getStrVal(const rapidjson::Value& doc, vector<string> position);
     void setStrVal(rapidjson::Value& doc, vector<string> position, string newVal);
+    size_t getArraySize(const rapidjson::Value& doc, vector<string> position);
 
 private:
     string jsonFilename;
@@ -124,6 +125,11 @@ public:
     ImageObject getSingleObject(const rapidjson::Value& doc, int imageIdx, int objectIdx);
     //string getObjectName(int imageIdx, int objectIdx);
     //ImageRegion getObjectRegion(int imageIdx, int objectIdx);
+
+private:
+    vector<string> trainImagePath;
+    vector<string> validateImagePath;
+    vector<string> testImagePath;
 };
 
 } // namespace fys
