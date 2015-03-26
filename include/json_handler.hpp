@@ -116,13 +116,14 @@ public:
     JsonImages(string filename);
     ~JsonImages();
     ImageSample getNumImage(const rapidjson::Value& doc);
-    string getFilename(const rapidjson::Value& doc, int imageIdx);
-    string getFolderName(const rapidjson::Value& doc, int imageIdx);
-    ImageSize getImageSize(const rapidjson::Value& doc, int imageIdx);
-    int getNumObject(const rapidjson::Value& doc, int imageIdx);
-    vector<ImageObject> getObjectList(const rapidjson::Value& doc, int imageIdx);
-    vector<int> getObjectIdList(const rapidjson::Value& doc, int imageIdx);
-    ImageObject getSingleObject(const rapidjson::Value& doc, int imageIdx, int objectIdx);
+    string getFilename(const rapidjson::Value& doc, int imageType, int imageIdx);
+    string getFolderName(const rapidjson::Value& doc, int imageType, int imageIdx);
+    ImageSize getImageSize(const rapidjson::Value& doc, int imageType, int imageIdx);
+    int getNumObject(const rapidjson::Value& doc, int imageType, int imageIdx);
+    vector<ImageObject> getObjectList(const rapidjson::Value& doc, int imageType, int imageIdx);
+    vector<int> getObjectIdList(const rapidjson::Value& doc, int imageType, int imageIdx);
+    ImageObject getSingleObject(const rapidjson::Value& doc,
+        int imageType, int imageIdx, int objectIdx);
     //string getObjectName(int imageIdx, int objectIdx);
     //ImageRegion getObjectRegion(int imageIdx, int objectIdx);
 

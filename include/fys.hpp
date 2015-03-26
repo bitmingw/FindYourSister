@@ -20,6 +20,11 @@
 
 #define MAX_LINE 256 // max characters in one line
 
+// type of sample images
+#define TRAIN_TYPE 0
+#define VALIDATE_TYPE 1
+#define TEST_TYPE 2
+
 using namespace std;
 
 namespace fys {
