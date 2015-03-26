@@ -19,6 +19,7 @@
 #include <unistd.h>
 
 #define MAX_LINE 256 // max characters in one line
+#define INT_STR_LEN 12 // max number of characters in one integer
 
 // type of sample images
 #define TRAIN_TYPE 0
@@ -31,6 +32,7 @@ namespace fys {
 
 // some utility functions
 int checkDigit(string str);
+string itoa(int idx);
 
 } // namespce fys
 

@@ -17,4 +17,11 @@ int checkDigit(string str)
     }
 }
 
+string itoa(int idx)
+{
+    char s[INT_STR_LEN];
+    snprintf(s, INT_STR_LEN, "%d", idx);
+    return string(s);
+}
+
 } // namespce fys
