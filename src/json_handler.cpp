@@ -578,8 +578,8 @@ JsonImages::getObjectList(const rapidjson::Value& doc, int imageType, int imageI
         tmpPath.pop_back();
         tmpPath.push_back("ymax");
         objYMax = getIntVal(doc, tmpPath);
-        //ImageRegion reg = ImageRegion(objXMin, objXMax, objYMin, objYMax);
-        objVec.push_back(ImageObject(objName, objID, ImageRegion(objXMin, objXMax, objYMin, objYMax)));
+        objVec.push_back(ImageObject(objName, objID, 
+            ImageRegion(objXMin, objXMax, objYMin, objYMax)));
     }
     
     return objVec; 
