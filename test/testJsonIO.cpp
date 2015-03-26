@@ -121,6 +121,10 @@ void testImageProperties(string imagesFile)
     std::cout << std::endl;
     std::cout << "File name of image 0: " << ji.getFileName(doc, TRAIN_TYPE, 0) << std::endl;
     std::cout << "Folder name of image 0: " << ji.getFolderName(doc, TRAIN_TYPE, 0) << std::endl;
+    
+    ImageSize is = ji.getImageSize(doc, TRAIN_TYPE, 0);
+    std::cout << "Rows: " << is.nrows << std::endl;
+    std::cout << "Columns: " << is.ncols << std::endl;
 
     std::cout << "==== Test End: Number of Images ====" << std::endl;
 }
