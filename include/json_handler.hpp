@@ -45,6 +45,17 @@ public:
     ImageRegion region;
 };
 
+class ImageSample
+{
+public:
+    ImageSample();
+    ImageSample(int train, int validate, int test);
+    ~ImageSample();
+    int train;
+    int validate;
+    int test;
+    int total;
+};
 
 // base class
 class JsonHandler
@@ -103,14 +114,16 @@ class JsonImages: public JsonHandler
 public:
     JsonImages(string filename);
     ~JsonImages();
-    int getNumImages();
-    string getFilename(int imageIdx);
-    string getFolderName(int imageIdx);
-    ImageSize getImageSize(int imageIdx);
-    int getNumObjects();
-    string getObjectName(int imageIdx, int objectIdx);
-    int getObjectId(int imageIdx, int objectIdx);
-    ImageRegion getObjectRegion(int imageIdx, int objectIdx);
+    ImageSample getNumImage(const rapidjson::Value& doc);
+    string getFilename(const rapidjson::Value& doc, int imageIdx);
+    string getFolderName(const rapidjson::Value& doc, int imageIdx);
+    ImageSize getImageSize(const rapidjson::Value& doc, int imageIdx);
+    int getNumObject(const rapidjson::Value& doc, int imageIdx);
+    vector<ImageObject> getObjectList(const rapidjson::Value& doc, int imageIdx);
+    vector<int> getObjectIdList(const rapidjson::Value& doc, int imageIdx);
+    ImageObject getSingleObject(const rapidjson::Value& doc, int imageIdx, int objectIdx);
+    //string getObjectName(int imageIdx, int objectIdx);
+    //ImageRegion getObjectRegion(int imageIdx, int objectIdx);
 };
 
 } // namespace fys

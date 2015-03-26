@@ -24,6 +24,12 @@ ImageObject::ImageObject(string name, int id, ImageRegion& region)
     : name(name), id(id), region(region) {}
 ImageObject::~ImageObject() {}
 
+ImageSample::ImageSample()
+    : train(0), validate(0), test(0), total(0) {}
+ImageSample::ImageSample(int train, int validate, int test)
+    : train(train), validate(validate), test(test), total(train + validate + test) {}
+ImageSample::~ImageSample() {}
+
 
 // base class
 JsonHandler::JsonHandler(string filename) 
