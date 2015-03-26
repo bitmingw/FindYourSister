@@ -103,7 +103,7 @@ void testFeatureType(string featuresFile)
     std::cout << "==== Test End: Feature Types ====" << std::endl;
 }
 
-void testNumImage(string imagesFile)
+void testImageProperties(string imagesFile)
 {
     std::cout << "==== Test Start: Number of Images ====" << std::endl;
 
@@ -119,7 +119,8 @@ void testNumImage(string imagesFile)
     std::cout << "Test set: " << stat.test << std::endl;
     std::cout << "Total: " << stat.total << std::endl;
     std::cout << std::endl;
-    std::cout << "File name of image 0: " << ji.getFilename(doc, TRAIN_TYPE, 0) << std::endl;
+    std::cout << "File name of image 0: " << ji.getFileName(doc, TRAIN_TYPE, 0) << std::endl;
+    std::cout << "Folder name of image 0: " << ji.getFolderName(doc, TRAIN_TYPE, 0) << std::endl;
 
     std::cout << "==== Test End: Number of Images ====" << std::endl;
 }

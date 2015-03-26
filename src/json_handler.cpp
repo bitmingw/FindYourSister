@@ -438,8 +438,8 @@ JsonImages::getNumImage(const rapidjson::Value& doc)
     return ImageSample(train, validate, test);
 }
 
-string
-JsonImages::getFilename(const rapidjson::Value& doc, int imageType, int imageIdx)
+vector<string>
+JsonImages::getTypePath(int imageType)
 {
     vector<string> searchPath;
     switch (imageType) {
@@ -454,11 +454,52 @@ JsonImages::getFilename(const rapidjson::Value& doc, int imageType, int imageIdx
             break;
         default:
             std::cerr << "Invalid image category!" << std::endl;
-            return "";
+            return searchPath; 
+    }
+    return searchPath; 
+}
+
+string
+JsonImages::getFileName(const rapidjson::Value& doc, int imageType, int imageIdx)
+{
+    vector<string> searchPath = getTypePath(imageType);
+    if (searchPath.size() == 0) {
+        return "";
     }
     searchPath.push_back(itoa(imageIdx));
     searchPath.push_back("filename");
     return getStrVal(doc, searchPath);
+}
+
+string
+JsonImages::getFolderName(const rapidjson::Value& doc, int imageType, int imageIdx)
+{
+    vector<string> searchPath = getTypePath(imageType);
+    if (searchPath.size() == 0) {
+        return "";
+    }
+    searchPath.push_back(itoa(imageIdx));
+    searchPath.push_back("folder");
+    return getStrVal(doc, searchPath);
+}
+
+ImageSize
+JsonImages::getImageSize(const rapidjson::Value& doc, int imageType, int imageIdx)
+{
+    vector<string> searchPath = getTypePath(imageType);
+    if (searchPath.size() == 0) {
+        return ImageSize();
+    }
+    searchPath.push_back(itoa(imageIdx));
+    searchPath.push_back("size");
+
+    // check nrows and ncols one by one
+    searchPath.push_back("nrows");
+    int nrows = getIntVal(doc, searchPath);
+    searchPath.pop_back();
+    searchPath.push_back("ncols");
+    int ncols = getIntVal(doc, searchPath);
+    return ImageSize(nrows, ncols);
 }
 
 } // namespace fys

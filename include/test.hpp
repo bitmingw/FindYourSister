@@ -7,6 +7,6 @@ namespace fys {
 void testBasicIO(string featuresFile);
 void testGetSet(string imagesFile);
 void testFeatureType(string featuresFile);
-void testNumImage(string imagesFile);
+void testImageProperties(string imagesFile);
 
 } // namespace fys

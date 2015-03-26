@@ -116,7 +116,7 @@ public:
     JsonImages(string filename);
     ~JsonImages();
     ImageSample getNumImage(const rapidjson::Value& doc);
-    string getFilename(const rapidjson::Value& doc, int imageType, int imageIdx);
+    string getFileName(const rapidjson::Value& doc, int imageType, int imageIdx);
     string getFolderName(const rapidjson::Value& doc, int imageType, int imageIdx);
     ImageSize getImageSize(const rapidjson::Value& doc, int imageType, int imageIdx);
     int getNumObject(const rapidjson::Value& doc, int imageType, int imageIdx);
@@ -131,6 +131,9 @@ private:
     vector<string> trainImagePath;
     vector<string> validateImagePath;
     vector<string> testImagePath;
+
+protected:
+    vector<string> getTypePath(int imageType);
 };
 
 } // namespace fys
