@@ -38,7 +38,7 @@ public:
 class ImageObject
 {
 public:
-    ImageObject(string name, int id, ImageRegion& region);
+    ImageObject(string name, int id, ImageRegion region);
     ~ImageObject(); 
     string name;
     int id;
@@ -81,6 +81,9 @@ public:
 private:
     string jsonFilename;
     string jsonStr;
+
+protected:
+    const rapidjson::Value& getReference(const rapidjson::Value& doc, vector<string> position);
 };
 
 

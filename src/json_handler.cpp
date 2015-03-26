@@ -20,7 +20,7 @@ ImageRegion::ImageRegion(int xmin, int xmax, int ymin, int ymax)
     : xmin(xmin), xmax(xmax), ymin(ymin), ymax(ymax) {}
 ImageRegion::~ImageRegion() {}
 
-ImageObject::ImageObject(string name, int id, ImageRegion& region)
+ImageObject::ImageObject(string name, int id, ImageRegion region)
     : name(name), id(id), region(region) {}
 ImageObject::~ImageObject() {}
 
@@ -90,6 +90,40 @@ JsonHandler::writeJsonFile()
     }
     else {
         std::cerr << "Error: can\'t open " << this->jsonFilename << " for writing!" << std::endl;
+    }
+}
+
+const rapidjson::Value&
+JsonHandler::getReference(const rapidjson::Value& doc, vector<string> position)
+{
+    assert(position.size() >= 1);
+
+    int checkVal; // convert string to number if necessary
+    if ((checkVal = checkDigit(position[0])) == -1) {
+        // position[0] is a string
+        const rapidjson::Value& tmp = doc[position[0].c_str()]; 
+        if (position.size() == 1) {
+            return tmp;
+        }
+        else {
+            vector<string>::iterator it = position.begin();
+            it++;
+            vector<string> lessPosition(it, position.end());
+            return getReference(tmp, lessPosition);
+        }
+    }
+    else {
+         // position[0] is a number
+        const rapidjson::Value& tmp = doc[checkVal]; 
+        if (position.size() == 1) {
+            return tmp;
+        }
+        else {
+            vector<string>::iterator it = position.begin();
+            it++;
+            vector<string> lessPosition(it, position.end());
+            return getReference(tmp, lessPosition);
+        }
     }
 }
 
@@ -500,6 +534,55 @@ JsonImages::getImageSize(const rapidjson::Value& doc, int imageType, int imageId
     searchPath.push_back("ncols");
     int ncols = getIntVal(doc, searchPath);
     return ImageSize(nrows, ncols);
+}
+
+vector<ImageObject>
+JsonImages::getObjectList(const rapidjson::Value& doc, int imageType, int imageIdx)
+{
+    // value to be returned
+    vector<ImageObject> objVec;
+
+    vector<string> searchPath = getTypePath(imageType);
+    if (searchPath.size() == 0) {
+        return objVec; // return an empty vector
+    }
+    searchPath.push_back(itoa(imageIdx));
+    searchPath.push_back("objects");
+
+    // local variables used in the loop
+    vector<string> tmpPath;
+    string objName;
+    int objID;
+    int objXMin, objXMax, objYMin, objYMax;
+
+    // check each object one by one
+    const rapidjson::Value& objRoot = getReference(doc, searchPath);
+    for (size_t i = 0; i < objRoot.Size(); ++i) {
+        tmpPath = searchPath;
+        tmpPath.push_back(itoa(i));
+        tmpPath.push_back("name");
+        objName = getStrVal(doc, tmpPath);
+        tmpPath.pop_back();
+        tmpPath.push_back("id");
+        objID = getIntVal(doc, tmpPath);
+        tmpPath.pop_back();
+        tmpPath.push_back("region");
+        tmpPath.push_back("xmin");
+        objXMin = getIntVal(doc, tmpPath);
+        tmpPath.pop_back();
+        tmpPath.push_back("xmax");
+        objXMax = getIntVal(doc, tmpPath);
+        tmpPath.pop_back();
+        tmpPath.push_back("ymin");
+        objYMin = getIntVal(doc, tmpPath);
+        tmpPath.pop_back();
+        tmpPath.push_back("ymax");
+        objYMax = getIntVal(doc, tmpPath);
+        //ImageRegion reg = ImageRegion(objXMin, objXMax, objYMin, objYMax);
+        objVec.push_back(ImageObject(objName, objID, ImageRegion(objXMin, objXMax, objYMin, objYMax)));
+    }
+    
+    return objVec; 
 }
 
 } // namespace fys
