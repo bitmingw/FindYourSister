@@ -83,7 +83,7 @@ void testGetSet(string imageFile)
 
 void testFeatureType(string featuresFile)
 {
-    std::cout << "Test Start: Feature Types ====" << std::endl;
+    std::cout << "==== Test Start: Feature Types ====" << std::endl;
 
     JsonFeatures jf = JsonFeatures(featuresFile);
     jf.readJsonFile();
@@ -101,6 +101,25 @@ void testFeatureType(string featuresFile)
     std::cout << "Json string after change: " << jf.getDocStr(buffer) << std::endl;
 
     std::cout << "==== Test End: Feature Types ====" << std::endl;
+}
+
+void testNumImage(string imagesFile)
+{
+    std::cout << "==== Test Start: Number of Images ====" << std::endl;
+
+    JsonImages ji = JsonImages(imagesFile);
+    ji.readJsonFile();
+
+    rapidjson::Document doc;
+    doc.Parse(ji.getFileStr().c_str());
+
+    ImageSample stat = ji.getNumImage(doc);
+    std::cout << "Training set: " << stat.train << std::endl;
+    std::cout << "Validation set: " << stat.validate << std::endl;
+    std::cout << "Test set: " << stat.test << std::endl;
+    std::cout << "Total: " << stat.total << std::endl;
+
+    std::cout << "==== Test End: Number of Images ====" << std::endl;
 }
 
 } // namespace fys
