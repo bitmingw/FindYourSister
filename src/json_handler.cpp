@@ -650,5 +650,59 @@ JsonImages::getObjectList(const rapidjson::Value& doc, int imageType, int imageI
     return objVec; 
 }
 
+vector<ImageObject>
+JsonImages::getObjectListByName(const rapidjson::Value& doc, int imageType,
+    int imageIdx, string objectName)
+{
+    // value to be returned
+    vector<ImageObject> objVec;
+
+    vector<string> searchPath = getTypePath(imageType);
+    if (searchPath.size() == 0) {
+        return objVec; // return an empty vector
+    }
+    searchPath.push_back(itoa(imageIdx));
+    searchPath.push_back("objects");
+
+    // local variables used in the loop
+    vector<string> tmpPath;
+    string objName;
+    int objID;
+    int objXMin, objXMax, objYMin, objYMax;
+
+    // check each object one by one
+    const rapidjson::Value& objRoot = getReference(doc, searchPath);
+    for (size_t i = 0; i < objRoot.Size(); ++i) {
+        tmpPath = searchPath;
+        tmpPath.push_back(itoa(i));
+        tmpPath.push_back("name");
+        objName = getStrVal(doc, tmpPath);
+        if (objName != objectName) {
+            continue;
+        }
+        tmpPath.pop_back();
+        tmpPath.push_back("id");
+        objID = getIntVal(doc, tmpPath);
+        tmpPath.pop_back();
+        tmpPath.push_back("region");
+        tmpPath.push_back("xmin");
+        objXMin = getIntVal(doc, tmpPath);
+        tmpPath.pop_back();
+        tmpPath.push_back("xmax");
+        objXMax = getIntVal(doc, tmpPath);
+        tmpPath.pop_back();
+        tmpPath.push_back("ymin");
+        objYMin = getIntVal(doc, tmpPath);
+        tmpPath.pop_back();
+        tmpPath.push_back("ymax");
+        objYMax = getIntVal(doc, tmpPath);
+        objVec.push_back(ImageObject(objName, objID, 
+            ImageRegion(objXMin, objXMax, objYMin, objYMax)));
+    }
+     
+    return objVec; 
+}
+
+
 } // namespace fys
 

@@ -130,7 +130,7 @@ public:
         int imageIdx, int objectIdx);
     vector<ImageObject> getObjectList(const rapidjson::Value& doc, int imageType, int imageIdx);
     vector<ImageObject> getObjectListByName(const rapidjson::Value& doc, int imageType,
-        int imageIdx); // TODO
+        int imageIdx, string objectName);
 
 private:
     vector<string> trainImagePath;
