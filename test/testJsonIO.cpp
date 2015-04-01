@@ -133,11 +133,17 @@ void testImageProperties(string imagesFile)
     std::cout << "Object region: " << oblist[0].region.xmin << " " << oblist[0].region.xmax << " " \
         << oblist[0].region.ymin << " " << oblist[0].region.ymax << std::endl;
 
+    std::cout << std::endl;
     ImageObject ob = ji.getObjectByID(doc, TRAIN_TYPE, 0, 0);
     std::cout << "Object name: " << ob.name << std::endl;
     std::cout << "Object ID: " << ob.id << std::endl;
     std::cout << "Object region: " << ob.region.xmin << " " << ob.region.xmax << " " \
         << ob.region.ymin << " " << ob.region.ymax << std::endl;
+    
+    std::cout << std::endl;
+    vector<ImageObject> oblist2 = ji.getObjectListByName(doc, TRAIN_TYPE, 0, "signal");
+    std::cout << "Object name: " << oblist2[0].name << std::endl;
+    std::cout << "Object ID: " << oblist2[0].id << std::endl;
 
     std::cout << "==== Test End: Number of Images ====" << std::endl;
 }
