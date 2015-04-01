@@ -124,7 +124,7 @@ public:
     string getFileName(const rapidjson::Value& doc, int imageType, int imageIdx);
     string getFolderName(const rapidjson::Value& doc, int imageType, int imageIdx);
     ImageSize getImageSize(const rapidjson::Value& doc, int imageType, int imageIdx);
-    int getNumObject(const rapidjson::Value& doc, int imageType, int imageIdx); // TODO
+    int getNumObject(const rapidjson::Value& doc, int imageType, int imageIdx); 
 
     ImageObject getObjectByID(const rapidjson::Value& doc, int imageType,
         int imageIdx, int objectIdx);

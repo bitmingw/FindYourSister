@@ -538,6 +538,18 @@ JsonImages::getImageSize(const rapidjson::Value& doc, int imageType, int imageId
     return ImageSize(nrows, ncols);
 }
 
+int
+JsonImages::getNumObject(const rapidjson::Value& doc, int imageType, int imageIdx)
+{
+    vector<string> searchPath = getTypePath(imageType);
+    if (searchPath.size() == 0) {
+        return 0; // return empty
+    }
+    searchPath.push_back(itoa(imageIdx));
+    searchPath.push_back("objects");
+    return getArraySize(doc, searchPath);
+}
+
 ImageObject
 JsonImages::getObjectByID(const rapidjson::Value& doc, int imageType, int imageIdx, int objectIdx)
 {
