@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright (c) 2015, Ming Wen
 #
 # Install OpenCV to Debian/Ubuntu machine, and Raspberry Pi
