@@ -126,6 +126,7 @@ void testImageProperties(string imagesFile)
     std::cout << "Rows: " << is.nrows << std::endl;
     std::cout << "Columns: " << is.ncols << std::endl;
 
+    std::cout << "Number of objects in image 0: " << ji.getNumObject(doc, TRAIN_TYPE, 0) << std::endl;
     vector<ImageObject> oblist = ji.getObjectList(doc, TRAIN_TYPE, 0);
     std::cout << "Object name: " << oblist[0].name << std::endl;
     std::cout << "Object ID: " << oblist[0].id << std::endl;
