@@ -29,4 +29,5 @@ doc/_build/*
 
 # exclusive
 !sloth/sloth/gui/icons/*
+!sloth/doc/_static/*
 
