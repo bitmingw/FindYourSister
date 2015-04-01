@@ -2,8 +2,6 @@
 
 This is a collection of tools for object detection.
 
----
-
 ## Installation
 
 These packages are required by the program:
@@ -20,8 +18,6 @@ These packages are needed if you want to use image annotation tool `sloth`:
 
 These packages are recommended to install:
 - virtualenv (from pip)
-
----
 
 If you are using Debian/Ubuntu/Raspbian, there are two scripts provided.
 
