@@ -1,5 +1,7 @@
 # Directories
 bin/
+build/*
+doc/_build/*
 
 # Picture formats
 *.jpg
@@ -7,6 +9,10 @@ bin/
 *.tiff
 
 # C/C++
+*.c~
+*.cpp~
+*.h~
+*.hpp~
 *.swp
 *.o
 *.obj
@@ -19,4 +25,5 @@ bin/
 
 # Python
 *.py[cod]
+*.py~
 
