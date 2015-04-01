@@ -27,3 +27,6 @@ doc/_build/*
 *.py[cod]
 *.py~
 
+# exclusive
+!sloth/sloth/gui/icons/*
+
