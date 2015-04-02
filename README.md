@@ -6,10 +6,12 @@ This is a collection of tools for object detection.
 
 These packages are required by the program:
 - build-essential
+- cmake
 - OpenCV
 - python2.7
 - pip
 - numpy
+- rapidjson
 
 These packages are needed if you want to use image annotation tool `sloth`:
 - Pillow (from pip)
@@ -21,17 +23,22 @@ These packages are recommended to install:
 
 If you are using Debian/Ubuntu/Raspbian, there are two scripts provided.
 
-`InstallOpencvDeb.sh` in `tools` folder will install required packages and virtualenv.
+1. `InstallOpencvDeb.sh` in `tools` folder will install required packages and virtualenv, except rapidjson.
 
-`InstallPyQt4Deb.sh` in `tools` folder will install SIP and PyQt4
+2. `InstallPyQt4Deb.sh` in `tools` folder will install SIP and PyQt4
 if you have already download the source code.
 
-Install `Pillow` is easy with
+To install `rapidjson`, please checkout
+```
+https://github.com/miloyip/rapidjson
+```
+ 
+To install `Pillow`, please use pip
 ```
 pip install Pillow
 ```
 
-To build the program, type
+To build the program without annotation tool, type
 ```
 make
 ```
@@ -42,4 +49,5 @@ To install annotation tool `sloth`, type
 cd sloth
 python setup.py install
 ```
+You may want to activate virtualenv in this case.
 
