@@ -16,6 +16,13 @@
         "nOctaveLayers": 2,
         "extended": true,
         "upright": false
+    },
+    "FREAK_config": {
+        "orientationNormalized": true,
+        "scaleNormalized": true,
+        "patternScale": 22.0,
+        "nOctaves": 4,
+        "selectedPairs": []
     }
 }
 
