@@ -15,6 +15,8 @@ class JsonFeatures : public JsonHandler
 public:
     JsonFeatures(string filename);
     ~JsonFeatures();
+
+    // -------- FEATURE TYPES --------
     string getDetectorType(const rapidjson::Value& doc);
     void setDetectorType(rapidjson::Value& doc, string newType);
     string getDescriptorType(const rapidjson::Value& doc);
@@ -23,6 +25,7 @@ public:
     void setMatcherType(rapidjson::Value& doc, string newType);
 
     // TODO: test the following 5 functions
+    // -------- SIFT CONFIG --------
     int getSIFTnfeatures(const rapidjson::Value& doc);
     int getSIFTnOctaveLayers(const rapidjson::Value& doc);
     double getSIFTcontrastThreshold(const rapidjson::Value& doc);
@@ -30,6 +33,7 @@ public:
     double getSIFTsigma(const rapidjson::Value& doc);
 
     // TODO: test the following 5 functions
+    // -------- SURF CONFIG --------
     double getSURFhessianThreshold(const rapidjson::Value& doc);
     int getSURFnOctaves(const rapidjson::Value& doc);
     int getSURFnOctaveLayers(const rapidjson::Value& doc);

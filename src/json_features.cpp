@@ -19,6 +19,8 @@ JsonFeatures::JsonFeatures(string filename)
 
 JsonFeatures::~JsonFeatures() {}
 
+// -------- FEATURE TYPES --------
+
 string
 JsonFeatures::getDetectorType(const rapidjson::Value& doc)
 {
@@ -121,6 +123,22 @@ JsonFeatures::getSURFnOctaveLayers(const rapidjson::Value& doc)
     vector<string> path = this->SURF_ConfigPath;
     path.push_back("nOctaveLayers");
     return getIntVal(doc, path);
+}
+
+bool
+JsonFeatures::getSURFextended(const rapidjson::Value& doc)
+{
+    vector<string> path = this->SURF_ConfigPath;
+    path.push_back("extended");
+    return getBoolVal(doc, path);
+}
+
+bool
+JsonFeatures::getSURFupright(const rapidjson::Value& doc)
+{
+    vector<string> path = this->SURF_ConfigPath;
+    path.push_back("upright");
+    return getBoolVal(doc, path);
 }
 
 } // namespace fys
