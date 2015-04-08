@@ -1,7 +1,10 @@
 // Copyright (c) 2015, Ming Wen
 
 #include "fys.hpp"
-#include "json_handler.hpp"
+#include "json_base.hpp"
+#include "json_images.hpp"
+#include "json_features.hpp"
+#include "test.hpp"
 
 using namespace std;
 
