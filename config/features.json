@@ -2,5 +2,13 @@
     "detector": "SIFT",
     "descriptor": null,
     "matcher": null,
-    "drawing": false
+    "drawing": false,
+    "SIFT_config": {
+        "nfeatures": 0,
+        "nOctaveLayers": 3,
+        "contrastThreshold": 0.04,
+        "edgeThreshold": 10,
+        "sigma": 1.6
+    }
 }
+
