@@ -32,8 +32,9 @@ int main(int argc, char* argv[]) {
     //fys::testGetSet(imagesConfigFile);
     //fys::testFeatureType(featuresConfigFile);
     //fys::testImageProperties(imagesConfigFile);
-    fys::testSIFTGetting(featuresConfigFile);
-    fys::testSURFGetting(featuresConfigFile);
+    //fys::testSIFTGetting(featuresConfigFile);
+    //fys::testSURFGetting(featuresConfigFile);
+    fys::testFREAKGetting(featuresConfigFile);
 
     exit(EXIT_SUCCESS);
 }

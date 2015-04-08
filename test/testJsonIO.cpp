@@ -189,5 +189,23 @@ void testSURFGetting(string featuresFile)
     std::cout << "==== Test End: Getting SURF Config ====" << std::endl;
 }
 
+void testFREAKGetting(string featuresFile)
+{
+    std::cout << "==== Test Start: Getting FREAK Config ====" << std::endl;
+
+    JsonFeatures jf = JsonFeatures(featuresFile);
+    jf.readJsonFile();
+
+    rapidjson::Document doc;
+    doc.Parse(jf.getFileStr().c_str());
+
+    std::cout << "Is orientation normalized: " << jf.getFREAKorientationNormalized(doc) << std::endl;
+    std::cout << "Is scale normalized: " << jf.getFREAKscaleNormalized(doc) << std::endl;
+    std::cout << "Pattern Scale: " << jf.getFREAKpatternScale(doc) << std::endl;
+    std::cout << "Number of octaves: " << jf.getFREAKnOctaves(doc) << std::endl;
+
+    std::cout << "==== Test End: Getting FREAK Config ====" << std::endl;
+}
+
 } // namespace fys
 

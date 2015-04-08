@@ -13,6 +13,7 @@ void testFeatureType(string featuresFile);
 void testImageProperties(string imagesFile);
 void testSIFTGetting(string featuresFile);
 void testSURFGetting(string featuresFile);
+void testFREAKGetting(string featuresFile);
 
 } // namespace fys
 
