@@ -15,6 +15,7 @@ JsonFeatures::JsonFeatures(string filename)
     matcherTypePath.push_back("matcher");
     SIFT_ConfigPath.push_back("SIFT_config");
     SURF_ConfigPath.push_back("SURF_config");
+    FREAK_ConfigPath.push_back("FREAK_config");
 }
 
 JsonFeatures::~JsonFeatures() {}
@@ -139,6 +140,40 @@ JsonFeatures::getSURFupright(const rapidjson::Value& doc)
     vector<string> path = this->SURF_ConfigPath;
     path.push_back("upright");
     return getBoolVal(doc, path);
+}
+
+// -------- FREAK CONFIG --------
+
+bool
+JsonFeatures::getFREAKorientationNormalized(const rapidjson::Value& doc)
+{
+    vector<string> path = this->FREAK_ConfigPath;
+    path.push_back("orientationNormalized");
+    return getBoolVal(doc, path);
+}
+
+bool
+JsonFeatures::getFREAKscaleNormalized(const rapidjson::Value& doc)
+{
+    vector<string> path = this->FREAK_ConfigPath;
+    path.push_back("scaleNormalized");
+    return getBoolVal(doc, path);
+}
+
+double
+JsonFeatures::getFREAKpatternScale(const rapidjson::Value& doc)
+{
+    vector<string> path = this->FREAK_ConfigPath;
+    path.push_back("patternScale");
+    return getDoubleVal(doc, path);
+}
+
+int
+JsonFeatures::getFREAKnOctaves(const rapidjson::Value& doc)
+{
+    vector<string> path = this->FREAK_ConfigPath;
+    path.push_back("nOctaves");
+    return getIntVal(doc, path);
 }
 
 } // namespace fys

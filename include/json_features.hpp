@@ -24,7 +24,6 @@ public:
     string getMatcherType(const rapidjson::Value& doc);
     void setMatcherType(rapidjson::Value& doc, string newType);
 
-    // TODO: test the following 5 functions
     // -------- SIFT CONFIG --------
     int getSIFTnfeatures(const rapidjson::Value& doc);
     int getSIFTnOctaveLayers(const rapidjson::Value& doc);
@@ -32,7 +31,6 @@ public:
     double getSIFTedgeThreshold(const rapidjson::Value& doc);
     double getSIFTsigma(const rapidjson::Value& doc);
 
-    // TODO: test the following 5 functions
     // -------- SURF CONFIG --------
     double getSURFhessianThreshold(const rapidjson::Value& doc);
     int getSURFnOctaves(const rapidjson::Value& doc);
@@ -40,14 +38,23 @@ public:
     bool getSURFextended(const rapidjson::Value& doc);
     bool getSURFupright(const rapidjson::Value& doc);
 
+    // -------- FREAK CONFIG --------
+    bool getFREAKorientationNormalized(const rapidjson::Value& doc);
+    bool getFREAKscaleNormalized(const rapidjson::Value& doc);
+    double getFREAKpatternScale(const rapidjson::Value& doc);
+    int getFREAKnOctaves(const rapidjson::Value& doc);
+    // TODO: getFREAKselectedPairs()
+
 private:
     vector<string> detectorTypePath;
     vector<string> descriptorTypePath;
     vector<string> matcherTypePath;
     vector<string> SIFT_ConfigPath;
     vector<string> SURF_ConfigPath;
+    vector<string> FREAK_ConfigPath;
 };
 
 } // namespace fys
 
 #endif // _H_JSON_FEATURES
+
