@@ -22,13 +22,17 @@ public:
     string getMatcherType(const rapidjson::Value& doc);
     void setMatcherType(rapidjson::Value& doc, string newType);
 
+    int getSIFTnfeatures(const rapidjson::Value& doc);
+    int getSIFTnOctaveLayers(const rapidjson::Value& doc);
+    double getSIFTcontrastThreshold(const rapidjson::Value& doc);
+    double getSIFTedgeThreshold(const rapidjson::Value& doc);
+    double getSIFTsigma(const rapidjson::Value& doc);
+
 private:
     vector<string> detectorTypePath;
     vector<string> descriptorTypePath;
     vector<string> matcherTypePath;
-    string detectorType;
-    string descriptorType;
-    string matcherType;
+    vector<string> SIFT_ConfigPath;
 };
 
 } // namespace fys

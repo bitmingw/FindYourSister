@@ -13,6 +13,7 @@ JsonFeatures::JsonFeatures(string filename)
     detectorTypePath.push_back("detector");
     descriptorTypePath.push_back("descriptor");
     matcherTypePath.push_back("matcher");
+    SIFT_ConfigPath.push_back("SIFT_config");
 }
 
 JsonFeatures::~JsonFeatures() {}
@@ -51,6 +52,48 @@ void
 JsonFeatures::setMatcherType(rapidjson::Value& doc, string newType)
 {
     setStrVal(doc, this->matcherTypePath, newType);
+}
+
+// --------
+
+int
+JsonFeatures::getSIFTnfeatures(const rapidjson::Value& doc)
+{
+    vector<string> path = this->SIFT_ConfigPath;
+    path.push_back("nfeatures");
+    return getIntVal(doc, path);
+}
+
+int
+JsonFeatures::getSIFTnOctaveLayers(const rapidjson::Value& doc)
+{
+    vector<string> path = this->SIFT_ConfigPath;
+    path.push_back("nOctaveLayers");
+    return getIntVal(doc, path);
+}
+
+double
+JsonFeatures::getSIFTcontrastThreshold(const rapidjson::Value& doc)
+{
+    vector<string> path = this->SIFT_ConfigPath;
+    path.push_back("contrastThreshold");
+    return getDoubleVal(doc, path);
+}
+
+double
+JsonFeatures::getSIFTedgeThreshold(const rapidjson::Value& doc)
+{
+    vector<string> path = this->SIFT_ConfigPath;
+    path.push_back("edgeThreshold");
+    return getDoubleVal(doc, path);
+}
+
+double
+JsonFeatures::getSIFTsigma(const rapidjson::Value& doc)
+{
+    vector<string> path = this->SIFT_ConfigPath;
+    path.push_back("sigma");
+    return getDoubleVal(doc, path);
 }
 
 } // namespace fys
