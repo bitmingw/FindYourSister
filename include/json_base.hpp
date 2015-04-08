@@ -19,13 +19,17 @@ class JsonHandler
 public:
     JsonHandler(string filename);
     ~JsonHandler();
+
+    // -------- FILE & DOCS --------
     void readJsonFile(); // open & read json file
     string getFileStr(); // return json file as string
     string getDocStr(rapidjson::StringBuffer& buffer); // return json document as string
     void updateStr(rapidjson::StringBuffer& buffer); // update this->jsonStr
     void writeJsonFile(); // open & write json file
 
-    // TODO: get / set bool value
+    // -------- GET & SET VALUES --------
+    bool getBoolVal(const rapidjson::Value& doc, vector<string> position);
+    void setBoolVal(rapidjson::Value& doc, vector<string> position, bool newVal);
     int getIntVal(const rapidjson::Value& doc, vector<string> position);
     void setIntVal(rapidjson::Value& doc, vector<string> position, int newVal);
     double getDoubleVal(const rapidjson::Value& doc, vector<string> position);
@@ -39,9 +43,11 @@ private:
     string jsonStr;
 
 protected:
+    // -------- NODE RETRIEVAL --------
     const rapidjson::Value& getReference(const rapidjson::Value& doc, vector<string> position);
 };
 
 } // namespace fys
 
 #endif // _H_JSON_BASE
+

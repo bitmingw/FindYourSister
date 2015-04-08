@@ -12,6 +12,8 @@ JsonHandler::JsonHandler(string filename)
 
 JsonHandler::~JsonHandler() {}
 
+// -------- FILE & DOCS --------
+
 void
 JsonHandler::readJsonFile()
 {
@@ -68,6 +70,8 @@ JsonHandler::writeJsonFile()
     }
 }
 
+// -------- NODE RETRIEVAL --------
+
 const rapidjson::Value&
 JsonHandler::getReference(const rapidjson::Value& doc, vector<string> position)
 {
@@ -98,6 +102,85 @@ JsonHandler::getReference(const rapidjson::Value& doc, vector<string> position)
             it++;
             vector<string> lessPosition(it, position.end());
             return getReference(tmp, lessPosition);
+        }
+    }
+}
+
+// -------- GET & SET VALUES --------
+bool
+JsonHandler::getBoolVal(const rapidjson::Value& doc, vector<string> position)
+{
+    assert(position.size() >= 1);
+
+    int checkVal; // convert string to number if necessary
+    if ((checkVal = checkDigit(position[0])) == -1) {
+        // position[0] is a string
+        const rapidjson::Value& tmp = doc[position[0].c_str()]; 
+        if (position.size() == 1 && tmp.IsBool()) {
+            return tmp.GetBool();
+        }
+        else if (position.size() == 1 && (!tmp.IsBool())) {
+            std::cerr << "Error: retrieved value is not type \'bool\'!" << std::endl;
+            return false;
+        }
+        else {
+            vector<string>::iterator it = position.begin();
+            it++;
+            vector<string> lessPosition(it, position.end());
+            return getBoolVal(tmp, lessPosition);
+        }
+    }
+    else {
+         // position[0] is a number
+        const rapidjson::Value& tmp = doc[checkVal]; 
+        if (position.size() == 1 && tmp.IsBool()) {
+            return tmp.GetBool();
+        }
+        else if (position.size() == 1 && (!tmp.IsBool())) {
+            std::cerr << "Error: retrieved value is not type \'bool\'!" << std::endl;
+            return false;
+        }
+        else {
+            vector<string>::iterator it = position.begin();
+            it++;
+            vector<string> lessPosition(it, position.end());
+            return getBoolVal(tmp, lessPosition);
+        }
+    }
+}
+
+void
+JsonHandler::setBoolVal(rapidjson::Value& doc, vector<string> position, bool newVal)
+{
+    assert(position.size() >= 1);
+
+    int checkVal; // convert string to number if necessary
+    if ((checkVal = checkDigit(position[0])) == -1) {
+        // position[0] is a string
+        rapidjson::Value& tmp = doc[position[0].c_str()]; 
+        if (position.size() == 1) {
+            tmp.SetBool(newVal);
+            return;
+        }
+        else {
+            vector<string>::iterator it = position.begin();
+            it++;
+            vector<string> lessPosition(it, position.end());
+            setBoolVal(tmp, lessPosition, newVal);
+        }
+    }
+    else {
+         // position[0] is a number
+        rapidjson::Value& tmp = doc[checkVal]; 
+        if (position.size() == 1) {
+            tmp.SetBool(newVal);
+            return;
+        }
+        else {
+            vector<string>::iterator it = position.begin();
+            it++;
+            vector<string> lessPosition(it, position.end());
+            setBoolVal(tmp, lessPosition, newVal);
         }
     }
 }
