@@ -151,5 +151,43 @@ void testImageProperties(string imagesFile)
     std::cout << "==== Test End: Number of Images ====" << std::endl;
 }
 
+void testSIFTGetting(string featuresFile)
+{
+    std::cout << "==== Test Start: Getting SIFT Config ====" << std::endl;
+
+    JsonFeatures jf = JsonFeatures(featuresFile);
+    jf.readJsonFile();
+
+    rapidjson::Document doc;
+    doc.Parse(jf.getFileStr().c_str());
+
+    std::cout << "Number of features: " << jf.getSIFTnfeatures(doc) << std::endl;
+    std::cout << "Number of layers: " << jf.getSIFTnOctaveLayers(doc) << std::endl;
+    std::cout << "Contrast threshold: " << jf.getSIFTcontrastThreshold(doc) << std::endl;
+    std::cout << "Edge threshold: " << jf.getSIFTedgeThreshold(doc) << std::endl;
+    std::cout << "Sigma: " << jf.getSIFTsigma(doc) << std::endl;
+    
+    std::cout << "==== Test End: Getting SIFT Config ====" << std::endl;
+}
+
+void testSURFGetting(string featuresFile)
+{
+    std::cout << "==== Test Start: Getting SURF Config ====" << std::endl;
+
+    JsonFeatures jf = JsonFeatures(featuresFile);
+    jf.readJsonFile();
+
+    rapidjson::Document doc;
+    doc.Parse(jf.getFileStr().c_str());
+
+    std::cout << "Hessian Threshold: " << jf.getSURFhessianThreshold(doc) << std::endl;
+    std::cout << "Number of octaves: " << jf.getSURFnOctaves(doc) << std::endl;
+    std::cout << "Number of layers: " << jf.getSURFnOctaveLayers(doc) << std::endl;
+    std::cout << "Is extended: " << jf.getSURFextended(doc) << std::endl;
+    std::cout << "Is upright: " << jf.getSURFupright(doc) << std::endl;
+    
+    std::cout << "==== Test End: Getting SURF Config ====" << std::endl;
+}
+
 } // namespace fys
 
