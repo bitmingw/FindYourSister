@@ -14,6 +14,7 @@ JsonFeatures::JsonFeatures(string filename)
     descriptorTypePath.push_back("descriptor");
     matcherTypePath.push_back("matcher");
     SIFT_ConfigPath.push_back("SIFT_config");
+    SURF_ConfigPath.push_back("SURF_config");
 }
 
 JsonFeatures::~JsonFeatures() {}
@@ -54,7 +55,7 @@ JsonFeatures::setMatcherType(rapidjson::Value& doc, string newType)
     setStrVal(doc, this->matcherTypePath, newType);
 }
 
-// --------
+// -------- SIFT CONFIG --------
 
 int
 JsonFeatures::getSIFTnfeatures(const rapidjson::Value& doc)
@@ -94,6 +95,32 @@ JsonFeatures::getSIFTsigma(const rapidjson::Value& doc)
     vector<string> path = this->SIFT_ConfigPath;
     path.push_back("sigma");
     return getDoubleVal(doc, path);
+}
+
+// -------- SURF CONFIG --------
+
+double
+JsonFeatures::getSURFhessianThreshold(const rapidjson::Value& doc)
+{
+    vector<string> path = this->SURF_ConfigPath;
+    path.push_back("hessianThreshold");
+    return getDoubleVal(doc, path);
+}
+
+int
+JsonFeatures::getSURFnOctaves(const rapidjson::Value& doc)
+{
+    vector<string> path = this->SURF_ConfigPath;
+    path.push_back("nOctaves");
+    return getIntVal(doc, path);
+}
+
+int
+JsonFeatures::getSURFnOctaveLayers(const rapidjson::Value& doc)
+{
+    vector<string> path = this->SURF_ConfigPath;
+    path.push_back("nOctaveLayers");
+    return getIntVal(doc, path);
 }
 
 } // namespace fys

@@ -25,6 +25,7 @@ public:
     void updateStr(rapidjson::StringBuffer& buffer); // update this->jsonStr
     void writeJsonFile(); // open & write json file
 
+    // TODO: get / set bool value
     int getIntVal(const rapidjson::Value& doc, vector<string> position);
     void setIntVal(rapidjson::Value& doc, vector<string> position, int newVal);
     double getDoubleVal(const rapidjson::Value& doc, vector<string> position);
