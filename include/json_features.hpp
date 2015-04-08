@@ -49,9 +49,9 @@ private:
     vector<string> detectorTypePath;
     vector<string> descriptorTypePath;
     vector<string> matcherTypePath;
-    vector<string> SIFT_ConfigPath;
-    vector<string> SURF_ConfigPath;
-    vector<string> FREAK_ConfigPath;
+    vector<string> SIFTConfigPath;
+    vector<string> SURFConfigPath;
+    vector<string> FREAKConfigPath;
 };
 
 } // namespace fys

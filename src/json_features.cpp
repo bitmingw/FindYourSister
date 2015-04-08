@@ -13,9 +13,9 @@ JsonFeatures::JsonFeatures(string filename)
     detectorTypePath.push_back("detector");
     descriptorTypePath.push_back("descriptor");
     matcherTypePath.push_back("matcher");
-    SIFT_ConfigPath.push_back("SIFT_config");
-    SURF_ConfigPath.push_back("SURF_config");
-    FREAK_ConfigPath.push_back("FREAK_config");
+    SIFTConfigPath.push_back("SIFT_config");
+    SURFConfigPath.push_back("SURF_config");
+    FREAKConfigPath.push_back("FREAK_config");
 }
 
 JsonFeatures::~JsonFeatures() {}
@@ -63,7 +63,7 @@ JsonFeatures::setMatcherType(rapidjson::Value& doc, string newType)
 int
 JsonFeatures::getSIFTnfeatures(const rapidjson::Value& doc)
 {
-    vector<string> path = this->SIFT_ConfigPath;
+    vector<string> path = this->SIFTConfigPath;
     path.push_back("nfeatures");
     return getIntVal(doc, path);
 }
@@ -71,7 +71,7 @@ JsonFeatures::getSIFTnfeatures(const rapidjson::Value& doc)
 int
 JsonFeatures::getSIFTnOctaveLayers(const rapidjson::Value& doc)
 {
-    vector<string> path = this->SIFT_ConfigPath;
+    vector<string> path = this->SIFTConfigPath;
     path.push_back("nOctaveLayers");
     return getIntVal(doc, path);
 }
@@ -79,7 +79,7 @@ JsonFeatures::getSIFTnOctaveLayers(const rapidjson::Value& doc)
 double
 JsonFeatures::getSIFTcontrastThreshold(const rapidjson::Value& doc)
 {
-    vector<string> path = this->SIFT_ConfigPath;
+    vector<string> path = this->SIFTConfigPath;
     path.push_back("contrastThreshold");
     return getDoubleVal(doc, path);
 }
@@ -87,7 +87,7 @@ JsonFeatures::getSIFTcontrastThreshold(const rapidjson::Value& doc)
 double
 JsonFeatures::getSIFTedgeThreshold(const rapidjson::Value& doc)
 {
-    vector<string> path = this->SIFT_ConfigPath;
+    vector<string> path = this->SIFTConfigPath;
     path.push_back("edgeThreshold");
     return getDoubleVal(doc, path);
 }
@@ -95,7 +95,7 @@ JsonFeatures::getSIFTedgeThreshold(const rapidjson::Value& doc)
 double
 JsonFeatures::getSIFTsigma(const rapidjson::Value& doc)
 {
-    vector<string> path = this->SIFT_ConfigPath;
+    vector<string> path = this->SIFTConfigPath;
     path.push_back("sigma");
     return getDoubleVal(doc, path);
 }
@@ -105,7 +105,7 @@ JsonFeatures::getSIFTsigma(const rapidjson::Value& doc)
 double
 JsonFeatures::getSURFhessianThreshold(const rapidjson::Value& doc)
 {
-    vector<string> path = this->SURF_ConfigPath;
+    vector<string> path = this->SURFConfigPath;
     path.push_back("hessianThreshold");
     return getDoubleVal(doc, path);
 }
@@ -113,7 +113,7 @@ JsonFeatures::getSURFhessianThreshold(const rapidjson::Value& doc)
 int
 JsonFeatures::getSURFnOctaves(const rapidjson::Value& doc)
 {
-    vector<string> path = this->SURF_ConfigPath;
+    vector<string> path = this->SURFConfigPath;
     path.push_back("nOctaves");
     return getIntVal(doc, path);
 }
@@ -121,7 +121,7 @@ JsonFeatures::getSURFnOctaves(const rapidjson::Value& doc)
 int
 JsonFeatures::getSURFnOctaveLayers(const rapidjson::Value& doc)
 {
-    vector<string> path = this->SURF_ConfigPath;
+    vector<string> path = this->SURFConfigPath;
     path.push_back("nOctaveLayers");
     return getIntVal(doc, path);
 }
@@ -129,7 +129,7 @@ JsonFeatures::getSURFnOctaveLayers(const rapidjson::Value& doc)
 bool
 JsonFeatures::getSURFextended(const rapidjson::Value& doc)
 {
-    vector<string> path = this->SURF_ConfigPath;
+    vector<string> path = this->SURFConfigPath;
     path.push_back("extended");
     return getBoolVal(doc, path);
 }
@@ -137,7 +137,7 @@ JsonFeatures::getSURFextended(const rapidjson::Value& doc)
 bool
 JsonFeatures::getSURFupright(const rapidjson::Value& doc)
 {
-    vector<string> path = this->SURF_ConfigPath;
+    vector<string> path = this->SURFConfigPath;
     path.push_back("upright");
     return getBoolVal(doc, path);
 }
@@ -147,7 +147,7 @@ JsonFeatures::getSURFupright(const rapidjson::Value& doc)
 bool
 JsonFeatures::getFREAKorientationNormalized(const rapidjson::Value& doc)
 {
-    vector<string> path = this->FREAK_ConfigPath;
+    vector<string> path = this->FREAKConfigPath;
     path.push_back("orientationNormalized");
     return getBoolVal(doc, path);
 }
@@ -155,7 +155,7 @@ JsonFeatures::getFREAKorientationNormalized(const rapidjson::Value& doc)
 bool
 JsonFeatures::getFREAKscaleNormalized(const rapidjson::Value& doc)
 {
-    vector<string> path = this->FREAK_ConfigPath;
+    vector<string> path = this->FREAKConfigPath;
     path.push_back("scaleNormalized");
     return getBoolVal(doc, path);
 }
@@ -163,7 +163,7 @@ JsonFeatures::getFREAKscaleNormalized(const rapidjson::Value& doc)
 double
 JsonFeatures::getFREAKpatternScale(const rapidjson::Value& doc)
 {
-    vector<string> path = this->FREAK_ConfigPath;
+    vector<string> path = this->FREAKConfigPath;
     path.push_back("patternScale");
     return getDoubleVal(doc, path);
 }
@@ -171,7 +171,7 @@ JsonFeatures::getFREAKpatternScale(const rapidjson::Value& doc)
 int
 JsonFeatures::getFREAKnOctaves(const rapidjson::Value& doc)
 {
-    vector<string> path = this->FREAK_ConfigPath;
+    vector<string> path = this->FREAKConfigPath;
     path.push_back("nOctaves");
     return getIntVal(doc, path);
 }
