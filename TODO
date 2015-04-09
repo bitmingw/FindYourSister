@@ -1,32 +1,13 @@
-[ ] Construct the framework
-    [x] Draw the graph of dependency
-	[ ] Add json parser
-	[ ] Write helper functions
-	[ ] Write main program
-	[ ] Write corresponding json config files
-	[ ] Debug
-	[ ] Test
+Update C++ image interface.
+    Use parse values as double rather than int.
 
-[ ] Add a test case
-    [ ] Setup image config files
-	[ ] Read labels & locations from json
-	[ ] Compute new matching
-	[ ] Search for classify conditions
-	[ ] Check image pairs
-	[ ] Optimize the results
+Rewrite gen_labels.py
+    `gen_labels.py` is a all-in-one script to generate final image labels.
+    Need to add a json to config its bahavior.
 
-[ ] Porting
-    [ ] Use cmake to replace Makefile
-	[ ] Test in GCC, MinGW & MSVC
+Update folder values.
+    Save the absolute path of file.
 
-[ ] Documents
-    [x] README
-	[x] Installing scripts for dependent packages
-	[ ] HTML docs
-
-[ ] Thesis
-    [ ] Principles
-	[ ] Results
-	[ ] Reference
-	[ ] Presentation
+Porting of python2 to python3.
+    Use future print function and unicode literals.
 
