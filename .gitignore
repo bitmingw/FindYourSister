@@ -2,6 +2,7 @@
 bin/
 build/*
 doc/_build/*
+*/.ropeproject/
 
 # Picture formats
 *.jpg
