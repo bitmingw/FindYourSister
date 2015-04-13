@@ -13,11 +13,12 @@ from other files. They are specified in a json configuration file.
 The default configuration file is `gen_labels.json` in current directory.
 
 If you want to display the json info in screen rather than write to
-a file, please set `outputJsonFile` to Null in configuration.
+a file, please set `outputJsonFile` to null in configuration.
 """
 
 import sys
 import json
+from os.path import split
 import re
 
 # Global variables
@@ -33,7 +34,7 @@ def main():
 
     configDoc = open(CONFIG_FILE, "r")
     configJson = json.load(configDoc)
-    print json.JSONEncoder(indent = 4).encode(configJson)
+    # print json.JSONEncoder(indent = 4).encode(configJson)
 
     # Parse config file
     outfile = configJson[u"outputJsonFile"]
@@ -61,9 +62,20 @@ def main():
     while i < numInfoFiles:
         addInfo(infoNode, infoFiles[i])
         i += 1
-    print infoNode
+    # print infoNode
 
-    # TODO: Add each label file into the json structure
+    # Process each label file
+    i = 0
+    while i < numLabelFiles:
+        processLabels(rootNode, labelFiles[i], infoNode)
+        i += 1
+
+    # Write the results
+    if outfile is None:
+        print json.JSONEncoder(indent = 4).encode(rootNode)
+    else:
+        out = open(outfile, "w")
+        out.write(json.JSONEncoder(indent = 4).encode(rootNode))
 
 
 def setupJsonRoot():
@@ -74,7 +86,7 @@ def setupJsonRoot():
     return root
 
 
-def addInfo(node, filepath):
+def addInfo(root, filepath):
     fd = open(filepath, "r")
     data = json.load(fd)
     group = None
@@ -85,16 +97,73 @@ def addInfo(node, filepath):
     elif u"test" in data.keys():
         group = u"test"
 
-    if group == None:
+    if group is None:
         return
     else:
         # Add all image info into database
         for item in data[group]:
-            node[group].append(item)
+            root[group].append(item)
+
+
+def processLabels(root, filepath, refInfo):
+    fd = open(filepath, "r")
+    data = json.load(fd)
+    # Each image is stored as a dict, collected in a list
+    for img in data:
+        processImage(root, img, refInfo)
+
+
+def processImage(root, imgDict, refInfo):
+    imgDir, imgFile = split(imgDict[u"filename"])
+    imgDir = getDirectFolder(imgDir)
+    group, node = findInfo(imgDir, imgFile, refInfo)
+    objID = 0
+
+    if group is not None:
+        node[u"objects"] = []
+        for label in imgDict[u"annotations"]:
+            obj = {}
+            obj[u"name"] = label[u"class"]
+            obj[u"id"] = objID
+            objID += 1
+            obj[u"region"] = {}
+            obj[u"region"][u"xmin"] = int(label[u"x"])
+            obj[u"region"][u"xmax"] = int(label[u"x"] + label[u"width"])
+            obj[u"region"][u"ymin"] = int(label[u"y"])
+            obj[u"region"][u"ymax"] = int(label[u"y"] + label[u"height"])
+            node[u"objects"].append(obj)
+        root[group].append(node)
+
+
+def findInfo(imgDir, imgFile, refInfo):
+    """
+    Helper function
+
+    Returns (group, refInfo_node) if query image is in refInfo.
+    Otherwise returns (None, None)
+    """
+    if u"train" in refInfo:
+        for info in refInfo[u"train"]:
+            if info[u"filename"] == imgFile and \
+                    getDirectFolder(info[u"folder"]) == imgDir:
+                return (u"train", info)
+    if u"validate" in refInfo:
+        for info in refInfo[u"train"]:
+            if info[u"filename"] == imgFile and \
+                    getDirectFolder(info[u"folder"]) == imgDir:
+                return (u"validate", info)
+    if u"test" in refInfo:
+        for info in refInfo[u"train"]:
+            if info[u"filename"] == imgFile and \
+                    getDirectFolder(info[u"folder"]) == imgDir:
+                return (u"test", info)
+    return (None, None)
 
 
 def getDirectFolder(path):
     """
+    Helper function
+
     This function returns the direct folder name of a file.
     It is used to match files given different types of path.
     """
