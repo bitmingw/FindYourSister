@@ -1,7 +1,8 @@
 {
     "imgLabelFiles": [
         {
-            "filename": "imgLabel.json"
+            "filename": "imgLabel.json",
+            "group": "train"
         }
     ],
     "imgInfoFiles": [
