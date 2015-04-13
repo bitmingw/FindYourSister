@@ -1,13 +1,5 @@
-Update C++ image interface.
-    [CANCEL]Use parse values as double rather than int.
-    Still using int, change values in json files into int.
-
-Rewrite gen_labels.py
-    `gen_labels.py` is a all-in-one script to generate final image labels.
-    Need to add a json to config its bahavior.
-
-Update folder values.
-    Save the absolute path of file.
+Writing interface to call OpenCV functions.
+    With the parameters in features.json.
 
 Porting of python2 to python3.
     Use future print function and unicode literals.
