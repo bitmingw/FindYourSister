@@ -7,6 +7,8 @@ using namespace std;
 
 namespace fys {
 
+// -------- HELPER --------
+
 ImageSize::ImageSize()
     : nrows(0), ncols(0) {}
 ImageSize::ImageSize(int nrows, int ncols)
@@ -31,7 +33,7 @@ ImageSample::ImageSample(int train, int validate, int test)
     : train(train), validate(validate), test(test), total(train + validate + test) {}
 ImageSample::~ImageSample() {}
 
-// --------
+// -------- JSON IMAGES CLASS --------
 
 JsonImages::JsonImages(string filename)
     : JsonHandler(filename) 
