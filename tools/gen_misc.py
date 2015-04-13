@@ -20,7 +20,7 @@ will be displayed in the terminal.
 """
 
 import sys
-from os.path import isfile, isdir, dirname, basename, join, splitext
+from os.path import abspath, isfile, isdir, join, split, splitext
 from os import listdir
 from PIL import Image
 import json
@@ -108,8 +108,8 @@ def addImage(root, path):
             li = root[u"test"]
 
         node = {}
-        node[u"folder"] = dirname(path)
-        node[u"filename"] = basename(path)
+        node[u"folder"] = split(abspath(path))[0]
+        node[u"filename"] = split(abspath(path))[1]
         node[u"size"] = {}
         node[u"size"][u"nrows"] = imgSize[1]  # height
         node[u"size"][u"ncols"] = imgSize[0]  # width
