@@ -6,10 +6,9 @@
     ],
     "imgInfoFiles": [
         {
-            "filename": "imgInfo.json",
-            "group": "train"
+            "filename": "imgInfo.json"
         }
     ],
-    "outputJsonFile": "out.json"
+    "outputJsonFile": "images.json"
 }
 
