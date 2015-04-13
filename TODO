@@ -1,5 +1,6 @@
 Update C++ image interface.
-    Use parse values as double rather than int.
+    [CANCEL]Use parse values as double rather than int.
+    Still using int, change values in json files into int.
 
 Rewrite gen_labels.py
     `gen_labels.py` is a all-in-one script to generate final image labels.
