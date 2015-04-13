@@ -1,0 +1,14 @@
+{
+    "imgLabelFiles": [
+        {
+            "filename": "imgLabel.json"
+        }
+    ],
+    "imgInfoFiles": [
+        {
+            "filename": "imgInfo.json"
+        }
+    ],
+    "outputJsonFile": "out.json"
+}
+
