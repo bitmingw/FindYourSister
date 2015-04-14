@@ -7,9 +7,11 @@ using namespace std;
 
 namespace fys {
 
-Features::Features(const JsonFeatures& jf)
+Features::Features(JsonFeatures& jf)
 {
-
+    detectorType = jf.getDetectorType(jf.doc);
+    descriptorType = jf.getDescriptorType(jf.doc);
+    matcherType = jf.getMatcherType(jf.doc);
 }
 
 Features::~Features() {}

@@ -18,16 +18,13 @@ class Features
 {
 
 public:
-    Features(const JsonFeatures& jf);
+    Features(JsonFeatures& jf);
     ~Features();
 
 private:
     string detectorType;
     string descriptorType;
     string matcherType;
-    //cv::FeatureDetector& detector;
-    //cv::DescriptorExtractor& extractor;
-    //cv::DescriptorMatcher& matcher;
 };
 
 } // namespace fys
