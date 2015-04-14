@@ -23,6 +23,20 @@ public:
     double sigma;
 };
 
+class SurfConfig
+{
+public:
+    SurfConfig();
+    SurfConfig(double hessianThreshold, int nOctaves, int nOctaveLayers,
+            bool isExtended, bool isUpright);
+    ~SurfConfig();
+    double hessianThreshold;
+    int nOctaves;
+    int nOctaveLayers;
+    bool isExtended;
+    bool isUpright;
+};
+
 class JsonFeatures : public JsonHandler
 {
 

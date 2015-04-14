@@ -7,6 +7,8 @@ using namespace std;
 
 namespace fys {
 
+// -------- SIFT CONFIG CLASS --------
+
 SiftConfig::SiftConfig() {}
 
 SiftConfig::SiftConfig(int nfeatures, int nOctaveLayers, double contrastThreshold,
@@ -16,6 +18,18 @@ SiftConfig::SiftConfig(int nfeatures, int nOctaveLayers, double contrastThreshol
       sigma(sigma) {}
 
 SiftConfig::~SiftConfig() {}
+
+// -------- SURF CONFIG CLASS --------
+
+SurfConfig::SurfConfig() {}
+
+SurfConfig::SurfConfig(double hessianThreshold, int nOctaves, int nOctaveLayers,
+        bool isExtended, bool isUpright)
+    : hessianThreshold(hessianThreshold),
+      nOctaves(nOctaves), nOctaveLayers(nOctaveLayers),
+      isExtended(isExtended), isUpright(isUpright) {}
+
+SurfConfig::~SurfConfig() {}
 
 JsonFeatures::JsonFeatures(string filename) 
     : JsonHandler(filename) 
