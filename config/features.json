@@ -3,21 +3,21 @@
     "descriptor": null,
     "matcher": null,
     "drawing": false,
-    "SIFT_config": {
+    "siftConfig": {
         "nfeatures": 0,
         "nOctaveLayers": 3,
         "contrastThreshold": 0.04,
         "edgeThreshold": 10.0,
         "sigma": 1.6
     },
-    "SURF_config": {
+    "surfConfig": {
         "hessianThreshold": 400.0,
         "nOctaves": 4,
         "nOctaveLayers": 2,
         "extended": true,
         "upright": false
     },
-    "FREAK_config": {
+    "freakConfig": {
         "orientationNormalized": true,
         "scaleNormalized": true,
         "patternScale": 22.0,

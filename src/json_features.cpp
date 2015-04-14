@@ -13,9 +13,9 @@ JsonFeatures::JsonFeatures(string filename)
     detectorTypePath.push_back("detector");
     descriptorTypePath.push_back("descriptor");
     matcherTypePath.push_back("matcher");
-    SIFTConfigPath.push_back("SIFT_config");
-    SURFConfigPath.push_back("SURF_config");
-    FREAKConfigPath.push_back("FREAK_config");
+    SIFTConfigPath.push_back("siftConfig");
+    SURFConfigPath.push_back("surfConfig");
+    FREAKConfigPath.push_back("freakConfig");
 }
 
 JsonFeatures::~JsonFeatures() {}
