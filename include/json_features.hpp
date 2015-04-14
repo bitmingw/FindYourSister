@@ -9,6 +9,20 @@ using namespace std;
 
 namespace fys {
 
+class SiftConfig
+{
+public:
+    SiftConfig();
+    SiftConfig(int nfeatures, int nOctaveLayers, double contrastThreshold,
+            double edgeThreshold, double sigma);
+    ~SiftConfig();
+    int nfeatures;
+    int nOctaveLayers;
+    double contrastThreshold;
+    double edgeThreshold;
+    double sigma;
+};
+
 class JsonFeatures : public JsonHandler
 {
 

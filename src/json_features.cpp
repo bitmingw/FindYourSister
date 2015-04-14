@@ -7,6 +7,16 @@ using namespace std;
 
 namespace fys {
 
+SiftConfig::SiftConfig() {}
+
+SiftConfig::SiftConfig(int nfeatures, int nOctaveLayers, double contrastThreshold,
+        double edgeThreshold, double sigma)
+    : nfeatures(nfeatures), nOctaveLayers(nOctaveLayers),
+      contrastThreshold(contrastThreshold), edgeThreshold(edgeThreshold),
+      sigma(sigma) {}
+
+SiftConfig::~SiftConfig() {}
+
 JsonFeatures::JsonFeatures(string filename) 
     : JsonHandler(filename) 
 {
