@@ -10,6 +10,7 @@ using namespace std;
 
 namespace fys {
 
+/*
 void testBasicIO(string featuresFile)
 {
     std::cout << "==== Test Start: BasicIO ====" << std::endl;
@@ -36,26 +37,23 @@ void testBasicIO(string featuresFile)
 
     std::cout << "==== Test End: BasicIO ====" << std::endl;
 }
+*/
 
 void testGetSet(string imageFile) 
 {
     std::cout << "==== Test Start: Getter and Setter ====" << std::endl;
 
-    JsonImages ji = JsonImages(imageFile);
-    ji.readJsonFile();
+    JsonImages ji(imageFile); 
     
-    rapidjson::Document doc;
-    doc.Parse(ji.getFileStr().c_str());
-
     // getIntVal
     vector<string> path1 = vector<string>();
     path1.push_back("train");
     path1.push_back("0");
     path1.push_back("size");
     path1.push_back("nrows");
-    std::cout << "Number of rows in the image: " << ji.getIntVal(doc, path1) << std::endl;
+    std::cout << "Number of rows in the image: " << ji.getIntVal(ji.doc, path1) << std::endl;
 
-    // getDoubleVal & setDoubleVal
+    // setDoubleVal
     vector<string> path2 = vector<string>();
     path2.push_back("train");
     path2.push_back("0");
@@ -63,27 +61,28 @@ void testGetSet(string imageFile)
     path2.push_back("0");
     path2.push_back("region");
     path2.push_back("ymin");
-    std::cout << "Original: min y value of the object: " << ji.getDoubleVal(doc, path2) << std::endl;
-    ji.setDoubleVal(doc, path2, 10);
-    std::cout << "New: min y value of the object: " << ji.getDoubleVal(doc, path2) << std::endl;
+    std::cout << "Original: min y value of the object: " << ji.getIntVal(ji.doc, path2) << std::endl;
+    ji.setDoubleVal(ji.doc, path2, 10);
+    std::cout << "New: min y value of the object: " << ji.getDoubleVal(ji.doc, path2) << std::endl;
 
     // getStrVal & setStrVal
     vector<string> path3 = vector<string>();
     path3.push_back("train");
     path3.push_back("0");
     path3.push_back("filename");
-    std::cout << "Original: file name of image: " << ji.getStrVal(doc, path3) << std::endl;
-    ji.setStrVal(doc, path3, "ff.jpg");
-    std::cout << "New: file name of image: " << ji.getStrVal(doc, path3) << std::endl;
+    std::cout << "Original: file name of image: " << ji.getStrVal(ji.doc, path3) << std::endl;
+    ji.setStrVal(ji.doc, path3, "ff.jpg");
+    std::cout << "New: file name of image: " << ji.getStrVal(ji.doc, path3) << std::endl;
 
     rapidjson::StringBuffer buffer;
     rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
-    doc.Accept(writer);
+    ji.doc.Accept(writer);
     std::cout << "Json string after change: " << ji.getDocStr(buffer) << std::endl;
 
     std::cout << "==== Test End: Getter and Setter ====" << std::endl;
 }
 
+/*
 void testFeatureType(string featuresFile)
 {
     std::cout << "==== Test Start: Feature Types ====" << std::endl;
@@ -206,6 +205,7 @@ void testFREAKGetting(string featuresFile)
 
     std::cout << "==== Test End: Getting FREAK Config ====" << std::endl;
 }
+*/
 
 } // namespace fys
 

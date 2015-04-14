@@ -20,11 +20,13 @@ public:
     JsonHandler(string filename);
     ~JsonHandler();
 
+    // -------- PUBLIC DATA --------
+    rapidjson::Document doc;
+
     // -------- FILE & DOCS --------
-    void readJsonFile(); // open & read json file
-    string getFileStr(); // return json file as string
+    string getFileStr(); // return json string
     string getDocStr(rapidjson::StringBuffer& buffer); // return json document as string
-    void updateStr(rapidjson::StringBuffer& buffer); // update this->jsonStr
+    void updateStr(rapidjson::StringBuffer& buffer); // update json string
     void writeJsonFile(); // open & write json file
 
     // -------- GET & SET VALUES --------

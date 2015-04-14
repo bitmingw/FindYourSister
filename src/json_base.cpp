@@ -8,14 +8,7 @@ using namespace std;
 namespace fys {
 
 JsonHandler::JsonHandler(string filename) 
-    : jsonFilename(filename) {}
-
-JsonHandler::~JsonHandler() {}
-
-// -------- FILE & DOCS --------
-
-void
-JsonHandler::readJsonFile()
+    : jsonFilename(filename)
 {
     string fullPath = "../config/" + this->jsonFilename;
     ifstream stream_r;
@@ -34,7 +27,14 @@ JsonHandler::readJsonFile()
     else {
         std::cerr << "Error: can\'t open " << this->jsonFilename << " for reading!" << std::endl;
     }
+
+    // save the stream as JSON document
+    this->doc.Parse(this->jsonStr.c_str());
 }
+
+JsonHandler::~JsonHandler() {}
+
+// -------- FILE & DOCS --------
 
 string
 JsonHandler::getFileStr()
