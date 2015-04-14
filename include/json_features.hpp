@@ -37,6 +37,19 @@ public:
     bool isUpright;
 };
 
+class FreakConfig
+{
+public:
+    FreakConfig();
+    FreakConfig(bool orientNormal, bool scaleNormal, double patternScale, int nOctaves);
+    ~FreakConfig();
+    bool orientNormal;
+    bool scaleNormal;
+    double patternScale;
+    int nOctaves;
+};
+
+
 class JsonFeatures : public JsonHandler
 {
 

@@ -31,6 +31,18 @@ SurfConfig::SurfConfig(double hessianThreshold, int nOctaves, int nOctaveLayers,
 
 SurfConfig::~SurfConfig() {}
 
+// -------- FREAK CONFIG CLASS --------
+
+FreakConfig::FreakConfig() {}
+
+FreakConfig::FreakConfig(bool orientNormal, bool scaleNormal, double patternScale, int nOctaves)
+    : orientNormal(orientNormal), scaleNormal(scaleNormal),
+      patternScale(patternScale), nOctaves(nOctaves) {}
+
+FreakConfig::~FreakConfig() {}
+
+// -------- JSON FEATURES --------
+
 JsonFeatures::JsonFeatures(string filename) 
     : JsonHandler(filename) 
 {
