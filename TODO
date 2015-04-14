@@ -1,6 +1,9 @@
 Writing interface to call OpenCV functions.
     With the parameters in features.json.
 
+Consider remove JsonHandler::getDocStr() and ::jsonStr.
+    It seems that they are not useful.
+
 Porting of python2 to python3.
     Use future print function and unicode literals.
 
