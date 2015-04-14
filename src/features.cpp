@@ -7,8 +7,7 @@ using namespace std;
 
 namespace fys {
 
-Features::Features(JsonFeatures config)
-    : config(config)
+Features::Features(const JsonFeatures& jf)
 {
 
 }

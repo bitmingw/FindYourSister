@@ -18,11 +18,10 @@ class Features
 {
 
 public:
-    Features(JsonFeatures config);
+    Features(const JsonFeatures& jf);
     ~Features();
 
 private:
-    JsonFeatures config;
     string detectorType;
     string descriptorType;
     string matcherType;
