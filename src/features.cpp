@@ -10,6 +10,7 @@ namespace fys {
 Features::Features(JsonFeatures config)
     : config(config)
 {
+
 }
 
 } // namespace fys

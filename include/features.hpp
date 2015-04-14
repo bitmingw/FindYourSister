@@ -23,6 +23,9 @@ public:
 
 private:
     JsonFeatures config;
+    string detectorType;
+    string descriptorType;
+    string matcherType;
     //cv::FeatureDetector& detector;
     //cv::DescriptorExtractor& extractor;
     //cv::DescriptorMatcher& matcher;
