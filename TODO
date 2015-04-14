@@ -1,5 +1,7 @@
 Consider use rapidjson inside of JsonHandler class.
     So each time there is no need to pass const doc explicitly.
+    Note: in recursive calls, doc is still required, but we could use
+    object.doc as the argument.
 
 Writing interface to call OpenCV functions.
     With the parameters in features.json.
