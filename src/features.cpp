@@ -12,5 +12,7 @@ Features::Features(const JsonFeatures& jf)
 
 }
 
+Features::~Features() {}
+
 } // namespace fys
 
