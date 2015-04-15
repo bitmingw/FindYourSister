@@ -1,7 +1,7 @@
 {
     "detector": "SIFT",
-    "descriptor": null,
-    "matcher": null,
+    "descriptor": "SIFT",
+    "matcher": "BFMatcher",
     "drawing": false,
     "siftConfig": {
         "nfeatures": 0,
