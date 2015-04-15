@@ -3,7 +3,7 @@
 
 CXX := g++
 CXXFLAGS := -Wall -g
-INCLUDES := -Iinclude 
+INCLUDES := -Iinclude -I/usr/local/include
 LIBDIR := -L/usr/local/lib
 LIBS := -l opencv_core -l opencv_highgui -l opencv_features2d -l opencv_nonfree
 TARGET := fys
@@ -22,7 +22,7 @@ TESTOBJ := $(patsubst %.cpp, %.o, $(wildcard $(TESTDIR)/*.cpp))
 all: $(TARGET)
 
 $(TARGET): $(SRCOBJ) $(TESTOBJ)
-	$(CXX) $(INCLUDES) $(CXXFLAGS) $(LIBDIR) $(LIBS) $^ -o $@
+	$(CXX) $(INCLUDES) $(CXXFLAGS) $^ -o $@ `pkg-config opencv --cflags --libs`
 	@mkdir -p bin
 	@mv $@ bin/$@
 
