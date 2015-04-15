@@ -1,12 +1,9 @@
-Consider use rapidjson inside of JsonHandler class.
-    COMPLETE!
-    WARMING: we should avoid copy constructor in this case.
-
 Writing interface to call OpenCV functions.
     With the parameters in features.json.
+    Update more powerful testing.
+    Add gen~() member functions to JsonFeatures.
 
-Consider remove JsonHandler::getDocStr() and ::jsonStr.
-    It seems that they are not useful.
+Know why imshow is not available in function calls.
 
 Porting of python2 to python3.
     Use future print function and unicode literals.
