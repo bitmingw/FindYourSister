@@ -4,6 +4,7 @@
 #include "json_features.hpp"
 
 using namespace std;
+using namespace cv;
 
 namespace fys {
 
@@ -18,6 +19,14 @@ SiftConfig::SiftConfig(int nfeatures, int nOctaveLayers, double contrastThreshol
       sigma(sigma) {}
 
 SiftConfig::~SiftConfig() {}
+
+SIFT&
+SiftConfig::genSIFT()
+{
+    SIFT *s = new SIFT(nfeatures, nOctaveLayers, contrastThreshold,
+            edgeThreshold, sigma);
+    return *s;
+}
 
 // -------- SURF CONFIG CLASS --------
 

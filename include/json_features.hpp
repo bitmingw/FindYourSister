@@ -3,6 +3,7 @@
 #ifndef _H_JSON_FEATURES
 #define _H_JSON_FEATURES
 
+#include "fys.hpp"
 #include "json_base.hpp"
 
 using namespace std;
@@ -22,6 +23,7 @@ public:
     double contrastThreshold;
     double edgeThreshold;
     double sigma;
+    SIFT& genSIFT(); // memory leakage here
 };
 
 class SurfConfig
@@ -91,7 +93,11 @@ public:
     void genSiftConfig(SiftConfig& config);
     void genSurfConfig(SurfConfig& config);
     void genFreakConfig(FreakConfig& config);
-    
+
+    // -------- CONFIG VALUES --------
+    SiftConfig siftParam;
+    SurfConfig surfParam;
+    FreakConfig freakParam;
 
 private:
     string detectorType;
@@ -103,9 +109,6 @@ private:
     vector<string> SIFTConfigPath;
     vector<string> SURFConfigPath;
     vector<string> FREAKConfigPath;
-    SiftConfig siftParam;
-    SurfConfig surfParam;
-    FreakConfig freakParam;
 };
 
 } // namespace fys
