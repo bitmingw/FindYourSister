@@ -46,12 +46,30 @@ FreakConfig::~FreakConfig() {}
 JsonFeatures::JsonFeatures(string filename) 
     : JsonHandler(filename) 
 {
+    // Set lookup values to json file
     detectorTypePath.push_back("detector");
     descriptorTypePath.push_back("descriptor");
     matcherTypePath.push_back("matcher");
     SIFTConfigPath.push_back("siftConfig");
     SURFConfigPath.push_back("surfConfig");
     FREAKConfigPath.push_back("freakConfig");
+
+    // Set types
+    this->detectorType = getDetectorType(this->doc);
+    this->descriptorType = getDescriptorType(this->doc);
+    this->matcherType = getMatcherType(this->doc);
+
+    // Set parameter class
+    if (detectorType == "SIFT" || descriptorType == "SIFT") {
+        genSiftConfig(this->siftParam);
+    }
+    else if (detectorType == "SURF" || descriptorType == "SURF") {
+        genSurfConfig(this->surfParam);
+    }
+    else if (detectorType == "FREAK" || descriptorType == "FREAK") {
+        genFreakConfig(this->freakParam);
+    }
+
 }
 
 JsonFeatures::~JsonFeatures() {}
@@ -210,6 +228,35 @@ JsonFeatures::getFREAKnOctaves(const rapidjson::Value& doc)
     vector<string> path = this->FREAKConfigPath;
     path.push_back("nOctaves");
     return getIntVal(doc, path);
+}
+
+void
+JsonFeatures::genSiftConfig(SiftConfig& config)
+{
+    config.nfeatures = getSIFTnfeatures(this->doc);
+    config.nOctaveLayers = getSIFTnOctaveLayers(this->doc);
+    config.contrastThreshold = getSIFTcontrastThreshold(this->doc);
+    config.edgeThreshold = getSIFTedgeThreshold(this->doc);
+    config.sigma = getSIFTsigma(this->doc);
+}
+
+void
+JsonFeatures::genSurfConfig(SurfConfig& config)
+{
+    config.hessianThreshold = getSURFhessianThreshold(this->doc);
+    config.nOctaves = getSURFnOctaves(this->doc);
+    config.nOctaveLayers = getSURFnOctaveLayers(this->doc);
+    config.isExtended = getSURFextended(this->doc);
+    config.isUpright = getSURFupright(this->doc);
+}
+
+void
+JsonFeatures::genFreakConfig(FreakConfig& config)
+{
+    config.orientNormal = getFREAKorientationNormalized(this->doc);
+    config.scaleNormal = getFREAKscaleNormalized(this->doc);
+    config.patternScale = getFREAKpatternScale(this->doc);
+    config.nOctaves = getFREAKnOctaves(this->doc);
 }
 
 } // namespace fys

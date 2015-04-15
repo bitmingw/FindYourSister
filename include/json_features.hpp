@@ -6,6 +6,7 @@
 #include "json_base.hpp"
 
 using namespace std;
+using namespace cv;
 
 namespace fys {
 
@@ -86,13 +87,25 @@ public:
     int getFREAKnOctaves(const rapidjson::Value& doc);
     // TODO: getFREAKselectedPairs()
 
+    // -------- GEN CONFIG CLASS --------
+    void genSiftConfig(SiftConfig& config);
+    void genSurfConfig(SurfConfig& config);
+    void genFreakConfig(FreakConfig& config);
+    
+
 private:
+    string detectorType;
+    string descriptorType;
+    string matcherType;
     vector<string> detectorTypePath;
     vector<string> descriptorTypePath;
     vector<string> matcherTypePath;
     vector<string> SIFTConfigPath;
     vector<string> SURFConfigPath;
     vector<string> FREAKConfigPath;
+    SiftConfig siftParam;
+    SurfConfig surfParam;
+    FreakConfig freakParam;
 };
 
 } // namespace fys
