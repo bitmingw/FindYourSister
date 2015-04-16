@@ -13,23 +13,37 @@ namespace fys {
 
 void testSIFT(string featuresFile)
 {
-    std::cout << "==== Test Start: SIFT Constructor ====" << std::endl;
+    std::cout << "==== Test Start: SIFT Demo ====" << std::endl;
 
-    Mat input = imread("../OneWaySignal/1.jpg");
-    std::cout << input.rows << " " << input.cols << std::endl;
-    Mat output;
+    Mat query = imread("../OneWaySignal/1.jpg", 0); // read gray image
+    Mat test = imread("../OneWaySignal/12.jpg", 0);
+
     JsonFeatures jf(featuresFile);
-    SIFT detector(jf.genSIFT());
-    vector<KeyPoint> points;
-    detector.detect(input, points);
+    SIFT detectAndExtractor(jf.genSIFT());
 
-    drawKeypoints(input, points, output);
+    vector<KeyPoint> queryKeys;
+    vector<KeyPoint> testKeys;
+
+    detectAndExtractor.detect(query, queryKeys);
+    detectAndExtractor.detect(test, testKeys);
+
+    Mat queryDescriptors, testDescriptors;
+    detectAndExtractor.compute(query, queryKeys, queryDescriptors);
+    detectAndExtractor.compute(test, testKeys, testDescriptors);
+
+    BFMatcher matcher(jf.genBFMatcher());
+    vector<DMatch> matches;
+    matcher.match(queryDescriptors, testDescriptors, matches);
+
+    Mat output;
+    drawMatches(query, queryKeys, test, testKeys, matches, output);
+    imwrite("../OneWaySignal/1-12.jpg", output);
 
     namedWindow("window");
     imshow("window", output); 
-    waitKey(5000);
+    waitKey(0);
 
-    std::cout << "==== Test End: SIFT Constructor ====" << std::endl;
+    std::cout << "==== Test End: SIFT Demo ====" << std::endl;
 }
 
 }
