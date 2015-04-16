@@ -49,6 +49,44 @@ FreakConfig::FreakConfig(bool orientNormal, bool scaleNormal, double patternScal
 
 FreakConfig::~FreakConfig() {}
 
+// -------- BFMATCHER CONFIG CLASS --------
+
+BFMatcherConfig::BFMatcherConfig() {}
+
+BFMatcherConfig::BFMatcherConfig(string normTypeStr, bool isCrossCheck)
+    : isCrossCheck(isCrossCheck)
+{
+    updateNormType(normTypeStr);
+}
+
+BFMatcherConfig::~BFMatcherConfig() {}
+
+void
+BFMatcherConfig::updateNormType(string normTypeStr)
+{
+    if (normTypeStr == "NORM_L1") {
+        this->normType = NORM_L1;
+    }
+    else if (normTypeStr == "NORM_L2") {
+        this->normType = NORM_L2;
+    }
+    else if (normTypeStr == "NORM_HAMMING") {
+        this->normType = NORM_HAMMING;
+    }
+    else if (normTypeStr == "NORM_HAMMING2") {
+        this->normType = NORM_HAMMING2;
+    }
+    else {
+        this->normType = NORM_L2;
+    }
+}
+
+BFMatcher*
+BFMatcherConfig::genBFMatcher()
+{
+    return new BFMatcher(normType, isCrossCheck);
+}
+
 // -------- JSON FEATURES --------
 
 JsonFeatures::JsonFeatures(string filename) 
@@ -61,6 +99,7 @@ JsonFeatures::JsonFeatures(string filename)
     SIFTConfigPath.push_back("siftConfig");
     SURFConfigPath.push_back("surfConfig");
     FREAKConfigPath.push_back("freakConfig");
+    BFMatcherConfigPath.push_back("BFMatcherConfig");
 
     // Set types
     this->detectorType = getDetectorType(this->doc);
@@ -78,6 +117,9 @@ JsonFeatures::JsonFeatures(string filename)
         genFreakConfig(this->freakParam);
     }
 
+    if (matcherType == "BFMatcher") {
+        genBFMatcherConfig(this->bfMatcherParam);
+    }
 }
 
 JsonFeatures::~JsonFeatures() {}
@@ -238,6 +280,26 @@ JsonFeatures::getFREAKnOctaves(const rapidjson::Value& doc)
     return getIntVal(doc, path);
 }
 
+// -------- BFMATCHER CONFIG --------
+
+string
+JsonFeatures::getBFMatcherNormType(const rapidjson::Value& doc)
+{
+    vector<string> path = this->BFMatcherConfigPath;
+    path.push_back("normType");
+    return getStrVal(doc, path);
+}
+
+bool
+JsonFeatures::getBFMatcherCrossCheck(const rapidjson::Value& doc)
+{
+    vector<string> path = this->BFMatcherConfigPath;
+    path.push_back("crossCheck");
+    return getBoolVal(doc, path);
+}
+
+// -------- GEN CONFIG CLASS --------
+
 void
 JsonFeatures::genSiftConfig(SiftConfig& config)
 {
@@ -267,11 +329,29 @@ JsonFeatures::genFreakConfig(FreakConfig& config)
     config.nOctaves = getFREAKnOctaves(this->doc);
 }
 
+void
+JsonFeatures::genBFMatcherConfig(BFMatcherConfig& config)
+{
+    config.updateNormType(getBFMatcherNormType(this->doc));
+    config.isCrossCheck = getBFMatcherCrossCheck(this->doc);
+}
+
+// -------- GEN DETECTOR / DESCRIPTOR (WRAPPER) --------
+
 SIFT&
 JsonFeatures::genSIFT()
 {
     siftPtr = this->siftParam.genSIFT();
     return *siftPtr;
+}
+
+// -------- GEN MATCHER (WRAPPER) --------
+
+BFMatcher&
+JsonFeatures::genBFMatcher()
+{
+    bfMatcherPtr = this->bfMatcherParam.genBFMatcher();
+    return *bfMatcherPtr;
 }
 
 } // namespace fys

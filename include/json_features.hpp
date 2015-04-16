@@ -38,6 +38,7 @@ public:
     int nOctaveLayers;
     bool isExtended;
     bool isUpright;
+    SURF* genSURF(); // TODO
 };
 
 class FreakConfig
@@ -50,6 +51,19 @@ public:
     bool scaleNormal;
     double patternScale;
     int nOctaves;
+    FREAK* genFREAK(); // TODO
+};
+
+class BFMatcherConfig
+{
+public:
+    BFMatcherConfig();
+    BFMatcherConfig(string normTypeStr, bool isCrossCheck);
+    ~BFMatcherConfig();
+    void updateNormType(string normTypeStr); 
+    int normType;
+    bool isCrossCheck;
+    BFMatcher* genBFMatcher(); 
 };
 
 
@@ -89,31 +103,46 @@ public:
     int getFREAKnOctaves(const rapidjson::Value& doc);
     // TODO: getFREAKselectedPairs()
 
+    // -------- BFMATCHER CONFIG --------
+    string getBFMatcherNormType(const rapidjson::Value& doc);
+    bool getBFMatcherCrossCheck(const rapidjson::Value& doc);
+
     // -------- GEN CONFIG CLASS --------
     void genSiftConfig(SiftConfig& config);
     void genSurfConfig(SurfConfig& config);
     void genFreakConfig(FreakConfig& config);
+    void genBFMatcherConfig(BFMatcherConfig& config);
 
     // -------- GEN DETECTOR / DESCRIPTOR (WRAPPER) --------
     SIFT& genSIFT();
     SURF& genSURF(); // TODO
+    FREAK& genFREAK(); // TODO
+
+    // -------- GEN MATCHER (WRAPPER) --------
+    BFMatcher& genBFMatcher();
 
 private:
     string detectorType;
     string extractorType;
     string matcherType;
+
     vector<string> detectorTypePath;
     vector<string> extractorTypePath;
     vector<string> matcherTypePath;
     vector<string> SIFTConfigPath;
     vector<string> SURFConfigPath;
     vector<string> FREAKConfigPath;
+    vector<string> BFMatcherConfigPath;
+
     SiftConfig siftParam;
     SurfConfig surfParam;
     FreakConfig freakParam;
+    BFMatcherConfig bfMatcherParam;
+
     SIFT* siftPtr;
     SURF* surfPrt;
     FREAK* freakPtr;
+    BFMatcher* bfMatcherPtr;
 };
 
 } // namespace fys
