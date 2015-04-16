@@ -23,7 +23,7 @@ public:
     double contrastThreshold;
     double edgeThreshold;
     double sigma;
-    SIFT& genSIFT(); // memory leakage here
+    SIFT* genSIFT(); 
 };
 
 class SurfConfig
@@ -111,6 +111,9 @@ private:
     SiftConfig siftParam;
     SurfConfig surfParam;
     FreakConfig freakParam;
+    SIFT* siftPtr;
+    SURF* surfPrt;
+    FREAK* freakPtr;
 };
 
 } // namespace fys

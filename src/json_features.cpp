@@ -20,12 +20,11 @@ SiftConfig::SiftConfig(int nfeatures, int nOctaveLayers, double contrastThreshol
 
 SiftConfig::~SiftConfig() {}
 
-SIFT&
+SIFT*
 SiftConfig::genSIFT()
 {
-    SIFT *s = new SIFT(nfeatures, nOctaveLayers, contrastThreshold,
+    return new SIFT(nfeatures, nOctaveLayers, contrastThreshold,
             edgeThreshold, sigma);
-    return *s;
 }
 
 // -------- SURF CONFIG CLASS --------
@@ -271,7 +270,8 @@ JsonFeatures::genFreakConfig(FreakConfig& config)
 SIFT&
 JsonFeatures::genSIFT()
 {
-    return this->siftParam.genSIFT();
+    siftPtr = this->siftParam.genSIFT();
+    return *siftPtr;
 }
 
 } // namespace fys
