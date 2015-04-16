@@ -23,6 +23,10 @@
         "patternScale": 22.0,
         "nOctaves": 4,
         "selectedPairs": []
+    },
+    "BFMatcherConfig": {
+        "normType": "NORM_L2",
+        "crossCheck": false
     }
 }
 
