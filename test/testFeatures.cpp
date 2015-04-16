@@ -19,7 +19,7 @@ void testSIFT(string featuresFile)
     std::cout << input.rows << " " << input.cols << std::endl;
     Mat output;
     JsonFeatures jf(featuresFile);
-    SIFT detector(jf.siftParam.genSIFT());
+    SIFT detector(jf.genSIFT());
     vector<KeyPoint> points;
     detector.detect(input, points);
 

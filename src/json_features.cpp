@@ -268,5 +268,11 @@ JsonFeatures::genFreakConfig(FreakConfig& config)
     config.nOctaves = getFREAKnOctaves(this->doc);
 }
 
+SIFT&
+JsonFeatures::genSIFT()
+{
+    return this->siftParam.genSIFT();
+}
+
 } // namespace fys
 
