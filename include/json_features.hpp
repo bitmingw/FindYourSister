@@ -63,8 +63,8 @@ public:
     // -------- FEATURE TYPES --------
     string getDetectorType(const rapidjson::Value& doc);
     void setDetectorType(rapidjson::Value& doc, string newType);
-    string getDescriptorType(const rapidjson::Value& doc);
-    void setDescriptorType(rapidjson::Value& doc, string newType);
+    string getExtractorType(const rapidjson::Value& doc);
+    void setExtractorType(rapidjson::Value& doc, string newType);
     string getMatcherType(const rapidjson::Value& doc);
     void setMatcherType(rapidjson::Value& doc, string newType);
 
@@ -94,21 +94,23 @@ public:
     void genSurfConfig(SurfConfig& config);
     void genFreakConfig(FreakConfig& config);
 
-    // -------- CONFIG VALUES --------
-    SiftConfig siftParam;
-    SurfConfig surfParam;
-    FreakConfig freakParam;
+    // -------- GEN DETECTOR / DESCRIPTOR (WRAPPER) --------
+    SIFT& genSIFT();
+    SURF& genSURF(); // TODO
 
 private:
     string detectorType;
-    string descriptorType;
+    string extractorType;
     string matcherType;
     vector<string> detectorTypePath;
-    vector<string> descriptorTypePath;
+    vector<string> extractorTypePath;
     vector<string> matcherTypePath;
     vector<string> SIFTConfigPath;
     vector<string> SURFConfigPath;
     vector<string> FREAKConfigPath;
+    SiftConfig siftParam;
+    SurfConfig surfParam;
+    FreakConfig freakParam;
 };
 
 } // namespace fys

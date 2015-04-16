@@ -57,7 +57,7 @@ JsonFeatures::JsonFeatures(string filename)
 {
     // Set lookup values to json file
     detectorTypePath.push_back("detector");
-    descriptorTypePath.push_back("descriptor");
+    extractorTypePath.push_back("extractor");
     matcherTypePath.push_back("matcher");
     SIFTConfigPath.push_back("siftConfig");
     SURFConfigPath.push_back("surfConfig");
@@ -65,17 +65,17 @@ JsonFeatures::JsonFeatures(string filename)
 
     // Set types
     this->detectorType = getDetectorType(this->doc);
-    this->descriptorType = getDescriptorType(this->doc);
+    this->extractorType = getExtractorType(this->doc);
     this->matcherType = getMatcherType(this->doc);
 
     // Set parameter class
-    if (detectorType == "SIFT" || descriptorType == "SIFT") {
+    if (detectorType == "SIFT" || extractorType == "SIFT") {
         genSiftConfig(this->siftParam);
     }
-    else if (detectorType == "SURF" || descriptorType == "SURF") {
+    else if (detectorType == "SURF" || extractorType == "SURF") {
         genSurfConfig(this->surfParam);
     }
-    else if (detectorType == "FREAK" || descriptorType == "FREAK") {
+    else if (detectorType == "FREAK" || extractorType == "FREAK") {
         genFreakConfig(this->freakParam);
     }
 
@@ -98,15 +98,15 @@ JsonFeatures::setDetectorType(rapidjson::Value& doc, string newType)
 }
 
 string
-JsonFeatures::getDescriptorType(const rapidjson::Value& doc)
+JsonFeatures::getExtractorType(const rapidjson::Value& doc)
 {
-    return getStrVal(doc, this->descriptorTypePath); 
+    return getStrVal(doc, this->extractorTypePath); 
 }
 
 void
-JsonFeatures::setDescriptorType(rapidjson::Value& doc, string newType)
+JsonFeatures::setExtractorType(rapidjson::Value& doc, string newType)
 {
-    setStrVal(doc, this->descriptorTypePath, newType);
+    setStrVal(doc, this->extractorTypePath, newType);
 }
 
 string

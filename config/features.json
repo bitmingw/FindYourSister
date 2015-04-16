@@ -1,6 +1,6 @@
 {
     "detector": "SIFT",
-    "descriptor": "SIFT",
+    "extractor": "SIFT",
     "matcher": "BFMatcher",
     "drawing": false,
     "siftConfig": {
