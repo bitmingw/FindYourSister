@@ -23,14 +23,11 @@ void testSIFT(string featuresFile)
     vector<KeyPoint> points;
     detector.detect(input, points);
 
-    for (size_t i = 0; i < points.size(); i++) {
-        std::cout << points[i].size << std::endl;
-    }
-
     drawKeypoints(input, points, output);
 
     namedWindow("window");
-    imshow("window", input); // no image, don't know why
+    imshow("window", output); 
+    waitKey(5000);
 
     std::cout << "==== Test End: SIFT Constructor ====" << std::endl;
 }
