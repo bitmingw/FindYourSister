@@ -1,9 +1,8 @@
 Writing interface to call OpenCV functions.
     With the parameters in features.json.
     Update more powerful testing.
-    Add gen~() member functions to JsonFeatures.
 
-Know why imshow is not available in function calls.
+Rename descriptor to extractor.
 
 Porting of python2 to python3.
     Use future print function and unicode literals.
