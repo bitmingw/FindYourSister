@@ -2,8 +2,6 @@ Writing interface to call OpenCV functions.
     With the parameters in features.json.
     Update more powerful testing.
 
-Rename descriptor to extractor.
-
 Porting of python2 to python3.
     Use future print function and unicode literals.
 
