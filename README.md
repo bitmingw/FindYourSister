@@ -15,6 +15,10 @@ These packages are required by the program:
 - PyQt4
 - rapidjson
 
+virtualenv is recommended but not mandatory.
+
+&nbsp;
+
 For Debian/Ubuntu/Raspbian users, two scripts are provided.
 
   1. `InstallOpencvDeb.sh` in `tools` folder installs OpenCV and relative packages.
@@ -32,6 +36,8 @@ You need to manually install `rapidjson` and `Pillow`.
      ```
      pip install Pillow
      ```
+
+&nbsp;
 
 Finally build the program by the following commands
 ```
