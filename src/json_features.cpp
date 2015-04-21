@@ -39,6 +39,12 @@ SurfConfig::SurfConfig(double hessianThreshold, int nOctaves, int nOctaveLayers,
 
 SurfConfig::~SurfConfig() {}
 
+SURF*
+SurfConfig::genSURF()
+{
+    return new SURF(hessianThreshold, nOctaves, nOctaveLayers, isExtended, isUpright);
+}
+
 // -------- FREAK CONFIG CLASS --------
 
 FreakConfig::FreakConfig() {}
@@ -48,6 +54,12 @@ FreakConfig::FreakConfig(bool orientNormal, bool scaleNormal, double patternScal
       patternScale(patternScale), nOctaves(nOctaves) {}
 
 FreakConfig::~FreakConfig() {}
+
+FREAK*
+FreakConfig::genFREAK()
+{
+    return new FREAK(orientNormal, scaleNormal, patternScale, nOctaves);
+}
 
 // -------- BFMATCHER CONFIG CLASS --------
 
@@ -343,6 +355,20 @@ JsonFeatures::genSIFT()
 {
     siftPtr = this->siftParam.genSIFT();
     return *siftPtr;
+}
+
+SURF&
+JsonFeatures::genSURF()
+{
+    surfPtr = this->surfParam.genSURF();
+    return *surfPtr;
+}
+
+FREAK&
+JsonFeatures::genFREAK()
+{
+    freakPtr = this->freakParam.genFREAK();
+    return *freakPtr;
 }
 
 // -------- GEN MATCHER (WRAPPER) --------

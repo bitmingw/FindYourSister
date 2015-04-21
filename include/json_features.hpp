@@ -38,7 +38,7 @@ public:
     int nOctaveLayers;
     bool isExtended;
     bool isUpright;
-    SURF* genSURF(); // TODO
+    SURF* genSURF(); 
 };
 
 class FreakConfig
@@ -51,7 +51,7 @@ public:
     bool scaleNormal;
     double patternScale;
     int nOctaves;
-    FREAK* genFREAK(); // TODO
+    FREAK* genFREAK(); 
 };
 
 class BFMatcherConfig
@@ -115,8 +115,8 @@ public:
 
     // -------- GEN DETECTOR / DESCRIPTOR (WRAPPER) --------
     SIFT& genSIFT();
-    SURF& genSURF(); // TODO
-    FREAK& genFREAK(); // TODO
+    SURF& genSURF(); 
+    FREAK& genFREAK(); 
 
     // -------- GEN MATCHER (WRAPPER) --------
     BFMatcher& genBFMatcher();
@@ -140,7 +140,7 @@ private:
     BFMatcherConfig bfMatcherParam;
 
     SIFT* siftPtr;
-    SURF* surfPrt;
+    SURF* surfPtr;
     FREAK* freakPtr;
     BFMatcher* bfMatcherPtr;
 };
