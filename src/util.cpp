@@ -7,7 +7,8 @@ using namespace cv;
 
 namespace fys {
 
-int checkDigit(string str)
+int
+checkDigit(string str)
 {
     const char* c_str = str.c_str();
     if (isdigit(c_str[0])) {
@@ -18,14 +19,16 @@ int checkDigit(string str)
     }
 }
 
-string itoa(int idx)
+string
+itoa(int idx)
 {
     char s[INT_STR_LEN];
     snprintf(s, INT_STR_LEN, "%d", idx);
     return string(s);
 }
 
-vector<KeyPoint> pointsInRegion(vector<KeyPoint> allPoints, ImageRegion& region)
+vector<KeyPoint>
+pointsInRegion(vector<KeyPoint> allPoints, ImageRegion& region)
 {
     vector<KeyPoint> selectedPoints;
     float x, y;
@@ -39,12 +42,14 @@ vector<KeyPoint> pointsInRegion(vector<KeyPoint> allPoints, ImageRegion& region)
     return selectedPoints;
 }
 
-vector<KeyPoint> pointsInObject(vector<KeyPoint> allPoints, ImageObject& object)
+vector<KeyPoint>
+pointsInObject(vector<KeyPoint> allPoints, ImageObject& object)
 {
     return pointsInRegion(allPoints, object.region);
 }
 
-vector<KeyPoint> matchedPoints(vector<KeyPoint> allPoints, vector<DMatch> matches, int type)
+vector<KeyPoint>
+matchedPoints(vector<KeyPoint> allPoints, vector<DMatch> matches, int type)
 {
     vector<KeyPoint> matched;
     if (type != QUERY_PART_TYPE && type != TRAIN_PART_TYPE) {
