@@ -30,12 +30,14 @@ void testSIFT(string featuresFile, string imagesFile)
 
     vector<KeyPoint> queryKeys;
     vector<KeyPoint> testKeys;
+    vector<KeyPoint> reducedKeys;
     Mat queryDescriptors, testDescriptors;
     BFMatcher matcher(jf.genBFMatcher());
     vector<DMatch> matches;
     Mat output;
     
     detectAndExtractor.detect(query, queryKeys);
+
     // Delete the points outside the object region
     queryKeys = pointsInObject(queryKeys, ob);
     detectAndExtractor.compute(query, queryKeys, queryDescriptors);
@@ -45,7 +47,12 @@ void testSIFT(string featuresFile, string imagesFile)
 
     matcher.match(queryDescriptors, testDescriptors, matches);
 
+    // Delete unmatched points in train image
+    reducedKeys = matchedPoints(testKeys, matches, TRAIN_PART_TYPE);
+
     drawMatches(query, queryKeys, test1, testKeys, matches, output);
+
+#if 0
     imwrite("1-2.jpg", output);
 
     
@@ -65,11 +72,11 @@ void testSIFT(string featuresFile, string imagesFile)
 
     drawMatches(query, queryKeys, test3, testKeys, matches, output);
     imwrite("1-9.jpg", output);
+#endif
 
-
-    //namedWindow("window");
-    //imshow("window", output); 
-    //waitKey(0);
+    namedWindow("window");
+    imshow("window", output); 
+    waitKey(0);
 
     std::cout << "==== Test End: SIFT Demo ====" << std::endl;
 }

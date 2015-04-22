@@ -26,7 +26,9 @@
 #define VALIDATE_TYPE 1
 #define TEST_TYPE 2
 
-using namespace std;
+// type of match
+#define QUERY_PART_TYPE 0
+#define TRAIN_PART_TYPE 1
 
 #endif // _H_FYS
 

@@ -16,6 +16,7 @@ int checkDigit(string str);
 string itoa(int idx);
 vector<KeyPoint> pointsInRegion(vector<KeyPoint> allPoints, ImageRegion& region);
 vector<KeyPoint> pointsInObject(vector<KeyPoint> allPoints, ImageObject& object);
+vector<KeyPoint> matchedPoints(vector<KeyPoint> allPoints, vector<DMatch> matches, int type);
 
 } // namespce fys
 
