@@ -51,7 +51,7 @@ python setup.py install
 
 This program provides a simple tool for image labeling, based on sloth
 ```
-https://github.com/cvhicKIT/sloth
+https://github.com/cvhciKIT/sloth
 ```
 You can find detailed document of sloth in `sloth/doc` folder.
 
