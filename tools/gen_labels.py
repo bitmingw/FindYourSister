@@ -145,17 +145,20 @@ def findInfo(imgDir, imgFile, refInfo):
     if u"train" in refInfo:
         for info in refInfo[u"train"]:
             if info[u"filename"] == imgFile and \
-                    getDirectFolder(info[u"folder"]) == imgDir:
+                    (imgDir == "" or \
+                    getDirectFolder(info[u"folder"]) == imgDir):
                 return (u"train", info)
     if u"validate" in refInfo:
         for info in refInfo[u"train"]:
             if info[u"filename"] == imgFile and \
-                    getDirectFolder(info[u"folder"]) == imgDir:
+                    (imgDir == "" or \
+                    getDirectFolder(info[u"folder"]) == imgDir):
                 return (u"validate", info)
     if u"test" in refInfo:
         for info in refInfo[u"train"]:
             if info[u"filename"] == imgFile and \
-                    getDirectFolder(info[u"folder"]) == imgDir:
+                    (imgDir == "" or \
+                    getDirectFolder(info[u"folder"]) == imgDir):
                 return (u"test", info)
     return (None, None)
 
@@ -169,7 +172,10 @@ def getDirectFolder(path):
     """
     pattern = "/\w+"
     result = re.findall(pattern, path)
-    return result[-1][1:]  # [1:] remove the '/' char at the beginning
+    if len(result):
+        return result[-1][1:]  # [1:] remove the '/' char at the beginning
+    else:
+        return ""
 
 
 if __name__ == "__main__":
