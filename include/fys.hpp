@@ -28,13 +28,5 @@
 
 using namespace std;
 
-namespace fys {
-
-// some utility functions
-int checkDigit(string str);
-string itoa(int idx);
-
-} // namespce fys
-
 #endif // _H_FYS
 
