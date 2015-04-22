@@ -1,6 +1,7 @@
 // Copyright (c) 2015, Ming Wen
 
 #include "fys.hpp"
+#include "util.hpp"
 #include "json_base.hpp"
 #include "json_images.hpp"
 #include "json_features.hpp"
