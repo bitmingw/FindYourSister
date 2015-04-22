@@ -3,6 +3,7 @@
 #ifndef _H_FYS
 #define _H_FYS
 
+#include <algorithm>
 #include <cassert>
 #include <iostream>
 #include <fstream>

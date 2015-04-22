@@ -35,6 +35,8 @@ void testSIFT(string featuresFile, string imagesFile)
     BFMatcher matcher(jf.genBFMatcher());
     vector<DMatch> matches;
     Mat output;
+    ImageRegion reg;
+    Scalar color(0, 0, 255);
     
     detectAndExtractor.detect(query, queryKeys);
 
@@ -49,8 +51,10 @@ void testSIFT(string featuresFile, string imagesFile)
 
     // Delete unmatched points in train image
     reducedKeys = matchedPoints(testKeys, matches, TRAIN_PART_TYPE);
+    reg = locateDenseRegion(reducedKeys, 0.05);
 
     drawMatches(query, queryKeys, test1, testKeys, matches, output);
+    rectangle(output, Point(reg.xmin + query.cols, reg.ymin), Point(reg.xmax + query.cols, reg.ymax), color, 2);
 
 #if 0
     imwrite("1-2.jpg", output);

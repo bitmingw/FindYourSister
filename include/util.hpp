@@ -11,12 +11,17 @@ using namespace cv;
 
 namespace fys {
 
-// some utility functions
 int checkDigit(string str);
 string itoa(int idx);
+bool pointsCompXAscend(KeyPoint i, KeyPoint j);
+bool pointsCompXDescend(KeyPoint i, KeyPoint j);
+bool pointsCompYAscend(KeyPoint i, KeyPoint j);
+bool pointsCompYDescend(KeyPoint i, KeyPoint j);
+
 vector<KeyPoint> pointsInRegion(vector<KeyPoint> allPoints, ImageRegion& region);
 vector<KeyPoint> pointsInObject(vector<KeyPoint> allPoints, ImageObject& object);
 vector<KeyPoint> matchedPoints(vector<KeyPoint> allPoints, vector<DMatch> matches, int type);
+ImageRegion locateDenseRegion(vector<KeyPoint> points, double featherRate);
 
 } // namespce fys
 
