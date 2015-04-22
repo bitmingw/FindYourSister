@@ -51,12 +51,11 @@ void testSIFT(string featuresFile, string imagesFile)
 
     // Delete unmatched points in train image
     reducedKeys = matchedPoints(testKeys, matches, TRAIN_PART_TYPE);
-    reg = locateDenseRegion(reducedKeys, 0.05);
+    reg = locateDenseRegion(reducedKeys, 0.2);
 
     drawMatches(query, queryKeys, test1, testKeys, matches, output);
     rectangle(output, Point(reg.xmin + query.cols, reg.ymin), Point(reg.xmax + query.cols, reg.ymax), color, 2);
 
-#if 0
     imwrite("1-2.jpg", output);
 
     
@@ -64,8 +63,11 @@ void testSIFT(string featuresFile, string imagesFile)
     detectAndExtractor.compute(test2, testKeys, testDescriptors);
 
     matcher.match(queryDescriptors, testDescriptors, matches);
+    reducedKeys = matchedPoints(testKeys, matches, TRAIN_PART_TYPE);
+    reg = locateDenseRegion(reducedKeys, 0.2);
 
     drawMatches(query, queryKeys, test2, testKeys, matches, output);
+    rectangle(output, Point(reg.xmin + query.cols, reg.ymin), Point(reg.xmax + query.cols, reg.ymax), color, 2);
     imwrite("1-5.jpg", output);
 
 
@@ -73,14 +75,16 @@ void testSIFT(string featuresFile, string imagesFile)
     detectAndExtractor.compute(test3, testKeys, testDescriptors);
 
     matcher.match(queryDescriptors, testDescriptors, matches);
+    reducedKeys = matchedPoints(testKeys, matches, TRAIN_PART_TYPE);
+    reg = locateDenseRegion(reducedKeys, 0.2);
 
     drawMatches(query, queryKeys, test3, testKeys, matches, output);
+    rectangle(output, Point(reg.xmin + query.cols, reg.ymin), Point(reg.xmax + query.cols, reg.ymax), color, 2);
     imwrite("1-9.jpg", output);
-#endif
 
-    namedWindow("window");
-    imshow("window", output); 
-    waitKey(0);
+    //namedWindow("window");
+    //imshow("window", output); 
+    //waitKey(0);
 
     std::cout << "==== Test End: SIFT Demo ====" << std::endl;
 }
