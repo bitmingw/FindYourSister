@@ -1,6 +1,7 @@
 // Copyright (c) 2015, Ming Wen
 
 #include "fys.hpp"
+#include "util.hpp"
 #include "json_base.hpp"
 #include "json_images.hpp"
 #include "json_features.hpp"
@@ -11,37 +12,64 @@ using namespace cv;
 
 namespace fys {
 
-void testSIFT(string featuresFile)
+void testSIFT(string featuresFile, string imagesFile)
 {
     std::cout << "==== Test Start: SIFT Demo ====" << std::endl;
 
     Mat query = imread("../OneWaySignal/1.jpg", 0); // read gray image
-    Mat test = imread("../OneWaySignal/12.jpg", 0);
+    Mat test1 = imread("../OneWaySignal/2.jpg", 0);
+    Mat test2 = imread("../OneWaySignal/5.jpg", 0);
+    Mat test3 = imread("../OneWaySignal/9.jpg", 0);
 
     JsonFeatures jf(featuresFile);
     SIFT detectAndExtractor(jf.genSIFT());
 
+    // Read images json file
+    JsonImages ji(imagesFile);
+    ImageObject ob = ji.getObjectByID(ji.doc, TRAIN_TYPE, 0, 0);
+
     vector<KeyPoint> queryKeys;
     vector<KeyPoint> testKeys;
-
-    detectAndExtractor.detect(query, queryKeys);
-    detectAndExtractor.detect(test, testKeys);
-
     Mat queryDescriptors, testDescriptors;
-    detectAndExtractor.compute(query, queryKeys, queryDescriptors);
-    detectAndExtractor.compute(test, testKeys, testDescriptors);
-
     BFMatcher matcher(jf.genBFMatcher());
     vector<DMatch> matches;
+    Mat output;
+    
+    detectAndExtractor.detect(query, queryKeys);
+    // Delete the points outside the object region
+    queryKeys = pointsInObject(queryKeys, ob);
+    detectAndExtractor.compute(query, queryKeys, queryDescriptors);
+    
+    detectAndExtractor.detect(test1, testKeys);
+    detectAndExtractor.compute(test1, testKeys, testDescriptors);
+
     matcher.match(queryDescriptors, testDescriptors, matches);
 
-    Mat output;
-    drawMatches(query, queryKeys, test, testKeys, matches, output);
-    imwrite("../OneWaySignal/1-12.jpg", output);
+    drawMatches(query, queryKeys, test1, testKeys, matches, output);
+    imwrite("1-2.jpg", output);
 
-    namedWindow("window");
-    imshow("window", output); 
-    waitKey(0);
+    
+    detectAndExtractor.detect(test2, testKeys);
+    detectAndExtractor.compute(test2, testKeys, testDescriptors);
+
+    matcher.match(queryDescriptors, testDescriptors, matches);
+
+    drawMatches(query, queryKeys, test2, testKeys, matches, output);
+    imwrite("1-5.jpg", output);
+
+
+    detectAndExtractor.detect(test3, testKeys);
+    detectAndExtractor.compute(test3, testKeys, testDescriptors);
+
+    matcher.match(queryDescriptors, testDescriptors, matches);
+
+    drawMatches(query, queryKeys, test3, testKeys, matches, output);
+    imwrite("1-9.jpg", output);
+
+
+    //namedWindow("window");
+    //imshow("window", output); 
+    //waitKey(0);
 
     std::cout << "==== Test End: SIFT Demo ====" << std::endl;
 }

@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
     //fys::testSIFTGetting(featuresConfigFile);
     //fys::testSURFGetting(featuresConfigFile);
     //fys::testFREAKGetting(featuresConfigFile);
-    fys::testSIFT(featuresConfigFile);
+    fys::testSIFT(featuresConfigFile, imagesConfigFile);
 
     exit(EXIT_SUCCESS);
 }

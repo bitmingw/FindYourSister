@@ -14,7 +14,7 @@ void testImageProperties(string imagesFile);
 void testSIFTGetting(string featuresFile);
 void testSURFGetting(string featuresFile);
 void testFREAKGetting(string featuresFile);
-void testSIFT(string featuresFile);
+void testSIFT(string featuresFile, string imagesFile);
 
 } // namespace fys
 
