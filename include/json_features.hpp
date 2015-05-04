@@ -81,6 +81,7 @@ public:
     void setExtractorType(rapidjson::Value& doc, string newType);
     string getMatcherType(const rapidjson::Value& doc);
     void setMatcherType(rapidjson::Value& doc, string newType);
+    vector<string> getAlgoParaStr(string usage);
 
     // -------- SIFT CONFIG --------
     int getSIFTnfeatures(const rapidjson::Value& doc);
@@ -88,7 +89,6 @@ public:
     double getSIFTcontrastThreshold(const rapidjson::Value& doc);
     double getSIFTedgeThreshold(const rapidjson::Value& doc);
     double getSIFTsigma(const rapidjson::Value& doc);
-    vector<string> getSIFTparaTypes();
     vector<string> getSIFTparaStr();
 
     // -------- SURF CONFIG --------

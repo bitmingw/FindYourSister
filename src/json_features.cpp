@@ -175,6 +175,19 @@ JsonFeatures::setMatcherType(rapidjson::Value& doc, string newType)
     setStrVal(doc, this->matcherTypePath, newType);
 }
 
+vector<string>
+JsonFeatures::getAlgoParaStr(string usage)
+{
+    if (usage == "detector") {
+        if (this->detectorType == "SIFT") {
+            return this->getSIFTparaStr();
+        } 
+    }
+
+    // Should not go here
+    return vector<string>();
+}
+
 // -------- SIFT CONFIG --------
 
 int
@@ -215,18 +228,6 @@ JsonFeatures::getSIFTsigma(const rapidjson::Value& doc)
     vector<string> path = this->SIFTConfigPath;
     path.push_back("sigma");
     return getDoubleVal(doc, path);
-}
-
-vector<string>
-JsonFeatures::getSIFTparaTypes()
-{
-    vector<string> types;
-    types.push_back("int");
-    types.push_back("int");
-    types.push_back("double");
-    types.push_back("double");
-    types.push_back("double");
-    return types;
 }
 
 vector<string>
