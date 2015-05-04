@@ -1,6 +1,20 @@
+Try general OpenCV feature detector.
+    Using the general type instead of pointing out type in main program.
+
 Writing interface to call OpenCV functions.
     With the parameters in features.json.
     Update more powerful testing.
+
+Segment and label the images.
+    Convert short videos to images.
+    Use sloth to label them.
+    In case of need, store in a different location.
+    
+Paper work.
+    Structure and outline.
+
+Documents.
+    After all the interfaces are complete.
 
 Porting of python2 to python3.
     Use future print function and unicode literals.
