@@ -5,12 +5,28 @@
 #include "json_base.hpp"
 #include "json_images.hpp"
 #include "json_features.hpp"
+#include "fys_algorithms.hpp"
 #include "test.hpp"
 
 using namespace std;
 using namespace cv;
 
 namespace fys {
+
+void testSIFTdetector(string featuresFile)
+{
+    std::cout << "==== Test Start: SIFT detector ====" << std::endl;
+
+    Mat query = imread("../OneWaySignal/1.jpg", 0); // read gray image
+    vector<KeyPoint> queryKeys;
+ 
+    JsonFeatures jf(featuresFile);
+    FysFeatureDetector fd(jf.getDetectorType(jf.doc), jf.getSIFTparaStr());
+    FeatureDetector* d = fd.getDetector();
+    d->detect(query, queryKeys);
+
+    std::cout << "==== Test End: SIFT detector ====" << std::endl;
+}
 
 void testSIFT(string featuresFile, string imagesFile)
 {

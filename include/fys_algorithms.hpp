@@ -15,7 +15,7 @@ class FysFeatureDetector
 {
 public:
     FysFeatureDetector(string name);
-    FysFeatureDetector(string name, vector<string> paras, vector<string> paraTypes);
+    FysFeatureDetector(string name, vector<string> paras);
     ~FysFeatureDetector();
     cv::FeatureDetector* getDetector();
 private:
@@ -31,7 +31,7 @@ public:
     cv::DescriptorExtractor* getExtractor();
 private:
     cv::DescriptorExtractor* extractor;
-}
+};
 
 class FysDescriptorMatcher
 {
@@ -42,7 +42,7 @@ public:
     cv::DescriptorMatcher* getMatcher();
 private:
     cv::DescriptorMatcher* matcher;
-}
+};
 
 } // namespace fys
 
