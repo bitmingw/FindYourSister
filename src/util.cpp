@@ -49,6 +49,17 @@ btoa(bool var)
 }
 
 bool
+atob(const char* s)
+{
+    if (strcmp(s, "true") == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool
 pointsCompXAscend(KeyPoint i, KeyPoint j)
 {
     return i.pt.x < j.pt.x;

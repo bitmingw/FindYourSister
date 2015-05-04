@@ -15,6 +15,7 @@ int checkDigit(string str);
 string itoa(int idx);
 string ftoa(double num);
 string btoa(bool var);
+bool atob(const char* s);
 
 bool pointsCompXAscend(KeyPoint i, KeyPoint j);
 bool pointsCompXDescend(KeyPoint i, KeyPoint j);
