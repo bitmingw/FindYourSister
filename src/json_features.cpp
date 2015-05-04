@@ -118,21 +118,6 @@ JsonFeatures::JsonFeatures(string filename)
     this->detectorType = getDetectorType(this->doc);
     this->extractorType = getExtractorType(this->doc);
     this->matcherType = getMatcherType(this->doc);
-
-    // Set parameter class
-    if (detectorType == "SIFT" || extractorType == "SIFT") {
-        genSiftConfig(this->siftParam);
-    }
-    else if (detectorType == "SURF" || extractorType == "SURF") {
-        genSurfConfig(this->surfParam);
-    }
-    else if (detectorType == "FREAK" || extractorType == "FREAK") {
-        genFreakConfig(this->freakParam);
-    }
-
-    if (matcherType == "BFMatcher") {
-        genBFMatcherConfig(this->bfMatcherParam);
-    }
 }
 
 JsonFeatures::~JsonFeatures() {}
@@ -372,38 +357,6 @@ JsonFeatures::genBFMatcherConfig(BFMatcherConfig& config)
 {
     config.updateNormType(getBFMatcherNormType(this->doc));
     config.isCrossCheck = getBFMatcherCrossCheck(this->doc);
-}
-
-// -------- GEN DETECTOR / DESCRIPTOR (WRAPPER) --------
-
-SIFT&
-JsonFeatures::genSIFT()
-{
-    siftPtr = this->siftParam.genSIFT();
-    return *siftPtr;
-}
-
-SURF&
-JsonFeatures::genSURF()
-{
-    surfPtr = this->surfParam.genSURF();
-    return *surfPtr;
-}
-
-FREAK&
-JsonFeatures::genFREAK()
-{
-    freakPtr = this->freakParam.genFREAK();
-    return *freakPtr;
-}
-
-// -------- GEN MATCHER (WRAPPER) --------
-
-BFMatcher&
-JsonFeatures::genBFMatcher()
-{
-    bfMatcherPtr = this->bfMatcherParam.genBFMatcher();
-    return *bfMatcherPtr;
 }
 
 } // namespace fys

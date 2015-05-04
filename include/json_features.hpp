@@ -115,14 +115,6 @@ public:
     void genFreakConfig(FreakConfig& config);
     void genBFMatcherConfig(BFMatcherConfig& config);
 
-    // -------- GEN DETECTOR / DESCRIPTOR (WRAPPER) --------
-    SIFT& genSIFT();
-    SURF& genSURF(); 
-    FREAK& genFREAK(); 
-
-    // -------- GEN MATCHER (WRAPPER) --------
-    BFMatcher& genBFMatcher();
-
 private:
     string detectorType;
     string extractorType;
@@ -141,10 +133,6 @@ private:
     FreakConfig freakParam;
     BFMatcherConfig bfMatcherParam;
 
-    SIFT* siftPtr;
-    SURF* surfPtr;
-    FREAK* freakPtr;
-    BFMatcher* bfMatcherPtr;
 };
 
 } // namespace fys

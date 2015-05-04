@@ -28,6 +28,7 @@ void testSIFTdetector(string featuresFile)
     std::cout << "==== Test End: SIFT detector ====" << std::endl;
 }
 
+/*
 void testSIFT(string featuresFile, string imagesFile)
 {
     std::cout << "==== Test Start: SIFT Demo ====" << std::endl;
@@ -104,6 +105,7 @@ void testSIFT(string featuresFile, string imagesFile)
 
     std::cout << "==== Test End: SIFT Demo ====" << std::endl;
 }
+*/
 
 }
 
