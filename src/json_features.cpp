@@ -190,11 +190,31 @@ JsonFeatures::getFREAKnOctaves(const rapidjson::Value& doc)
 // -------- BFMATCHER CONFIG --------
 
 string
-JsonFeatures::getBFMatcherNormType(const rapidjson::Value& doc)
+JsonFeatures::getBFMatcherNormStr(const rapidjson::Value& doc)
 {
     vector<string> path = this->BFMatcherConfigPath;
     path.push_back("normType");
     return getStrVal(doc, path);
+}
+
+int
+JsonFeatures::getBFMatcherNormType(string strType)
+{
+    if (strType == "NORM_L1") {
+        return NORM_L1;
+    }
+    else if (strType == "NORM_L2") {
+        return NORM_L2;
+    }
+    else if (strType == "NORM_HAMMING") {
+        return NORM_HAMMING;
+    }
+    else if (strType == "NORM_HAMMING2") {
+        return NORM_HAMMING2;
+    }
+    else {
+        return NORM_L2;
+    }
 }
 
 bool
@@ -207,6 +227,7 @@ JsonFeatures::getBFMatcherCrossCheck(const rapidjson::Value& doc)
 
 // -------- CONFIG RETRIVAL --------
 
+// Don't forget to register the algorithms here
 vector<string>
 JsonFeatures::getParameters(string usage)
 {
@@ -214,6 +235,28 @@ JsonFeatures::getParameters(string usage)
         if (this->detectorType == "SIFT") {
             return this->getSIFTparameters();
         } 
+        else if (this->detectorType == "SURF") {
+            return this->getSURFparameters();
+        }
+        else if (this->detectorType == "FREAK") {
+            return this->getFREAKparameters();
+        }
+    }
+    else if (usage == "extractor") {
+        if (this->extractorType == "SIFT") {
+            return this->getSIFTparameters();
+        } 
+        else if (this->extractorType == "SURF") {
+            return this->getSURFparameters();
+        }
+        else if (this->extractorType == "FREAK") {
+            return this->getFREAKparameters();
+        }
+    }
+    else if (usage == "matcher") {
+        if (this->matcherType == "BFMatcher") {
+            return this->getBFMatcherParameters();
+        }
     }
 
     // Should not go here
@@ -232,6 +275,37 @@ JsonFeatures::getSIFTparameters()
     return parameters;
 }
 
+vector<string>
+JsonFeatures::getSURFparameters()
+{
+    vector<string> parameters;
+    parameters.push_back(ftoa(this->getSURFhessianThreshold(this->doc)));
+    parameters.push_back(itoa(this->getSURFnOctaves(this->doc)));
+    parameters.push_back(itoa(this->getSURFnOctaveLayers(this->doc)));
+    parameters.push_back(btoa(this->getSURFextended(this->doc)));
+    parameters.push_back(btoa(this->getSURFupright(this->doc)));
+    return parameters;
+}
+
+vector<string>
+JsonFeatures::getFREAKparameters()
+{
+    vector<string> parameters;
+    parameters.push_back(btoa(this->getFREAKorientationNormalized(this->doc)));
+    parameters.push_back(btoa(this->getFREAKscaleNormalized(this->doc)));
+    parameters.push_back(ftoa(this->getFREAKpatternScale(this->doc)));
+    parameters.push_back(itoa(this->getFREAKnOctaves(this->doc)));
+    return parameters;
+}
+
+vector<string>
+JsonFeatures::getBFMatcherParameters()
+{
+    vector<string> parameters;
+    parameters.push_back(itoa(this->getBFMatcherNormType(this->getBFMatcherNormStr(this->doc))));
+    parameters.push_back(btoa(this->getBFMatcherCrossCheck(this->doc)));
+    return parameters;
+}
 
 } // namespace fys
 

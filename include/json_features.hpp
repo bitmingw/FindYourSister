@@ -48,7 +48,8 @@ public:
     // TODO: getFREAKselectedPairs()
 
     // -------- BFMATCHER CONFIG --------
-    string getBFMatcherNormType(const rapidjson::Value& doc);
+    string getBFMatcherNormStr(const rapidjson::Value& doc);
+    int getBFMatcherNormType(string strType);
     bool getBFMatcherCrossCheck(const rapidjson::Value& doc);
 
     // -------- CONFIG RETRIVAL --------
