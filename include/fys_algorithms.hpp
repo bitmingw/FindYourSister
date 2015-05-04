@@ -51,7 +51,7 @@ private:
 class FysAlgorithms
 {
 public:
-    FysAlgorithms(string featureJsonFile);
+    FysAlgorithms(string featureJsonFile, string imageJsonFile);
     ~FysAlgorithms();
     cv::FeatureDetector* d;
     cv::DescriptorExtractor* e;
@@ -59,6 +59,7 @@ public:
 
 private:
     JsonFeatures jf;
+    JsonImages ji;
     FysFeatureDetector* fysDetector;
     FysDescriptorExtractor* fysExtractor;
     FysDescriptorMatcher* fysMatcher;

@@ -116,8 +116,8 @@ FysDescriptorMatcher::getMatcher()
 }
 
 // -------- ALGORITHMS --------
-FysAlgorithms::FysAlgorithms(string featureJsonFile)
-    : jf(featureJsonFile)
+FysAlgorithms::FysAlgorithms(string featureJsonFile, string imageJsonFile)
+    : jf(featureJsonFile), ji(imageJsonFile)
 {
     fysDetector = new FysFeatureDetector(jf.getDetectorType(jf.doc),
             jf.getParameters("detector"));
