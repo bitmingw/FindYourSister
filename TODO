@@ -1,6 +1,3 @@
-Try general OpenCV feature detector.
-    Using the general type instead of pointing out type in main program.
-
 Writing interface to call OpenCV functions.
     With the parameters in features.json.
     Update more powerful testing.
