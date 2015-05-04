@@ -25,7 +25,6 @@ public:
     void setExtractorType(rapidjson::Value& doc, string newType);
     string getMatcherType(const rapidjson::Value& doc);
     void setMatcherType(rapidjson::Value& doc, string newType);
-    vector<string> getAlgoParaStr(string usage);
 
     // -------- SIFT CONFIG --------
     int getSIFTnfeatures(const rapidjson::Value& doc);
@@ -33,7 +32,6 @@ public:
     double getSIFTcontrastThreshold(const rapidjson::Value& doc);
     double getSIFTedgeThreshold(const rapidjson::Value& doc);
     double getSIFTsigma(const rapidjson::Value& doc);
-    vector<string> getSIFTparaStr();
 
     // -------- SURF CONFIG --------
     double getSURFhessianThreshold(const rapidjson::Value& doc);
@@ -52,6 +50,13 @@ public:
     // -------- BFMATCHER CONFIG --------
     string getBFMatcherNormType(const rapidjson::Value& doc);
     bool getBFMatcherCrossCheck(const rapidjson::Value& doc);
+
+    // -------- CONFIG RETRIVAL --------
+    vector<string> getParameters(string usage);
+    vector<string> getSIFTparameters();
+    vector<string> getSURFparameters();
+    vector<string> getFREAKparameters();
+    vector<string> getBFMatcherParameters();
 
 private:
     string detectorType;

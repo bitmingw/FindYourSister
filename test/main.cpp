@@ -36,8 +36,8 @@ int main(int argc, char* argv[]) {
     //fys::testSURFGetting(featuresConfigFile);
     //fys::testFREAKGetting(featuresConfigFile);
     //fys::testSIFT(featuresConfigFile, imagesConfigFile);
-    //fys::testAlgoPara(featuresConfigFile);
-    fys::testSIFTdetector(featuresConfigFile);
+    fys::testAlgoPara(featuresConfigFile);
+    //fys::testSIFTdetector(featuresConfigFile);
 
     exit(EXIT_SUCCESS);
 }

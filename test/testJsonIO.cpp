@@ -214,7 +214,7 @@ void testAlgoPara(string featuresFile)
 
     JsonFeatures jf(featuresFile);
 
-    vector<string> paras = jf.getSIFTparaStr();
+    vector<string> paras = jf.getSIFTparameters();
     for (vector<string>::iterator it = paras.begin(); it != paras.end(); ++it) {
         std::cout << *it << std::endl;
     }

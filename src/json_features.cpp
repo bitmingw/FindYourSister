@@ -69,19 +69,6 @@ JsonFeatures::setMatcherType(rapidjson::Value& doc, string newType)
     setStrVal(doc, this->matcherTypePath, newType);
 }
 
-vector<string>
-JsonFeatures::getAlgoParaStr(string usage)
-{
-    if (usage == "detector") {
-        if (this->detectorType == "SIFT") {
-            return this->getSIFTparaStr();
-        } 
-    }
-
-    // Should not go here
-    return vector<string>();
-}
-
 // -------- SIFT CONFIG --------
 
 int
@@ -122,18 +109,6 @@ JsonFeatures::getSIFTsigma(const rapidjson::Value& doc)
     vector<string> path = this->SIFTConfigPath;
     path.push_back("sigma");
     return getDoubleVal(doc, path);
-}
-
-vector<string>
-JsonFeatures::getSIFTparaStr()
-{
-    vector<string> parameters;
-    parameters.push_back(itoa(this->getSIFTnfeatures(this->doc)));
-    parameters.push_back(itoa(this->getSIFTnOctaveLayers(this->doc)));
-    parameters.push_back(ftoa(this->getSIFTcontrastThreshold(this->doc)));
-    parameters.push_back(ftoa(this->getSIFTedgeThreshold(this->doc)));
-    parameters.push_back(ftoa(this->getSIFTsigma(this->doc)));
-    return parameters;
 }
 
 // -------- SURF CONFIG --------
@@ -229,6 +204,34 @@ JsonFeatures::getBFMatcherCrossCheck(const rapidjson::Value& doc)
     path.push_back("crossCheck");
     return getBoolVal(doc, path);
 }
+
+// -------- CONFIG RETRIVAL --------
+
+vector<string>
+JsonFeatures::getParameters(string usage)
+{
+    if (usage == "detector") {
+        if (this->detectorType == "SIFT") {
+            return this->getSIFTparameters();
+        } 
+    }
+
+    // Should not go here
+    return vector<string>();
+}
+
+vector<string>
+JsonFeatures::getSIFTparameters()
+{
+    vector<string> parameters;
+    parameters.push_back(itoa(this->getSIFTnfeatures(this->doc)));
+    parameters.push_back(itoa(this->getSIFTnOctaveLayers(this->doc)));
+    parameters.push_back(ftoa(this->getSIFTcontrastThreshold(this->doc)));
+    parameters.push_back(ftoa(this->getSIFTedgeThreshold(this->doc)));
+    parameters.push_back(ftoa(this->getSIFTsigma(this->doc)));
+    return parameters;
+}
+
 
 } // namespace fys
 

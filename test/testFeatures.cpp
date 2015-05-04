@@ -21,7 +21,7 @@ void testSIFTdetector(string featuresFile)
     vector<KeyPoint> queryKeys;
  
     JsonFeatures jf(featuresFile);
-    FysFeatureDetector fd(jf.getDetectorType(jf.doc), jf.getAlgoParaStr("detector"));
+    FysFeatureDetector fd(jf.getDetectorType(jf.doc), jf.getParameters("detector"));
     FeatureDetector* d = fd.getDetector();
     d->detect(query, queryKeys);
 
