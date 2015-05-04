@@ -11,62 +11,6 @@ using namespace cv;
 
 namespace fys {
 
-class SiftConfig
-{
-public:
-    SiftConfig();
-    SiftConfig(int nfeatures, int nOctaveLayers, double contrastThreshold,
-            double edgeThreshold, double sigma);
-    ~SiftConfig();
-    int nfeatures;
-    int nOctaveLayers;
-    double contrastThreshold;
-    double edgeThreshold;
-    double sigma;
-    SIFT* genSIFT(); 
-};
-
-class SurfConfig
-{
-public:
-    SurfConfig();
-    SurfConfig(double hessianThreshold, int nOctaves, int nOctaveLayers,
-            bool isExtended, bool isUpright);
-    ~SurfConfig();
-    double hessianThreshold;
-    int nOctaves;
-    int nOctaveLayers;
-    bool isExtended;
-    bool isUpright;
-    SURF* genSURF(); 
-};
-
-class FreakConfig
-{
-public:
-    FreakConfig();
-    FreakConfig(bool orientNormal, bool scaleNormal, double patternScale, int nOctaves);
-    ~FreakConfig();
-    bool orientNormal;
-    bool scaleNormal;
-    double patternScale;
-    int nOctaves;
-    FREAK* genFREAK(); 
-};
-
-class BFMatcherConfig
-{
-public:
-    BFMatcherConfig();
-    BFMatcherConfig(string normTypeStr, bool isCrossCheck);
-    ~BFMatcherConfig();
-    void updateNormType(string normTypeStr); 
-    int normType;
-    bool isCrossCheck;
-    BFMatcher* genBFMatcher(); 
-};
-
-
 class JsonFeatures : public JsonHandler
 {
 
@@ -109,12 +53,6 @@ public:
     string getBFMatcherNormType(const rapidjson::Value& doc);
     bool getBFMatcherCrossCheck(const rapidjson::Value& doc);
 
-    // -------- GEN CONFIG CLASS --------
-    void genSiftConfig(SiftConfig& config);
-    void genSurfConfig(SurfConfig& config);
-    void genFreakConfig(FreakConfig& config);
-    void genBFMatcherConfig(BFMatcherConfig& config);
-
 private:
     string detectorType;
     string extractorType;
@@ -127,12 +65,6 @@ private:
     vector<string> SURFConfigPath;
     vector<string> FREAKConfigPath;
     vector<string> BFMatcherConfigPath;
-
-    SiftConfig siftParam;
-    SurfConfig surfParam;
-    FreakConfig freakParam;
-    BFMatcherConfig bfMatcherParam;
-
 };
 
 } // namespace fys
