@@ -208,5 +208,19 @@ void testFREAKGetting(string featuresFile)
 }
 */
 
+void testAlgoPara(string featuresFile)
+{
+    std::cout << "==== Test Start: get SIFT parameters ====" << std::endl;
+
+    JsonFeatures jf(featuresFile);
+
+    vector<string> paras = jf.getSIFTparaStr();
+    for (vector<string>::iterator it = paras.begin(); it != paras.end(); ++it) {
+        std::cout << *it << std::endl;
+    }
+
+    std::cout << "==== Test End: get SIFT parameters ====" << std::endl;
+}
+
 } // namespace fys
 

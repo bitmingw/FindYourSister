@@ -15,6 +15,7 @@ void testSIFTGetting(string featuresFile);
 void testSURFGetting(string featuresFile);
 void testFREAKGetting(string featuresFile);
 void testSIFT(string featuresFile, string imagesFile);
+void testAlgoPara(string featuresFile);
 
 } // namespace fys
 

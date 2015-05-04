@@ -217,6 +217,30 @@ JsonFeatures::getSIFTsigma(const rapidjson::Value& doc)
     return getDoubleVal(doc, path);
 }
 
+vector<string>
+JsonFeatures::getSIFTparaTypes()
+{
+    vector<string> types;
+    types.push_back("int");
+    types.push_back("int");
+    types.push_back("double");
+    types.push_back("double");
+    types.push_back("double");
+    return types;
+}
+
+vector<string>
+JsonFeatures::getSIFTparaStr()
+{
+    vector<string> parameters;
+    parameters.push_back(itoa(this->getSIFTnfeatures(this->doc)));
+    parameters.push_back(itoa(this->getSIFTnOctaveLayers(this->doc)));
+    parameters.push_back(ftoa(this->getSIFTcontrastThreshold(this->doc)));
+    parameters.push_back(ftoa(this->getSIFTedgeThreshold(this->doc)));
+    parameters.push_back(ftoa(this->getSIFTsigma(this->doc)));
+    return parameters;
+}
+
 // -------- SURF CONFIG --------
 
 double

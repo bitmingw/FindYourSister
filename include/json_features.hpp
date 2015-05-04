@@ -88,6 +88,8 @@ public:
     double getSIFTcontrastThreshold(const rapidjson::Value& doc);
     double getSIFTedgeThreshold(const rapidjson::Value& doc);
     double getSIFTsigma(const rapidjson::Value& doc);
+    vector<string> getSIFTparaTypes();
+    vector<string> getSIFTparaStr();
 
     // -------- SURF CONFIG --------
     double getSURFhessianThreshold(const rapidjson::Value& doc);
