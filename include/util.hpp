@@ -13,6 +13,9 @@ namespace fys {
 
 int checkDigit(string str);
 string itoa(int idx);
+string ftoa(double num);
+string btoa(bool var);
+
 bool pointsCompXAscend(KeyPoint i, KeyPoint j);
 bool pointsCompXDescend(KeyPoint i, KeyPoint j);
 bool pointsCompYAscend(KeyPoint i, KeyPoint j);

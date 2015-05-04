@@ -27,6 +27,27 @@ itoa(int idx)
     return string(s);
 }
 
+string
+ftoa(double num)
+{
+    char s[DOUBLE_STR_LEN];
+    snprintf(s, DOUBLE_STR_LEN, "%f", num);
+    return string(s);
+}
+
+string
+btoa(bool var)
+{
+    char s[BOOL_STR_LEN];
+    if (var == true) {
+        snprintf(s, BOOL_STR_LEN, "true");
+    }
+    else {
+        snprintf(s, BOOL_STR_LEN, "false");
+    }
+    return string(s);
+}
+
 bool
 pointsCompXAscend(KeyPoint i, KeyPoint j)
 {
