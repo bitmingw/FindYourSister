@@ -100,6 +100,14 @@ JsonImages::getFolderName(const rapidjson::Value& doc, int imageType, int imageI
     return getStrVal(doc, searchPath);
 }
 
+string
+JsonImages::getFullName(const rapidjson::Value& doc, int imageType, int imageIdx)
+{
+    string folder = getFolderName(doc, imageType, imageIdx);
+    string file = getFileName(doc, imageType, imageIdx);
+    return folder + "/" + file;
+}
+
 ImageSize
 JsonImages::getImageSize(const rapidjson::Value& doc, int imageType, int imageIdx)
 {

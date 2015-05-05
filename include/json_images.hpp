@@ -65,6 +65,7 @@ public:
     ImageSample getNumImage(const rapidjson::Value& doc);
     string getFileName(const rapidjson::Value& doc, int imageType, int imageIdx);
     string getFolderName(const rapidjson::Value& doc, int imageType, int imageIdx);
+    string getFullName(const rapidjson::Value& doc, int imageType, int imageIdx);
     ImageSize getImageSize(const rapidjson::Value& doc, int imageType, int imageIdx);
     int getNumObject(const rapidjson::Value& doc, int imageType, int imageIdx); 
 
