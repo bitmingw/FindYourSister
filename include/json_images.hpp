@@ -62,7 +62,7 @@ public:
     JsonImages(string filename);
     ~JsonImages();
 
-    ImageSample getNumImage(const rapidjson::Value& doc);
+    ImageSample getNumImages(const rapidjson::Value& doc);
     string getFileName(const rapidjson::Value& doc, int imageType, int imageIdx);
     string getFolderName(const rapidjson::Value& doc, int imageType, int imageIdx);
     string getFullName(const rapidjson::Value& doc, int imageType, int imageIdx);

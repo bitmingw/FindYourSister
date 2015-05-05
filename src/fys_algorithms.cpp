@@ -132,6 +132,29 @@ FysAlgorithms::FysAlgorithms(string featureJsonFile, string imageJsonFile)
     testMats = new cv::Mat[MAT_ARRAY_SIZE];
 }
 
+vector<string>
+FysAlgorithms::getFilenames(int groupType)
+{
+    vector<string> names;
+    ImageSample summary = this->ji.getNumImages(this->ji.doc);
+    if (groupType == TRAIN_TYPE) {
+        for (int i = 0; i < summary.train; ++i) {
+            names.push_back(this->ji.getFullName(this->ji.doc, groupType, i));
+        }
+    }
+    else if (groupType == VALIDATE_TYPE) {
+        for (int i = 0; i < summary.validate; ++i) {
+            names.push_back(this->ji.getFullName(this->ji.doc, groupType, i));
+        }
+    }
+    else if (groupType == TEST_TYPE) {
+        for (int i = 0; i < summary.test; ++i) {
+            names.push_back(this->ji.getFullName(this->ji.doc, groupType, i));
+        }
+    }
+    return names;
+}
+
 void
 FysAlgorithms::readImage(cv::Mat* image, unsigned int idx, const string& filename, int flags)
 {

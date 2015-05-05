@@ -47,7 +47,7 @@ JsonImages::JsonImages(string filename)
 JsonImages::~JsonImages() {}
 
 ImageSample
-JsonImages::getNumImage(const rapidjson::Value& doc)
+JsonImages::getNumImages(const rapidjson::Value& doc)
 {
     int train = getArraySize(doc, trainImagePath);
     int validate = getArraySize(doc, validateImagePath);

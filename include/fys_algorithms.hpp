@@ -56,14 +56,18 @@ class FysAlgorithms
 public:
     FysAlgorithms(string featureJsonFile, string imageJsonFile);
     ~FysAlgorithms();
+    vector<string> getFilenames(int groupType);
     void readImage(cv::Mat* image, unsigned int idx, const string& filename, int flags);
     void readImages(cv::Mat* images, const vector<string>& filenames, int flags);
     cv::Mat getImage(const string& type, unsigned int idx);
+
     cv::FeatureDetector* d;
     cv::DescriptorExtractor* e;
     cv::DescriptorMatcher* m;
+
     JsonFeatures jf; // MOVE TO PUBLIC FOR TEST
     JsonImages ji; // MOVE TO PUBLIC FOR TEST
+
     cv::Mat* queryMats; // MOVE TO PUBLIC FOR TEST
     cv::Mat* testMats; // MOVE TO PUBLIC FOR TEST
     cv::Mat* outputMats; // MOVE TO PUBLIC FOR TEST
