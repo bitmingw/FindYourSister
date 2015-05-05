@@ -205,5 +205,14 @@ FysAlgorithms::match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
     m->match(queryDescriptions[idx], testDescriptions[idx], mapping);
 }
 
+void
+FysAlgorithms::draw(cv::Mat* querys, vector<KeyPoint> queryKeys, unsigned int queryIdx,
+        cv::Mat* tests, vector<KeyPoint> testKeys, unsigned int testIdx,
+        vector<DMatch> mapping, cv::Mat* outputs, unsigned int outputIdx)
+{
+    drawMatches(querys[queryIdx], queryKeys, tests[testIdx], testKeys,
+            mapping, outputs[outputIdx]);
+}
+
 } // namespace fys
 

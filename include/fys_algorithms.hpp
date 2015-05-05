@@ -76,7 +76,7 @@ public:
 
     vector<vector<cv::KeyPoint> > queryKeys; // MOVE TO PUBLIC FOR TEST
     vector<vector<cv::KeyPoint> > testKeys; // MOVE TO PUBLIC FOR TEST
-    vector<vector<cv::KeyPoint> > reducedKeys; // MOVE TO PUBLIC FOR TEST
+    vector<vector<cv::KeyPoint> > reducedKeys; // MOVE TO PUBLIC FOR TEST, TODO
     vector<vector<cv::DMatch> > matches; // MOVE TO PUBLIC FOR TEST
 
     void detect(cv::Mat* images, vector<KeyPoint> keys, unsigned int idx);
@@ -84,6 +84,9 @@ public:
             cv::Mat* descriptions, unsigned int idx);
     void match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
             vector<DMatch> mapping, unsigned int idx);
+    void draw(cv::Mat* querys, vector<KeyPoint> queryKeys, unsigned int queryIdx,
+            cv::Mat* tests, vector<KeyPoint> testKeys, unsigned int testIdx,
+            vector<DMatch> mapping, cv::Mat* outputs, unsigned int outputIdx);
 
 private:
     FysFeatureDetector* fysDetector;
