@@ -58,7 +58,7 @@ public:
     ~FysAlgorithms();
     void readImage(cv::Mat* image, unsigned int idx, const string& filename, int flags);
     void readImages(cv::Mat* images, const vector<string>& filenames, int flags);
-    cv::Mat getImage(); // Problem: how to retrieve image with a proper token
+    cv::Mat getImage(const string& type, unsigned int idx);
     cv::FeatureDetector* d;
     cv::DescriptorExtractor* e;
     cv::DescriptorMatcher* m;

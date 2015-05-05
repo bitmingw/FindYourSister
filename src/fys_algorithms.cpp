@@ -146,6 +146,20 @@ FysAlgorithms::readImages(cv::Mat* images, const vector<string>& filenames, int 
     }
 }
 
+cv::Mat
+FysAlgorithms::getImage(const string& type, unsigned int idx)
+{
+    if (type == "query") {
+        return queryMats[idx];
+    }
+    else if (type == "test") {
+        return testMats[idx];
+    }
+
+    // Should not reach here
+    return cv::Mat();
+}
+
 FysAlgorithms::~FysAlgorithms() {}
 
 } // namespace fys
