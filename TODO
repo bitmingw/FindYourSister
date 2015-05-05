@@ -3,9 +3,6 @@ Tuning.
     Implement destructor when new is used in the class.
 
 Writing interface to call OpenCV functions.
-    Get number of images in images.json file (each group).
-    Read the images from given folder and filename.
-    Use the parameters in features.json.
     Update more powerful testing.
     Check the results of detected object region.
 

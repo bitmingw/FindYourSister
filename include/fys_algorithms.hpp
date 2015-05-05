@@ -88,6 +88,9 @@ public:
             cv::Mat* tests, vector<KeyPoint> testKeys, unsigned int testIdx,
             vector<DMatch> mapping, cv::Mat* outputs, unsigned int outputIdx);
 
+    void runValidate();
+    void runTest();
+
 private:
     FysFeatureDetector* fysDetector;
     FysDescriptorExtractor* fysExtractor;
