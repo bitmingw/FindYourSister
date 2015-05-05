@@ -128,8 +128,8 @@ FysAlgorithms::FysAlgorithms(string featureJsonFile, string imageJsonFile)
     d = fysDetector->getDetector();
     e = fysExtractor->getExtractor();
     m = fysMatcher->getMatcher();
-    queryMat = new cv::Mat[1000]; // FOR TEST
-    //queryMats = new cv::Mat[1000]; // FOR TEST
+    queryMats = new cv::Mat[MAT_ARRAY_SIZE]; 
+    testMats = new cv::Mat[MAT_ARRAY_SIZE];
 }
 
 void

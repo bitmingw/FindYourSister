@@ -64,7 +64,11 @@ public:
     cv::DescriptorMatcher* m;
     JsonFeatures jf; // MOVE TO PUBLIC FOR TEST
     JsonImages ji; // MOVE TO PUBLIC FOR TEST
-    cv::Mat* queryMat; // MOVE TO PUBLIC FOR TEST
+    cv::Mat* queryMats; // MOVE TO PUBLIC FOR TEST
+    cv::Mat* testMats; // MOVE TO PUBLIC FOR TEST
+    cv::Mat* outputMats; // MOVE TO PUBLIC FOR TEST
+    cv::Mat* queryDescriptions; // MOVE TO PUBLIC FOR TEST
+    cv::Mat* testDescriptions; // MOVE TO PUBLIC FOR TEST 
 
 private:
     FysFeatureDetector* fysDetector;
