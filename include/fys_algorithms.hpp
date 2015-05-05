@@ -56,16 +56,17 @@ class FysAlgorithms
 public:
     FysAlgorithms(string featureJsonFile, string imageJsonFile);
     ~FysAlgorithms();
-    void readImage(cv::Mat* image, const string& filename, int flags);
-    void readImages(cv::Mat* images, int nimages, const string& filename, int flags);
+    void readImage(cv::Mat* image, unsigned int idx, const string& filename, int flags);
+    void readImages(cv::Mat* images, const vector<string>& filenames, int flags);
+    cv::Mat getImage(); // Problem: how to retrieve image with a proper token
     cv::FeatureDetector* d;
     cv::DescriptorExtractor* e;
     cv::DescriptorMatcher* m;
-    JsonImages ji; // FOR TEST
-    cv::Mat* queryMat; // FOR TEST
+    JsonFeatures jf; // MOVE TO PUBLIC FOR TEST
+    JsonImages ji; // MOVE TO PUBLIC FOR TEST
+    cv::Mat* queryMat; // MOVE TO PUBLIC FOR TEST
 
 private:
-    JsonFeatures jf;
     FysFeatureDetector* fysDetector;
     FysDescriptorExtractor* fysExtractor;
     FysDescriptorMatcher* fysMatcher;
