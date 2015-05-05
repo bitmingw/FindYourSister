@@ -1,3 +1,7 @@
+Tuning.
+    change string to const string& to reduce the load.
+    Implement destructor when new is used in the class.
+
 Writing interface to call OpenCV functions.
     Get number of images in images.json file (each group).
     Read the images from given folder and filename.
