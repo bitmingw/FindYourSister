@@ -1,6 +1,9 @@
 Writing interface to call OpenCV functions.
-    With the parameters in features.json.
+    Get number of images in images.json file (each group).
+    Read the images from given folder and filename.
+    Use the parameters in features.json.
     Update more powerful testing.
+    Check the results of detected object region.
 
 Segment and label the images.
     Convert short videos to images.
