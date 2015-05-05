@@ -82,6 +82,8 @@ public:
     void detect(cv::Mat* images, vector<KeyPoint> keys, unsigned int idx);
     void compute(cv::Mat* images, vector<KeyPoint> keys,
             cv::Mat* descriptions, unsigned int idx);
+    void match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
+            vector<DMatch> mapping, unsigned int idx);
 
 private:
     FysFeatureDetector* fysDetector;

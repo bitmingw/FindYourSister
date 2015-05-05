@@ -198,5 +198,12 @@ FysAlgorithms::compute(cv::Mat* images, vector<KeyPoint> keys,
     e->compute(images[idx], keys, descriptions[idx]);
 }
 
+void
+FysAlgorithms::match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
+        vector<DMatch> mapping, unsigned int idx)
+{
+    m->match(queryDescriptions[idx], testDescriptions[idx], mapping);
+}
+
 } // namespace fys
 
