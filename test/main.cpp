@@ -4,6 +4,7 @@
 #include "json_base.hpp"
 #include "json_images.hpp"
 #include "json_features.hpp"
+#include "fys_algorithms.hpp"
 #include "test.hpp"
 
 using namespace cv;
@@ -36,8 +37,9 @@ int main(int argc, char* argv[]) {
     //fys::testSURFGetting(featuresConfigFile);
     //fys::testFREAKGetting(featuresConfigFile);
     //fys::testSIFT(featuresConfigFile, imagesConfigFile);
-    fys::testAlgoPara(featuresConfigFile);
+    //fys::testAlgoPara(featuresConfigFile);
     //fys::testSIFTdetector(featuresConfigFile);
+    fys::testReadImageWrapper(featuresConfigFile, imagesConfigFile);
 
     exit(EXIT_SUCCESS);
 }

@@ -128,6 +128,13 @@ FysAlgorithms::FysAlgorithms(string featureJsonFile, string imageJsonFile)
     d = fysDetector->getDetector();
     e = fysExtractor->getExtractor();
     m = fysMatcher->getMatcher();
+    queryMat = new cv::Mat();
+}
+
+void
+FysAlgorithms::readImage(cv::Mat* image, const string& filename, int flags)
+{
+    *image = imread(filename, flags); 
 }
 
 FysAlgorithms::~FysAlgorithms() {}

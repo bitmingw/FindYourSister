@@ -24,6 +24,7 @@ private:
     cv::FeatureDetector* detector;
 };
 
+
 class FysDescriptorExtractor
 {
 public:
@@ -35,6 +36,7 @@ public:
 private:
     cv::DescriptorExtractor* extractor;
 };
+
 
 class FysDescriptorMatcher
 {
@@ -48,18 +50,22 @@ private:
     cv::DescriptorMatcher* matcher;
 };
 
+
 class FysAlgorithms
 {
 public:
     FysAlgorithms(string featureJsonFile, string imageJsonFile);
     ~FysAlgorithms();
+    void readImage(cv::Mat* image, const string& filename, int flags);
+    void readImages(cv::Mat* images, int nimages, const string& filename, int flags);
     cv::FeatureDetector* d;
     cv::DescriptorExtractor* e;
     cv::DescriptorMatcher* m;
+    JsonImages ji; // FOR TEST
+    cv::Mat* queryMat; // FOR TEST
 
 private:
     JsonFeatures jf;
-    JsonImages ji;
     FysFeatureDetector* fysDetector;
     FysDescriptorExtractor* fysExtractor;
     FysDescriptorMatcher* fysMatcher;
