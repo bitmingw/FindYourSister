@@ -191,6 +191,12 @@ FysAlgorithms::detect(cv::Mat* images, vector<KeyPoint> keys, unsigned int idx)
     d->detect(images[idx], keys);
 }
 
+void
+FysAlgorithms::compute(cv::Mat* images, vector<KeyPoint> keys,
+        cv::Mat* descriptions, unsigned int idx)
+{
+    e->compute(images[idx], keys, descriptions[idx]);
+}
 
 } // namespace fys
 

@@ -80,6 +80,8 @@ public:
     vector<vector<cv::DMatch> > matches; // MOVE TO PUBLIC FOR TEST
 
     void detect(cv::Mat* images, vector<KeyPoint> keys, unsigned int idx);
+    void compute(cv::Mat* images, vector<KeyPoint> keys,
+            cv::Mat* descriptions, unsigned int idx);
 
 private:
     FysFeatureDetector* fysDetector;
