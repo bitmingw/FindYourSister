@@ -57,7 +57,7 @@ public:
     FysAlgorithms(string featureJsonFile, string imageJsonFile);
     ~FysAlgorithms();
     vector<string> getFilenames(int groupType);
-    void readImage(cv::Mat* image, unsigned int idx, const string& filename, int flags);
+    void readImage(cv::Mat* images, unsigned int idx, const string& filename, int flags);
     void readImages(cv::Mat* images, const vector<string>& filenames, int flags);
     cv::Mat getImage(const string& type, unsigned int idx);
 
@@ -79,10 +79,13 @@ public:
     vector<vector<cv::KeyPoint> > reducedKeys; // MOVE TO PUBLIC FOR TEST
     vector<vector<cv::DMatch> > matches; // MOVE TO PUBLIC FOR TEST
 
+    void detect(cv::Mat* images, vector<KeyPoint> keys, unsigned int idx);
+
 private:
     FysFeatureDetector* fysDetector;
     FysDescriptorExtractor* fysExtractor;
     FysDescriptorMatcher* fysMatcher;
+    ImageSample numImages;
 };
 
 } // namespace fys

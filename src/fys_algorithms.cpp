@@ -130,25 +130,27 @@ FysAlgorithms::FysAlgorithms(string featureJsonFile, string imageJsonFile)
     m = fysMatcher->getMatcher();
     queryMats = new cv::Mat[MAT_ARRAY_SIZE]; 
     testMats = new cv::Mat[MAT_ARRAY_SIZE];
+    numImages = this->ji.getNumImages(this->ji.doc);
 }
+
+FysAlgorithms::~FysAlgorithms() {}
 
 vector<string>
 FysAlgorithms::getFilenames(int groupType)
 {
     vector<string> names;
-    ImageSample summary = this->ji.getNumImages(this->ji.doc);
     if (groupType == TRAIN_TYPE) {
-        for (int i = 0; i < summary.train; ++i) {
+        for (int i = 0; i < this->numImages.train; ++i) {
             names.push_back(this->ji.getFullName(this->ji.doc, groupType, i));
         }
     }
     else if (groupType == VALIDATE_TYPE) {
-        for (int i = 0; i < summary.validate; ++i) {
+        for (int i = 0; i < this->numImages.validate; ++i) {
             names.push_back(this->ji.getFullName(this->ji.doc, groupType, i));
         }
     }
     else if (groupType == TEST_TYPE) {
-        for (int i = 0; i < summary.test; ++i) {
+        for (int i = 0; i < this->numImages.test; ++i) {
             names.push_back(this->ji.getFullName(this->ji.doc, groupType, i));
         }
     }
@@ -156,9 +158,9 @@ FysAlgorithms::getFilenames(int groupType)
 }
 
 void
-FysAlgorithms::readImage(cv::Mat* image, unsigned int idx, const string& filename, int flags)
+FysAlgorithms::readImage(cv::Mat* images, unsigned int idx, const string& filename, int flags)
 {
-    image[idx] = imread(filename, flags); 
+    images[idx] = imread(filename, flags); 
 }
 
 void
@@ -183,7 +185,12 @@ FysAlgorithms::getImage(const string& type, unsigned int idx)
     return cv::Mat();
 }
 
-FysAlgorithms::~FysAlgorithms() {}
+void
+FysAlgorithms::detect(cv::Mat* images, vector<KeyPoint> keys, unsigned int idx)
+{
+    d->detect(images[idx], keys);
+}
+
 
 } // namespace fys
 
