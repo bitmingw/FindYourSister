@@ -74,6 +74,11 @@ public:
     cv::Mat* queryDescriptions; // MOVE TO PUBLIC FOR TEST
     cv::Mat* testDescriptions; // MOVE TO PUBLIC FOR TEST 
 
+    vector<vector<cv::KeyPoint> > queryKeys; // MOVE TO PUBLIC FOR TEST
+    vector<vector<cv::KeyPoint> > testKeys; // MOVE TO PUBLIC FOR TEST
+    vector<vector<cv::KeyPoint> > reducedKeys; // MOVE TO PUBLIC FOR TEST
+    vector<vector<cv::DMatch> > matches; // MOVE TO PUBLIC FOR TEST
+
 private:
     FysFeatureDetector* fysDetector;
     FysDescriptorExtractor* fysExtractor;

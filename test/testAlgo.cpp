@@ -18,10 +18,10 @@ void testReadImageWrapper(string featuresFile, string imagesFile)
 
     FysAlgorithms app(featuresFile, imagesFile);
     std::cout << "Construction of algorithms class: complete!" << std::endl;
-    app.readImage(app.queryMats, 0, app.ji.getFullName(app.ji.doc, TRAIN_TYPE, 0), 0);
+    app.readImages(app.queryMats, app.getFilenames(TRAIN_TYPE), 0);
 
     namedWindow("readingTest");
-    imshow("readingTest", app.getImage("query", 0));
+    imshow("readingTest", app.getImage("query", 4));
     waitKey(5000);
 
     std::cout << "==== Test End: Read Image Wrapper ====" << std::endl;
