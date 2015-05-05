@@ -1,3 +1,6 @@
+# Autosave
+*.*~
+
 # Directories
 bin/
 build/*
@@ -10,10 +13,6 @@ doc/_build/*
 *.tiff
 
 # C/C++
-*.c~
-*.cpp~
-*.h~
-*.hpp~
 *.swp
 *.o
 *.obj
@@ -26,7 +25,6 @@ doc/_build/*
 
 # Python
 *.py[cod]
-*.py~
 
 # exclusive
 !sloth/sloth/gui/icons/*
