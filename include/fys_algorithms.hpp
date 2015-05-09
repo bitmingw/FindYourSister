@@ -84,7 +84,7 @@ public:
     void compute(cv::Mat* images, vector<KeyPoint> keys,
             cv::Mat* descriptions, unsigned int idx);
     void match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
-            vector<DMatch> mapping, unsigned int idx);
+            vector<DMatch> mapping, unsigned int queryIdx, unsigned int testIdx);
     void draw(cv::Mat* querys, vector<KeyPoint> queryKeys, unsigned int queryIdx,
             cv::Mat* tests, vector<KeyPoint> testKeys, unsigned int testIdx,
             vector<DMatch> mapping, cv::Mat* outputs, unsigned int outputIdx);

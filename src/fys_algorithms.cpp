@@ -201,9 +201,9 @@ FysAlgorithms::compute(cv::Mat* images, vector<KeyPoint> keys,
 
 void
 FysAlgorithms::match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
-        vector<DMatch> mapping, unsigned int idx)
+        vector<DMatch> mapping, unsigned int queryIdx, unsigned int testIdx)
 {
-    m->match(queryDescriptions[idx], testDescriptions[idx], mapping);
+    m->match(queryDescriptions[queryIdx], testDescriptions[testIdx], mapping);
 }
 
 void
