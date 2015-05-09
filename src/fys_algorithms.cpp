@@ -295,7 +295,26 @@ FysAlgorithms::runTest()
 void
 FysAlgorithms::runAlgorithm(int runType)
 {
+    int numTestImages = 0;
+    if (runType == VALIDATE_TYPE) {
+        numTestImages = this->numImages.validate;
+    }
+    else if (runType == TEST_TYPE) {
+        numTestImages = this->numImages.test;
+    }
 
+    int i = 0;
+    int j = 0;
+    vector<DMatch> mapping;
+    while (i < numTestImages) {
+        j = 0;
+        while (j < this->numImages.train) {
+            this->match(queryDescriptions, testDescriptions, mapping, j, i);
+            this->matches.push_back(mapping);
+            ++j;
+        }
+        ++i;
+    }
 }
 
 } // namespace fys
