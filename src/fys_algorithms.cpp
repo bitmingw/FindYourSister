@@ -199,7 +199,7 @@ FysAlgorithms::detect(cv::Mat* images, vector<KeyPoint>& keys, unsigned int idx)
 }
 
 void
-FysAlgorithms::compute(cv::Mat* images, vector<KeyPoint> keys,
+FysAlgorithms::compute(cv::Mat* images, vector<KeyPoint>& keys,
         cv::Mat* descriptions, unsigned int idx)
 {
     e->compute(images[idx], keys, descriptions[idx]);
@@ -207,7 +207,7 @@ FysAlgorithms::compute(cv::Mat* images, vector<KeyPoint> keys,
 
 void
 FysAlgorithms::match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
-        vector<DMatch> mapping, unsigned int queryIdx, unsigned int testIdx)
+        vector<DMatch>& mapping, unsigned int queryIdx, unsigned int testIdx)
 {
     m->match(queryDescriptions[queryIdx], testDescriptions[testIdx], mapping);
 }

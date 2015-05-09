@@ -35,7 +35,7 @@ void testAlgoMatch(string featuresFile, string imagesFile)
     app.runTest();
 
     namedWindow("matching");
-    imshow("matching", app.visualizeMatch(0, 2));
+    imshow("matching", app.visualizeMatch(0, 4));
     waitKey(5000);
 }
 

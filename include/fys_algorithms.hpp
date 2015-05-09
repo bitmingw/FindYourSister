@@ -81,10 +81,10 @@ public:
 
     // -------- OpenCV Features2D Interface --------
     void detect(cv::Mat* images, vector<KeyPoint>& keys, unsigned int idx);
-    void compute(cv::Mat* images, vector<KeyPoint> keys,
+    void compute(cv::Mat* images, vector<KeyPoint>& keys,
             cv::Mat* descriptions, unsigned int idx);
     void match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
-            vector<DMatch> mapping, unsigned int queryIdx, unsigned int testIdx);
+            vector<DMatch>& mapping, unsigned int queryIdx, unsigned int testIdx);
     void draw(cv::Mat* querys, vector<KeyPoint> queryKeys, unsigned int queryIdx,
             cv::Mat* tests, vector<KeyPoint> testKeys, unsigned int testIdx,
             vector<DMatch> mapping, cv::Mat* outputs, unsigned int outputIdx);
