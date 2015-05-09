@@ -18,6 +18,7 @@ void testSIFT(string featuresFile, string imagesFile);
 void testSIFTdetector(string featuresFile);
 void testAlgoPara(string featuresFile);
 void testReadImageWrapper(string featuresFile, string imagesFile);
+void testAlgoMatch(string featuresFile, string imagesFile);
 
 } // namespace fys
 

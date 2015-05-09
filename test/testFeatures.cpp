@@ -22,8 +22,11 @@ void testSIFTdetector(string featuresFile)
  
     JsonFeatures jf(featuresFile);
     FysFeatureDetector fd(jf.getDetectorType(jf.doc), jf.getParameters("detector"));
+    //FysFeatureDetector fd(jf.getDetectorType(jf.doc));
     FeatureDetector* d = fd.getDetector();
+    // FeatureDetector* d = new SIFT();
     d->detect(query, queryKeys);
+    std::cout << queryKeys.size() << std::endl;
 
     std::cout << "==== Test End: SIFT detector ====" << std::endl;
 }

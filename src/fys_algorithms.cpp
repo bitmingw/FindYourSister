@@ -27,8 +27,8 @@ FysFeatureDetector::FysFeatureDetector(string name, vector<string> parameters)
         int para1 = atoi(parameters[0].c_str());
         int para2 = atoi(parameters[1].c_str());
         double para3 = atof(parameters[2].c_str());
-        double para4 = atof(parameters[2].c_str());
-        double para5 = atof(parameters[2].c_str());
+        double para4 = atof(parameters[3].c_str());
+        double para5 = atof(parameters[4].c_str());
         this->detector = new SIFT(para1, para2, para3, para4, para5);
     }
     else {
@@ -67,8 +67,8 @@ FysDescriptorExtractor::FysDescriptorExtractor(string name, vector<string> param
         int para1 = atoi(parameters[0].c_str());
         int para2 = atoi(parameters[1].c_str());
         double para3 = atof(parameters[2].c_str());
-        double para4 = atof(parameters[2].c_str());
-        double para5 = atof(parameters[2].c_str());
+        double para4 = atof(parameters[3].c_str());
+        double para5 = atof(parameters[4].c_str());
         this->extractor = new SIFT(para1, para2, para3, para4, para5);
     }
     else {
@@ -134,6 +134,8 @@ FysAlgorithms::FysAlgorithms(string featureJsonFile, string imageJsonFile)
     queryDescriptions = new cv::Mat[MAT_ARRAY_SIZE];
     testDescriptions = new cv::Mat[MAT_ARRAY_SIZE];
     numImages = this->ji.getNumImages(this->ji.doc);
+    querySize = numImages.train;
+    testSize = 0;
     savingSlot = 0;
 }
 
@@ -191,7 +193,7 @@ FysAlgorithms::getImage(const string& type, unsigned int idx)
 
 // -------- OpenCV Features2D Interface --------
 void
-FysAlgorithms::detect(cv::Mat* images, vector<KeyPoint> keys, unsigned int idx)
+FysAlgorithms::detect(cv::Mat* images, vector<KeyPoint>& keys, unsigned int idx)
 {
     d->detect(images[idx], keys);
 }
@@ -231,7 +233,7 @@ FysAlgorithms::loadInfo(int groupType)
         
         this->queryKeys = vector<vector<cv::KeyPoint> >(); // clear
         int i = 0;
-        while (i < this->numImages.train) {
+        while (i < querySize) {
             this->detect(queryMats, points, i);
             // Reduce the keypoints here
             this->queryKeys.push_back(points); 
@@ -239,7 +241,7 @@ FysAlgorithms::loadInfo(int groupType)
         }
 
         i = 0;
-        while (i < this->numImages.train) {
+        while (i < querySize) {
             this->compute(queryMats, queryKeys[i], queryDescriptions, i);
             ++i;
         }
@@ -251,23 +253,22 @@ FysAlgorithms::loadInfo(int groupType)
 
         this->testKeys = vector<vector<cv::KeyPoint> >(); // clear
         int i = 0;
-        int numTestImages = 0;
         if (groupType == VALIDATE_TYPE) {
-            numTestImages = this->numImages.validate;
+            this->testSize = this->numImages.validate;
         }
         else if (groupType == TEST_TYPE) {
-            numTestImages = this->numImages.test;
+            this->testSize = this->numImages.test;
         }
 
-        while (i < numTestImages) {
+        while (i < testSize) {
             this->detect(testMats, points, i);
             // Reduce the keypoinst here
-            this->queryKeys.push_back(points);
+            this->testKeys.push_back(points);
             ++i;
         }
 
         i = 0;
-        while (i < numTestImages) {
+        while (i < testSize) {
             this->compute(testMats, testKeys[i], testDescriptions, i);
             ++i;
         }
@@ -284,7 +285,9 @@ void
 FysAlgorithms::runValidate()
 {
     this->loadInfo(TRAIN_TYPE);
+    std::cout << "Load training set successfully!" << std::endl;
     this->loadInfo(VALIDATE_TYPE);
+    std::cout << "Load validation set successfully!" << std::endl;
     this->runAlgorithm(VALIDATE_TYPE);
 }
 
@@ -292,27 +295,21 @@ void
 FysAlgorithms::runTest()
 {
     this->loadInfo(TRAIN_TYPE);
+    std::cout << "Load training set successfully!" << std::endl;
     this->loadInfo(TEST_TYPE);
+    std::cout << "Load testing set successfully!" << std::endl;
     this->runAlgorithm(TEST_TYPE);
 }
 
 void
 FysAlgorithms::runAlgorithm(int runType)
 {
-    int numTestImages = 0;
-    if (runType == VALIDATE_TYPE) {
-        numTestImages = this->numImages.validate;
-    }
-    else if (runType == TEST_TYPE) {
-        numTestImages = this->numImages.test;
-    }
-
     int i = 0;
     int j = 0;
     vector<DMatch> mapping;
-    while (i < numTestImages) {
+    while (i < testSize) {
         j = 0;
-        while (j < this->numImages.train) {
+        while (j < querySize) {
             this->match(queryDescriptions, testDescriptions, mapping, j, i);
             this->matches.push_back(mapping);
             ++j;
@@ -327,7 +324,7 @@ FysAlgorithms::visualizeMatch(unsigned int queryIdx, unsigned int testIdx)
 {
     this->draw(queryMats, queryKeys[queryIdx], queryIdx,
             testMats, testKeys[testIdx], testIdx, // reducedKeys maybe used later
-            matches[testIdx * numImages.test + queryIdx], outputMats, savingSlot); // numImages
+            matches[testIdx * querySize + queryIdx], outputMats, savingSlot); 
     return outputMats[savingSlot++];    
 }
 

@@ -80,7 +80,7 @@ public:
     vector<vector<cv::DMatch> > matches; // MOVE TO PUBLIC FOR TEST
 
     // -------- OpenCV Features2D Interface --------
-    void detect(cv::Mat* images, vector<KeyPoint> keys, unsigned int idx);
+    void detect(cv::Mat* images, vector<KeyPoint>& keys, unsigned int idx);
     void compute(cv::Mat* images, vector<KeyPoint> keys,
             cv::Mat* descriptions, unsigned int idx);
     void match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
@@ -104,6 +104,8 @@ private:
     FysDescriptorExtractor* fysExtractor;
     FysDescriptorMatcher* fysMatcher;
     ImageSample numImages;
+    int querySize;
+    int testSize; // update in loadInfo()
     unsigned int savingSlot;
 };
 

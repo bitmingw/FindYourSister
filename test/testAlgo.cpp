@@ -27,5 +27,17 @@ void testReadImageWrapper(string featuresFile, string imagesFile)
     std::cout << "==== Test End: Read Image Wrapper ====" << std::endl;
 }
 
+void testAlgoMatch(string featuresFile, string imagesFile)
+{
+    std::cout << "==== Test Start: Match Group of Images ====" << std::endl;
+
+    FysAlgorithms app(featuresFile, imagesFile);
+    app.runTest();
+
+    namedWindow("matching");
+    imshow("matching", app.visualizeMatch(0, 2));
+    waitKey(5000);
+}
+
 } // namespace fys
 
