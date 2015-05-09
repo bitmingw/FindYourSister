@@ -91,9 +91,9 @@ public:
 
     // -------- RUN ANALYSIS --------
     void loadInfo(int groupType);
-    void loadAll();
-    void runValidate();
-    void runTest();
+    void runValidate(); // wrapper of runAlgorithm
+    void runTest(); // wrapper of runAlgorithm
+    void runAlgorithm(int runType);
 
 private:
     FysFeatureDetector* fysDetector;

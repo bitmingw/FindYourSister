@@ -277,9 +277,25 @@ FysAlgorithms::loadInfo(int groupType)
 }
 
 void
+FysAlgorithms::runValidate()
+{
+    this->loadInfo(TRAIN_TYPE);
+    this->loadInfo(VALIDATE_TYPE);
+    this->runAlgorithm(VALIDATE_TYPE);
+}
+
+void
 FysAlgorithms::runTest()
 {
-    
+    this->loadInfo(TRAIN_TYPE);
+    this->loadInfo(TEST_TYPE);
+    this->runAlgorithm(TEST_TYPE);
+}
+
+void
+FysAlgorithms::runAlgorithm(int runType)
+{
+
 }
 
 } // namespace fys
