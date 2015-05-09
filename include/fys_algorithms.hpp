@@ -61,23 +61,6 @@ public:
     void readImages(cv::Mat* images, const vector<string>& filenames, int flags);
     cv::Mat getImage(const string& type, unsigned int idx);
 
-    cv::FeatureDetector* d;
-    cv::DescriptorExtractor* e;
-    cv::DescriptorMatcher* m;
-
-    JsonFeatures jf; // MOVE TO PUBLIC FOR TEST
-    JsonImages ji; // MOVE TO PUBLIC FOR TEST
-
-    cv::Mat* queryMats; // MOVE TO PUBLIC FOR TEST
-    cv::Mat* testMats; // MOVE TO PUBLIC FOR TEST
-    cv::Mat* outputMats; // MOVE TO PUBLIC FOR TEST
-    cv::Mat* queryDescriptions; // MOVE TO PUBLIC FOR TEST
-    cv::Mat* testDescriptions; // MOVE TO PUBLIC FOR TEST 
-
-    vector<vector<cv::KeyPoint> > queryKeys; // MOVE TO PUBLIC FOR TEST
-    vector<vector<cv::KeyPoint> > testKeys; // MOVE TO PUBLIC FOR TEST
-    vector<vector<cv::KeyPoint> > reducedKeys; // MOVE TO PUBLIC FOR TEST, TODO
-    vector<vector<cv::DMatch> > matches; // MOVE TO PUBLIC FOR TEST
 
     // -------- OpenCV Features2D Interface --------
     void detect(cv::Mat* images, vector<KeyPoint>& keys, unsigned int idx);
@@ -100,9 +83,28 @@ public:
     cv::Mat visualizeMatch(unsigned int queryIdx, unsigned int testIdx); // with matching lines
 
 private:
+    JsonFeatures jf; 
+    JsonImages ji; 
+
     FysFeatureDetector* fysDetector;
     FysDescriptorExtractor* fysExtractor;
     FysDescriptorMatcher* fysMatcher;
+
+    cv::FeatureDetector* d;
+    cv::DescriptorExtractor* e;
+    cv::DescriptorMatcher* m;
+
+    cv::Mat* queryMats; 
+    cv::Mat* testMats; 
+    cv::Mat* outputMats; 
+    cv::Mat* queryDescriptions; 
+    cv::Mat* testDescriptions; 
+
+    vector<vector<cv::KeyPoint> > queryKeys; 
+    vector<vector<cv::KeyPoint> > testKeys; 
+    vector<vector<cv::KeyPoint> > reducedKeys; // TODO 
+    vector<vector<cv::DMatch> > matches; 
+
     ImageSample numImages;
     int querySize;
     int testSize; // update in loadInfo()

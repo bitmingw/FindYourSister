@@ -12,6 +12,7 @@ using namespace std;
 
 namespace fys {
 
+/*
 void testReadImageWrapper(string featuresFile, string imagesFile)
 {
     std::cout << "==== Test Start: Read Image Wrapper ====" << std::endl;
@@ -26,6 +27,7 @@ void testReadImageWrapper(string featuresFile, string imagesFile)
 
     std::cout << "==== Test End: Read Image Wrapper ====" << std::endl;
 }
+*/
 
 void testAlgoMatch(string featuresFile, string imagesFile)
 {
