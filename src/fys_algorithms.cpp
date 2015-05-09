@@ -130,7 +130,11 @@ FysAlgorithms::FysAlgorithms(string featureJsonFile, string imageJsonFile)
     m = fysMatcher->getMatcher();
     queryMats = new cv::Mat[MAT_ARRAY_SIZE]; 
     testMats = new cv::Mat[MAT_ARRAY_SIZE];
+    outputMats = new cv::Mat[MAT_ARRAY_SIZE];
+    queryDescriptions = new cv::Mat[MAT_ARRAY_SIZE];
+    testDescriptions = new cv::Mat[MAT_ARRAY_SIZE];
     numImages = this->ji.getNumImages(this->ji.doc);
+    savingSlot = 0;
 }
 
 FysAlgorithms::~FysAlgorithms() {}
@@ -315,6 +319,16 @@ FysAlgorithms::runAlgorithm(int runType)
         }
         ++i;
     }
+}
+
+// -------- VISUALIZATION --------
+cv::Mat
+FysAlgorithms::visualizeMatch(unsigned int queryIdx, unsigned int testIdx)
+{
+    this->draw(queryMats, queryKeys[queryIdx], queryIdx,
+            testMats, testKeys[testIdx], testIdx, // reducedKeys maybe used later
+            matches[testIdx * numImages.test + queryIdx], outputMats, savingSlot); // numImages
+    return outputMats[savingSlot++];    
 }
 
 } // namespace fys

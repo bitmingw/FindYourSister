@@ -95,11 +95,16 @@ public:
     void runTest(); // wrapper of runAlgorithm
     void runAlgorithm(int runType);
 
+    // -------- VISUALIZATION --------
+    cv::Mat visualize(const string& type, unsigned int idx); // with keypoints TODO
+    cv::Mat visualizeMatch(unsigned int queryIdx, unsigned int testIdx); // with matching lines
+
 private:
     FysFeatureDetector* fysDetector;
     FysDescriptorExtractor* fysExtractor;
     FysDescriptorMatcher* fysMatcher;
     ImageSample numImages;
+    unsigned int savingSlot;
 };
 
 } // namespace fys
