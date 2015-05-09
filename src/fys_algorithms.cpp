@@ -185,6 +185,7 @@ FysAlgorithms::getImage(const string& type, unsigned int idx)
     return cv::Mat();
 }
 
+// -------- OpenCV Features2D Interface --------
 void
 FysAlgorithms::detect(cv::Mat* images, vector<KeyPoint> keys, unsigned int idx)
 {
@@ -212,6 +213,73 @@ FysAlgorithms::draw(cv::Mat* querys, vector<KeyPoint> queryKeys, unsigned int qu
 {
     drawMatches(querys[queryIdx], queryKeys, tests[testIdx], testKeys,
             mapping, outputs[outputIdx]);
+}
+
+// -------- RUN ANALYSIS --------
+void
+FysAlgorithms::loadInfo(int groupType)
+{
+    vector<string> filenames;
+    vector<cv::KeyPoint> points;
+    if (groupType == TRAIN_TYPE) {
+        filenames = this->getFilenames(groupType);
+        readImages(queryMats, filenames, 1); // Load 3-channel color images
+        
+        this->queryKeys = vector<vector<cv::KeyPoint> >(); // clear
+        int i = 0;
+        while (i < this->numImages.train) {
+            this->detect(queryMats, points, i);
+            // Reduce the keypoints here
+            this->queryKeys.push_back(points); 
+            ++i;
+        }
+
+        i = 0;
+        while (i < this->numImages.train) {
+            this->compute(queryMats, queryKeys[i], queryDescriptions, i);
+            ++i;
+        }
+    }
+
+    else if (groupType == VALIDATE_TYPE || groupType == TEST_TYPE) {
+        filenames = this->getFilenames(groupType);
+        readImages(testMats, filenames, 1); // Load 3-channel color images
+
+        this->testKeys = vector<vector<cv::KeyPoint> >(); // clear
+        int i = 0;
+        int numTestImages = 0;
+        if (groupType == VALIDATE_TYPE) {
+            numTestImages = this->numImages.validate;
+        }
+        else if (groupType == TEST_TYPE) {
+            numTestImages = this->numImages.test;
+        }
+
+        while (i < numTestImages) {
+            this->detect(testMats, points, i);
+            // Reduce the keypoinst here
+            this->queryKeys.push_back(points);
+            ++i;
+        }
+
+        i = 0;
+        while (i < numTestImages) {
+            this->compute(testMats, testKeys[i], testDescriptions, i);
+            ++i;
+        }
+    }
+
+    else {
+        std::cerr << "Invalid group type of images!" << std::endl;
+    }
+
+    return;
+}
+
+void
+FysAlgorithms::runTest()
+{
+    
 }
 
 } // namespace fys

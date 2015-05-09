@@ -79,6 +79,7 @@ public:
     vector<vector<cv::KeyPoint> > reducedKeys; // MOVE TO PUBLIC FOR TEST, TODO
     vector<vector<cv::DMatch> > matches; // MOVE TO PUBLIC FOR TEST
 
+    // -------- OpenCV Features2D Interface --------
     void detect(cv::Mat* images, vector<KeyPoint> keys, unsigned int idx);
     void compute(cv::Mat* images, vector<KeyPoint> keys,
             cv::Mat* descriptions, unsigned int idx);
@@ -88,6 +89,9 @@ public:
             cv::Mat* tests, vector<KeyPoint> testKeys, unsigned int testIdx,
             vector<DMatch> mapping, cv::Mat* outputs, unsigned int outputIdx);
 
+    // -------- RUN ANALYSIS --------
+    void loadInfo(int groupType);
+    void loadAll();
     void runValidate();
     void runTest();
 
