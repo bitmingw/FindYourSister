@@ -40,6 +40,11 @@ public:
     bool getSURFextended(const rapidjson::Value& doc);
     bool getSURFupright(const rapidjson::Value& doc);
 
+    // -------- BRISK CONFIG --------
+    int getBRISKthresh(const rapidjson::Value& doc);
+    int getBRISKoctaves(const rapidjson::Value& doc);
+    double getBRISKpatternScale(const rapidjson::Value& doc);
+
     // -------- FREAK CONFIG --------
     bool getFREAKorientationNormalized(const rapidjson::Value& doc);
     bool getFREAKscaleNormalized(const rapidjson::Value& doc);
@@ -56,6 +61,7 @@ public:
     vector<string> getParameters(string usage);
     vector<string> getSIFTparameters();
     vector<string> getSURFparameters();
+    vector<string> getBRISKparameters();
     vector<string> getFREAKparameters();
     vector<string> getBFMatcherParameters();
 
@@ -69,6 +75,7 @@ private:
     vector<string> matcherTypePath;
     vector<string> SIFTConfigPath;
     vector<string> SURFConfigPath;
+    vector<string> BRISKConfigPath;
     vector<string> FREAKConfigPath;
     vector<string> BFMatcherConfigPath;
 };

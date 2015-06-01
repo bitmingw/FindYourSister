@@ -20,6 +20,7 @@ JsonFeatures::JsonFeatures(string filename)
     matcherTypePath.push_back("matcher");
     SIFTConfigPath.push_back("siftConfig");
     SURFConfigPath.push_back("surfConfig");
+    BRISKConfigPath.push_back("briskConfig");
     FREAKConfigPath.push_back("freakConfig");
     BFMatcherConfigPath.push_back("BFMatcherConfig");
 
@@ -153,6 +154,32 @@ JsonFeatures::getSURFupright(const rapidjson::Value& doc)
     return getBoolVal(doc, path);
 }
 
+// -------- BRISK CONFIG --------
+
+int
+JsonFeatures::getBRISKthresh(const rapidjson::Value& doc)
+{
+    vector<string> path = this->BRISKConfigPath;
+    path.push_back("thresh");
+    return getIntVal(doc, path);
+}
+
+int
+JsonFeatures::getBRISKoctaves(const rapidjson::Value& doc)
+{
+    vector<string> path = this->BRISKConfigPath;
+    path.push_back("octaves");
+    return getIntVal(doc, path);
+}
+
+double
+JsonFeatures::getBRISKpatternScale(const rapidjson::Value& doc)
+{
+    vector<string> path = this->BRISKConfigPath;
+    path.push_back("patternScale");
+    return getDoubleVal(doc, path);
+}
+
 // -------- FREAK CONFIG --------
 
 bool
@@ -238,8 +265,8 @@ JsonFeatures::getParameters(string usage)
         else if (this->detectorType == "SURF") {
             return this->getSURFparameters();
         }
-        else if (this->detectorType == "FREAK") {
-            return this->getFREAKparameters();
+        else if (this->detectorType == "BRISK") {
+            return this->getBRISKparameters();
         }
     }
     else if (usage == "extractor") {
@@ -248,6 +275,9 @@ JsonFeatures::getParameters(string usage)
         } 
         else if (this->extractorType == "SURF") {
             return this->getSURFparameters();
+        }
+        else if (this->extractorType == "BRISK") {
+            return this->getBRISKparameters();
         }
         else if (this->extractorType == "FREAK") {
             return this->getFREAKparameters();
@@ -284,6 +314,16 @@ JsonFeatures::getSURFparameters()
     parameters.push_back(itoa(this->getSURFnOctaveLayers(this->doc)));
     parameters.push_back(btoa(this->getSURFextended(this->doc)));
     parameters.push_back(btoa(this->getSURFupright(this->doc)));
+    return parameters;
+}
+
+vector<string>
+JsonFeatures::getBRISKparameters()
+{
+    vector<string> parameters;
+    parameters.push_back(itoa(this->getBRISKthresh(this->doc)));
+    parameters.push_back(itoa(this->getBRISKoctaves(this->doc)));
+    parameters.push_back(ftoa(this->getBRISKpatternScale(this->doc)));
     return parameters;
 }
 

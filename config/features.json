@@ -17,6 +17,11 @@
         "extended": true,
         "upright": false
     },
+    "briskConfig": {
+        "thresh": 30,
+        "octaves": 3,
+        "patternScale": 1.0
+    },
     "freakConfig": {
         "orientationNormalized": true,
         "scaleNormalized": true,
