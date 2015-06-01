@@ -235,7 +235,9 @@ FysAlgorithms::loadInfo(int groupType)
         int i = 0;
         while (i < querySize) {
             this->detect(queryMats, points, i);
-            // Reduce the keypoints here
+            // Remove the points outside the region
+            this->queryObjects.push_back(ji.getObjectList(ji.doc, groupType, i));
+            // points = pointsInRegion(); // Need the union of points, TODO
             this->queryKeys.push_back(points); 
             ++i;
         }
@@ -262,7 +264,6 @@ FysAlgorithms::loadInfo(int groupType)
 
         while (i < testSize) {
             this->detect(testMats, points, i);
-            // Reduce the keypoinst here
             this->testKeys.push_back(points);
             ++i;
         }
@@ -279,6 +280,19 @@ FysAlgorithms::loadInfo(int groupType)
     }
 
     return;
+}
+
+void
+FysAlgorithms::runEach(int testIdx)
+{
+    vector<DMatch> mapping;
+    int queryIdx = 0;
+    while (queryIdx < querySize) {
+        this->match(queryDescriptions, testDescriptions, mapping, queryIdx, testIdx);
+        // Reduce the keys here
+        this->matches.push_back(mapping);
+        ++queryIdx;
+    }
 }
 
 void
@@ -305,15 +319,8 @@ void
 FysAlgorithms::runAlgorithm(int runType)
 {
     int i = 0;
-    int j = 0;
-    vector<DMatch> mapping;
     while (i < testSize) {
-        j = 0;
-        while (j < querySize) {
-            this->match(queryDescriptions, testDescriptions, mapping, j, i);
-            this->matches.push_back(mapping);
-            ++j;
-        }
+        this->runEach(i);
         ++i;
     }
 }

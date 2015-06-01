@@ -74,6 +74,7 @@ public:
 
     // -------- RUN ANALYSIS --------
     void loadInfo(int groupType);
+    void runEach(int testIdx);
     void runValidate(); // wrapper of runAlgorithm
     void runTest(); // wrapper of runAlgorithm
     void runAlgorithm(int runType);
@@ -100,6 +101,7 @@ private:
     cv::Mat* queryDescriptions; 
     cv::Mat* testDescriptions; 
 
+    vector<vector<ImageObject> > queryObjects;
     vector<vector<cv::KeyPoint> > queryKeys; 
     vector<vector<cv::KeyPoint> > testKeys; 
     vector<vector<cv::KeyPoint> > reducedKeys; // TODO 
