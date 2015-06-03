@@ -27,7 +27,7 @@ vector<KeyPoint> pointsInObject(vector<KeyPoint> allPoints, ImageObject& object)
 vector<KeyPoint> matchedPoints(vector<KeyPoint> allPoints, vector<DMatch> matches, int type);
 ImageRegion locateDenseRegion(vector<KeyPoint> points, double featherRate);
 
-} // namespce fys
+} // namespace fys
 
 #endif // _H_UTIL
 
