@@ -16,6 +16,9 @@ FysFeatureDetector::FysFeatureDetector(string name)
     else if (name == "SURF") {
         this->detector = new SURF();
     }
+    else if (name == "BRISK") {
+        this->detector = new BRISK();
+    }
     else {
         this->detector = NULL;
     }
@@ -30,6 +33,20 @@ FysFeatureDetector::FysFeatureDetector(string name, vector<string> parameters)
         double para4 = atof(parameters[3].c_str());
         double para5 = atof(parameters[4].c_str());
         this->detector = new SIFT(para1, para2, para3, para4, para5);
+    }
+    else if (name == "SURF") {
+        double para1 = atof(parameters[0].c_str());
+        int para2 = atoi(parameters[1].c_str());
+        int para3 = atoi(parameters[2].c_str());
+        bool para4 = atob(parameters[3].c_str());
+        bool para5 = atob(parameters[4].c_str());
+        this->detector = new SURF(para1, para2, para3, para4, para5);
+    }
+    else if (name == "BRISK") {
+        int para1 = atoi(parameters[0].c_str());
+        int para2 = atoi(parameters[1].c_str());
+        double para3 = atof(parameters[2].c_str());
+        this->detector = new BRISK(para1, para2, para3);
     }
     else {
         this->detector = NULL;
@@ -53,6 +70,9 @@ FysDescriptorExtractor::FysDescriptorExtractor(string name)
     else if (name == "SURF") {
         this->extractor = new SURF();
     }
+    else if (name == "BRISK") {
+        this->extractor = new BRISK();
+    }
     else if (name == "FREAK") {
         this->extractor = new FREAK();
     }
@@ -70,6 +90,27 @@ FysDescriptorExtractor::FysDescriptorExtractor(string name, vector<string> param
         double para4 = atof(parameters[3].c_str());
         double para5 = atof(parameters[4].c_str());
         this->extractor = new SIFT(para1, para2, para3, para4, para5);
+    }
+    else if (name == "SURF") {
+        double para1 = atof(parameters[0].c_str());
+        int para2 = atoi(parameters[1].c_str());
+        int para3 = atoi(parameters[2].c_str());
+        bool para4 = atob(parameters[3].c_str());
+        bool para5 = atob(parameters[4].c_str());
+        this->extractor = new SURF(para1, para2, para3, para4, para5);
+    }
+    else if (name == "BRISK") {
+        int para1 = atoi(parameters[0].c_str());
+        int para2 = atoi(parameters[1].c_str());
+        double para3 = atof(parameters[2].c_str());
+        this->extractor = new BRISK(para1, para2, para3);
+    }
+    else if (name == "FREAK") {
+        bool para1 = atob(parameters[0].c_str());
+        bool para2 = atob(parameters[1].c_str());
+        double para3 = atof(parameters[2].c_str());
+        int para4 = atoi(parameters[3].c_str());
+        this->extractor = new FREAK(para1, para2, para3, para4);
     }
     else {
         this->extractor = NULL;
