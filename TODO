@@ -1,21 +1,7 @@
-Judgement.
-    Find out a proper way to judge if images are the same class or not.
-
 Tuning.
     change string to const string& to reduce the load.
     Implement destructor when new is used in the class.
     Change Mat[] to vector<Mat>
-
-Writing interface to call OpenCV functions.
-    Update more powerful testing.
-    Check the results of detected object region.
-
-Segment and label the images.
-    Use sloth to label them.
-    In case of need, store in a different location.
-    
-Paper work.
-    Structure and outline.
 
 Documents.
     After all the interfaces are complete.
