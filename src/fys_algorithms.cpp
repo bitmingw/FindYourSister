@@ -289,8 +289,8 @@ FysAlgorithms::runEach(int testIdx)
     int queryIdx = 0;
     while (queryIdx < querySize) {
         this->match(queryDescriptions, testDescriptions, mapping, queryIdx, testIdx);
-        // Reduce the keys here
         this->matches.push_back(mapping);
+        // Add your own algorithm here
         ++queryIdx;
     }
 }
