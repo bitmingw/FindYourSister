@@ -57,20 +57,21 @@ public:
     FysAlgorithms(string featureJsonFile, string imageJsonFile);
     ~FysAlgorithms();
     vector<string> getFilenames(int groupType);
-    void readImage(cv::Mat* images, unsigned int idx, const string& filename, int flags);
-    void readImages(cv::Mat* images, const vector<string>& filenames, int flags);
+    void readImage(vector<cv::Mat>& images, unsigned int idx, const string& filename, int flags);
+    void readImages(vector<cv::Mat>& images, int groupType,
+            const vector<string>& filenames, int flags);
     cv::Mat getImage(const string& type, unsigned int idx);
 
 
     // -------- OpenCV Features2D Interface --------
-    void detect(cv::Mat* images, vector<KeyPoint>& keys, unsigned int idx);
-    void compute(cv::Mat* images, vector<KeyPoint>& keys,
-            cv::Mat* descriptions, unsigned int idx);
-    void match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
+    void detect(vector<cv::Mat>& images, vector<KeyPoint>& keys, unsigned int idx);
+    void compute(vector<cv::Mat>& images, vector<KeyPoint>& keys,
+            vector<cv::Mat>& descriptions, unsigned int idx);
+    void match(vector<cv::Mat>& queryDescriptions, vector<cv::Mat>& testDescriptions,
             vector<DMatch>& mapping, unsigned int queryIdx, unsigned int testIdx);
-    void draw(cv::Mat* querys, vector<KeyPoint> queryKeys, unsigned int queryIdx,
-            cv::Mat* tests, vector<KeyPoint> testKeys, unsigned int testIdx,
-            vector<DMatch> mapping, cv::Mat* outputs, unsigned int outputIdx);
+    int draw(vector<cv::Mat>& querys, vector<KeyPoint>& queryKeys, unsigned int queryIdx,
+            vector<cv::Mat>& tests, vector<KeyPoint>& testKeys, unsigned int testIdx,
+            vector<DMatch>& mapping, vector<cv::Mat>& outputs);
 
     // -------- RUN ANALYSIS --------
     void loadInfo(int groupType);
@@ -95,11 +96,11 @@ private:
     cv::DescriptorExtractor* e;
     cv::DescriptorMatcher* m;
 
-    cv::Mat* queryMats; 
-    cv::Mat* testMats; 
-    cv::Mat* outputMats; 
-    cv::Mat* queryDescriptions; 
-    cv::Mat* testDescriptions; 
+    vector<cv::Mat> queryMats; 
+    vector<cv::Mat> testMats; 
+    vector<cv::Mat> outputMats; 
+    vector<cv::Mat> queryDescriptions; // the same size as queryMats 
+    vector<cv::Mat> testDescriptions; // the same size as testMats
 
     vector<vector<ImageObject> > queryObjects;
     vector<vector<cv::KeyPoint> > queryKeys; 
@@ -108,9 +109,8 @@ private:
     vector<vector<cv::DMatch> > matches; 
 
     ImageSample numImages;
-    int querySize;
-    int testSize; // update in loadInfo()
-    unsigned int savingSlot;
+    unsigned int querySize; // determine the size of image vector
+    unsigned int testSize; // update in loadInfo()
 };
 
 } // namespace fys

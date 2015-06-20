@@ -189,15 +189,9 @@ FysAlgorithms::FysAlgorithms(string featureJsonFile, string imageJsonFile)
         e = fysExtractor->getExtractor();
         m = fysMatcher->getMatcher();
     }
-    queryMats = new cv::Mat[MAT_ARRAY_SIZE]; 
-    testMats = new cv::Mat[MAT_ARRAY_SIZE];
-    outputMats = new cv::Mat[MAT_ARRAY_SIZE];
-    queryDescriptions = new cv::Mat[MAT_ARRAY_SIZE];
-    testDescriptions = new cv::Mat[MAT_ARRAY_SIZE];
     numImages = this->ji.getNumImages(this->ji.doc);
     querySize = numImages.train;
     testSize = 0;
-    savingSlot = 0;
 }
 
 FysAlgorithms::~FysAlgorithms()
@@ -239,61 +233,106 @@ FysAlgorithms::getFilenames(int groupType)
 }
 
 void
-FysAlgorithms::readImage(cv::Mat* images, unsigned int idx, const string& filename, int flags)
+FysAlgorithms::readImage(vector<cv::Mat>& images, unsigned int idx,
+        const string& filename, int flags)
 {
-    images[idx] = imread(filename, flags); 
+    if (idx < images.size()) {
+        images[idx] = imread(filename, flags); 
+    }
+    else {
+        std::cerr << "Read single image: given index is not available." << std::endl;
+    }
 }
 
 void
-FysAlgorithms::readImages(cv::Mat* images, const vector<string>& filenames, int flags)
+FysAlgorithms::readImages(vector<cv::Mat>& images, int groupType,
+        const vector<string>& filenames, int flags)
 {
-    for (unsigned int i = 0; i < filenames.size(); ++i) {
-        images[i] = imread(filenames[i], flags);
+    images = vector<cv::Mat>(); // clear the image vector
+    if (groupType == TRAIN_TYPE || groupType == VALIDATE_TYPE || groupType == TEST_TYPE) {
+        for (unsigned int i = 0; i < filenames.size(); ++i) {
+            images.push_back(imread(filenames[i], flags));
+        }
+        if (groupType == VALIDATE_TYPE || groupType == TEST_TYPE) {
+            this->testDescriptions = vector<cv::Mat>(filenames.size(), cv::Mat());
+        }
+        else {
+            this->queryDescriptions = vector<cv::Mat>(filenames.size(), cv::Mat());
+            if (this->querySize != filenames.size()) {
+                std::cerr << "Read batch images: warning, #images not consistent." << std::endl;
+            }
+        }
+    }
+    else {
+        std::cerr << "Read batch images: wrong group type." << std::endl;
     }
 }
 
 cv::Mat
 FysAlgorithms::getImage(const string& type, unsigned int idx)
 {
-    if (type == "query") {
+    if (type == "query" && idx < queryMats.size()) {
         return queryMats[idx];
     }
-    else if (type == "test") {
+    else if (type == "test" && idx < testMats.size()) {
         return testMats[idx];
     }
-
-    // Should not reach here
-    return cv::Mat();
+    else {
+        std::cerr << "Get image: wrong group or index out of range." << std::endl;
+        return cv::Mat(); // return empty image
+    }
 }
 
 // -------- OpenCV Features2D Interface --------
 void
-FysAlgorithms::detect(cv::Mat* images, vector<KeyPoint>& keys, unsigned int idx)
+FysAlgorithms::detect(vector<cv::Mat>& images, vector<KeyPoint>& keys, unsigned int idx)
 {
-    d->detect(images[idx], keys);
+    if (idx < images.size()) {
+        d->detect(images[idx], keys);
+    }
+    else {
+        std::cerr << "Feature detection: index out of range." << std::endl;
+    }
 }
 
 void
-FysAlgorithms::compute(cv::Mat* images, vector<KeyPoint>& keys,
-        cv::Mat* descriptions, unsigned int idx)
+FysAlgorithms::compute(vector<cv::Mat>& images, vector<KeyPoint>& keys,
+        vector<cv::Mat>& descriptions, unsigned int idx)
 {
-    e->compute(images[idx], keys, descriptions[idx]);
+    if (idx < images.size()) {
+        e->compute(images[idx], keys, descriptions[idx]);
+    }
+    else {
+        std::cerr << "Feature extraction: index out of range." << std::endl;
+    }
 }
 
 void
-FysAlgorithms::match(cv::Mat* queryDescriptions, cv::Mat* testDescriptions,
+FysAlgorithms::match(vector<cv::Mat>& queryDescriptions, vector<cv::Mat>& testDescriptions,
         vector<DMatch>& mapping, unsigned int queryIdx, unsigned int testIdx)
 {
-    m->match(queryDescriptions[queryIdx], testDescriptions[testIdx], mapping);
+    if (queryIdx < queryDescriptions.size() && testIdx < testDescriptions.size()) {
+        m->match(queryDescriptions[queryIdx], testDescriptions[testIdx], mapping);
+    }
+    else {
+        std::cerr << "Matching: index out of range." << std::endl;
+    }
 }
 
-void
-FysAlgorithms::draw(cv::Mat* querys, vector<KeyPoint> queryKeys, unsigned int queryIdx,
-        cv::Mat* tests, vector<KeyPoint> testKeys, unsigned int testIdx,
-        vector<DMatch> mapping, cv::Mat* outputs, unsigned int outputIdx)
+int
+FysAlgorithms::draw(vector<cv::Mat>& querys, vector<KeyPoint>& queryKeys, unsigned int queryIdx,
+        vector<cv::Mat>& tests, vector<KeyPoint>& testKeys, unsigned int testIdx,
+        vector<DMatch>& mapping, vector<cv::Mat>& outputs)
 {
-    drawMatches(querys[queryIdx], queryKeys, tests[testIdx], testKeys,
-            mapping, outputs[outputIdx]);
+    if (queryIdx < querys.size() && testIdx < tests.size()) {
+        Mat tmp;
+        drawMatches(querys[queryIdx], queryKeys, tests[testIdx], testKeys, mapping, tmp);
+        outputs.push_back(tmp);
+        return outputs.size() - 1; // return the index of output image
+    }
+    else {
+        return -1;
+    }
 }
 
 // -------- RUN ANALYSIS --------
@@ -304,10 +343,10 @@ FysAlgorithms::loadInfo(int groupType)
     vector<cv::KeyPoint> points;
     if (groupType == TRAIN_TYPE) {
         filenames = this->getFilenames(groupType);
-        readImages(queryMats, filenames, 1); // Load 3-channel color images
+        readImages(queryMats, groupType, filenames, 1); // Load 3-channel color images
         
         this->queryKeys = vector<vector<cv::KeyPoint> >(); // clear
-        int i = 0;
+        unsigned int i = 0;
         while (i < querySize) {
             this->detect(queryMats, points, i);
             // Remove the points outside the region
@@ -326,10 +365,10 @@ FysAlgorithms::loadInfo(int groupType)
 
     else if (groupType == VALIDATE_TYPE || groupType == TEST_TYPE) {
         filenames = this->getFilenames(groupType);
-        readImages(testMats, filenames, 1); // Load 3-channel color images
+        readImages(testMats, groupType, filenames, 1); // Load 3-channel color images
 
         this->testKeys = vector<vector<cv::KeyPoint> >(); // clear
-        int i = 0;
+        unsigned int i = 0;
         if (groupType == VALIDATE_TYPE) {
             this->testSize = this->numImages.validate;
         }
@@ -361,7 +400,7 @@ void
 FysAlgorithms::runEach(int testIdx)
 {
     vector<DMatch> mapping;
-    int queryIdx = 0;
+    unsigned int queryIdx = 0;
     while (queryIdx < querySize) {
         this->match(queryDescriptions, testDescriptions, mapping, queryIdx, testIdx);
         this->matches.push_back(mapping);
@@ -393,7 +432,7 @@ FysAlgorithms::runTest()
 void
 FysAlgorithms::runAlgorithm(int runType)
 {
-    int i = 0;
+    unsigned int i = 0;
     while (i < testSize) {
         this->runEach(i);
         ++i;
@@ -404,10 +443,10 @@ FysAlgorithms::runAlgorithm(int runType)
 cv::Mat
 FysAlgorithms::visualizeMatch(unsigned int queryIdx, unsigned int testIdx)
 {
-    this->draw(queryMats, queryKeys[queryIdx], queryIdx,
+    int idx = this->draw(queryMats, queryKeys[queryIdx], queryIdx,
             testMats, testKeys[testIdx], testIdx, // reducedKeys maybe used later
-            matches[testIdx * querySize + queryIdx], outputMats, savingSlot); 
-    return outputMats[savingSlot++];    
+            matches[testIdx * querySize + queryIdx], outputMats); 
+    return outputMats[idx];
 }
 
 } // namespace fys
