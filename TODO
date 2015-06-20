@@ -6,6 +6,3 @@ Tuning.
 Documents.
     After all the interfaces are complete.
 
-Porting of python2 to python3.
-    Use future print function and unicode literals.
-
