@@ -19,6 +19,8 @@ the file (old content will be truncated), otherwise the json string
 will be displayed in the terminal.
 """
 
+from __future__ import print_function
+from __future__ import unicode_literals
 import sys
 from os.path import abspath, isfile, isdir, join, split, splitext
 from os import listdir
@@ -38,12 +40,12 @@ def main():
         raise IOError("Given path is not a file or directory.")
 
     if len(sys.argv) == 2:
-        print "Warning: label as default group 'train'."
+        print("Warning: label as default group 'train'.")
         group = "train"
         jsonPath = None
     if len(sys.argv) == 3:
         if sys.argv[2] not in GROUP_TYPES:
-            print "Warning: label as default group 'train'."
+            print("Warning: label as default group 'train'.")
             group = "train"
             jsonPath = sys.argv[2]
         else:
@@ -76,7 +78,7 @@ def main():
         outfile = open(jsonPath, "w")
         outfile.write(s)
     else:
-        print s
+        print(s)
 
 
 def setupJsonRoot(groupType):

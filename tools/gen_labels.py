@@ -16,6 +16,8 @@ If you want to display the json info in screen rather than write to
 a file, please set `outputJsonFile` to null in configuration.
 """
 
+from __future__ import print_function
+from __future__ import unicode_literals
 import sys
 import json
 from os.path import split
@@ -34,7 +36,6 @@ def main():
 
     configDoc = open(CONFIG_FILE, "r")
     configJson = json.load(configDoc)
-    # print json.JSONEncoder(indent = 4).encode(configJson)
 
     # Parse config file
     outfile = configJson[u"outputJsonFile"]
@@ -62,7 +63,6 @@ def main():
     while i < numInfoFiles:
         addInfo(infoNode, infoFiles[i])
         i += 1
-    # print infoNode
 
     # Process each label file
     i = 0
@@ -72,7 +72,7 @@ def main():
 
     # Write the results
     if outfile is None:
-        print json.JSONEncoder(indent = 4).encode(rootNode)
+        print(json.JSONEncoder(indent = 4).encode(rootNode))
     else:
         out = open(outfile, "w")
         out.write(json.JSONEncoder(indent = 4).encode(rootNode))
