@@ -53,7 +53,13 @@ FysFeatureDetector::FysFeatureDetector(string name, vector<string> parameters)
     }
 }
 
-FysFeatureDetector::~FysFeatureDetector() {}
+FysFeatureDetector::~FysFeatureDetector()
+{
+    if (this->detector != NULL) {
+        delete detector;
+        detector = NULL;
+    }
+}
 
 cv::FeatureDetector*
 FysFeatureDetector::getDetector()
@@ -117,7 +123,13 @@ FysDescriptorExtractor::FysDescriptorExtractor(string name, vector<string> param
     }
 }
 
-FysDescriptorExtractor::~FysDescriptorExtractor() {}
+FysDescriptorExtractor::~FysDescriptorExtractor()
+{
+    if (this->extractor != NULL) {
+        delete extractor;
+        extractor = NULL;
+    }
+}
 
 cv::DescriptorExtractor*
 FysDescriptorExtractor::getExtractor()
@@ -148,7 +160,13 @@ FysDescriptorMatcher::FysDescriptorMatcher(string name, vector<string> parameter
     }
 }
 
-FysDescriptorMatcher::~FysDescriptorMatcher() {}
+FysDescriptorMatcher::~FysDescriptorMatcher()
+{
+    if (this->matcher != NULL) {
+        delete matcher;
+        matcher = NULL;
+    }
+}
 
 cv::DescriptorMatcher*
 FysDescriptorMatcher::getMatcher()
@@ -160,15 +178,17 @@ FysDescriptorMatcher::getMatcher()
 FysAlgorithms::FysAlgorithms(string featureJsonFile, string imageJsonFile)
     : jf(featureJsonFile), ji(imageJsonFile)
 {
-    fysDetector = new FysFeatureDetector(jf.getDetectorType(jf.doc),
+    fysDetector = new (std::nothrow) FysFeatureDetector(jf.getDetectorType(jf.doc),
             jf.getParameters("detector"));
-    fysExtractor = new FysDescriptorExtractor(jf.getExtractorType(jf.doc),
+    fysExtractor = new (std::nothrow) FysDescriptorExtractor(jf.getExtractorType(jf.doc),
             jf.getParameters("extractor"));
-    fysMatcher = new FysDescriptorMatcher(jf.getMatcherType(jf.doc),
+    fysMatcher = new (std::nothrow) FysDescriptorMatcher(jf.getMatcherType(jf.doc),
             jf.getParameters("matcher"));
-    d = fysDetector->getDetector();
-    e = fysExtractor->getExtractor();
-    m = fysMatcher->getMatcher();
+    if (fysDetector && fysExtractor && fysMatcher) {
+        d = fysDetector->getDetector();
+        e = fysExtractor->getExtractor();
+        m = fysMatcher->getMatcher();
+    }
     queryMats = new cv::Mat[MAT_ARRAY_SIZE]; 
     testMats = new cv::Mat[MAT_ARRAY_SIZE];
     outputMats = new cv::Mat[MAT_ARRAY_SIZE];
@@ -180,7 +200,21 @@ FysAlgorithms::FysAlgorithms(string featureJsonFile, string imageJsonFile)
     savingSlot = 0;
 }
 
-FysAlgorithms::~FysAlgorithms() {}
+FysAlgorithms::~FysAlgorithms()
+{
+    if (fysDetector != NULL) {
+        delete fysDetector;
+        fysDetector = NULL;
+    }
+    if (fysExtractor != NULL) {
+        delete fysExtractor;
+        fysExtractor = NULL;
+    }
+    if (fysMatcher != NULL) {
+        delete fysMatcher;
+        fysMatcher = NULL;
+    }
+}
 
 vector<string>
 FysAlgorithms::getFilenames(int groupType)
