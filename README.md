@@ -25,3 +25,16 @@ void testAlgoMatch(string featuresFile, string imagesFile)
 }
 ```
 
+## Documentation
+
+You need Sphinx to generate the documentation.
+
+```shell
+pip install Sphinx
+cd doc
+make html
+```
+
+## Licence
+
+BSD Licence.
