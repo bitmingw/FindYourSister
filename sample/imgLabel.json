@@ -1,0 +1,28 @@
+[
+    {
+        "annotations": [
+            {
+                "class": "rect",
+                "height": 62.0,
+                "width": 139.0,
+                "x": 54.0,
+                "y": 100.0
+            }
+        ],
+        "class": "image",
+        "filename": "Documents/FindYourSister/sample/train/train1.jpg"
+    },
+    {
+        "annotations": [
+            {
+                "class": "rect",
+                "height": 124.0,
+                "width": 367.0,
+                "x": 81.0,
+                "y": 76.0
+            }
+        ],
+        "class": "image",
+        "filename": "Documents/FindYourSister/sample/test/test1.jpg"
+    }
+]

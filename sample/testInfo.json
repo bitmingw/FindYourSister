@@ -1,0 +1,12 @@
+{
+    "test": [
+        {
+            "folder": "/home/pi/Documents/FindYourSister/sample/test", 
+            "size": {
+                "nrows": 333, 
+                "ncols": 500
+            }, 
+            "filename": "test1.jpg"
+        }
+    ]
+}

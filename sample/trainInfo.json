@@ -1,0 +1,12 @@
+{
+    "train": [
+        {
+            "folder": "/home/pi/Documents/FindYourSister/sample/train", 
+            "size": {
+                "nrows": 294, 
+                "ncols": 246
+            }, 
+            "filename": "train1.jpg"
+        }
+    ]
+}
