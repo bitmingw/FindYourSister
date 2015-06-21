@@ -1,8 +1,5 @@
-Tuning.
-    change string to const string& to reduce the load.
-    Implement destructor when new is used in the class.
-    Change Mat[] to vector<Mat>
-
 Documents.
     After all the interfaces are complete.
 
+Test.
+    Write a sample program.
