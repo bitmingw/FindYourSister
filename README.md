@@ -10,8 +10,9 @@ These packages are required by the program:
 - pkg-config
 - python2.7
 - pip
-- Pillow (from pip)
-- SIP (to build Qt projects)
+- Pillow 
+- SIP
+- Sphinx
 - PyQt4
 - rapidjson
 
