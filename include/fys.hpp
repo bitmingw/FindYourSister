@@ -33,8 +33,5 @@
 #define QUERY_PART_TYPE 0
 #define TRAIN_PART_TYPE 1
 
-// size of matrix array
-#define MAT_ARRAY_SIZE 1000
-
 #endif // _H_FYS
 
