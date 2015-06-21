@@ -12,23 +12,6 @@ using namespace std;
 
 namespace fys {
 
-/*
-void testReadImageWrapper(string featuresFile, string imagesFile)
-{
-    std::cout << "==== Test Start: Read Image Wrapper ====" << std::endl;
-
-    FysAlgorithms app(featuresFile, imagesFile);
-    std::cout << "Construction of algorithms class: complete!" << std::endl;
-    app.readImages(app.queryMats, app.getFilenames(TRAIN_TYPE), 0);
-
-    namedWindow("readingTest");
-    imshow("readingTest", app.getImage("query", 4));
-    waitKey(5000);
-
-    std::cout << "==== Test End: Read Image Wrapper ====" << std::endl;
-}
-*/
-
 void testAlgoMatch(string featuresFile, string imagesFile)
 {
     std::cout << "==== Test Start: Match Group of Images ====" << std::endl;
@@ -37,8 +20,10 @@ void testAlgoMatch(string featuresFile, string imagesFile)
     app.runTest();
 
     namedWindow("matching");
-    imshow("matching", app.visualizeMatch(0, 4));
+    imshow("matching", app.visualizeMatch(0, 0));
     waitKey(5000);
+
+    std::cout << "==== Test End: Match Group of Images ====" << std::endl;
 }
 
 } // namespace fys

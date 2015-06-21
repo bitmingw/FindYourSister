@@ -29,17 +29,6 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    //fys::testBasicIO(featuresConfigFile);
-    //fys::testGetSet(imagesConfigFile);
-    //fys::testFeatureType(featuresConfigFile);
-    //fys::testImageProperties(imagesConfigFile);
-    //fys::testSIFTGetting(featuresConfigFile);
-    //fys::testSURFGetting(featuresConfigFile);
-    //fys::testFREAKGetting(featuresConfigFile);
-    //fys::testSIFT(featuresConfigFile, imagesConfigFile);
-    //fys::testAlgoPara(featuresConfigFile);
-    //fys::testSIFTdetector(featuresConfigFile);
-    //fys::testReadImageWrapper(featuresConfigFile, imagesConfigFile);
     fys::testAlgoMatch(featuresConfigFile, imagesConfigFile);
 
     exit(EXIT_SUCCESS);

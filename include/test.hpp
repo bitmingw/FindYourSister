@@ -7,17 +7,6 @@ using namespace std;
 
 namespace fys {
 
-void testBasicIO(string featuresFile);
-void testGetSet(string imagesFile);
-void testFeatureType(string featuresFile);
-void testImageProperties(string imagesFile);
-void testSIFTGetting(string featuresFile);
-void testSURFGetting(string featuresFile);
-void testFREAKGetting(string featuresFile);
-void testSIFT(string featuresFile, string imagesFile);
-void testSIFTdetector(string featuresFile);
-void testAlgoPara(string featuresFile);
-void testReadImageWrapper(string featuresFile, string imagesFile);
 void testAlgoMatch(string featuresFile, string imagesFile);
 
 } // namespace fys
