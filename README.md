@@ -4,8 +4,6 @@ This is a simple framework for object detection.
 
 More information is provided in documentation.
 
-&nbsp;
-
 ## Features
 
 - Fast and reliable framework based on OpenCV.
