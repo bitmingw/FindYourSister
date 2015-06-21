@@ -2,7 +2,6 @@
     "detector": "BRISK",
     "extractor": "SIFT",
     "matcher": "BFMatcher",
-    "drawing": false,
     "siftConfig": {
         "nfeatures": 0,
         "nOctaveLayers": 3,
