@@ -1,26 +1,47 @@
 {
-    "train": [
+    "test": [
         {
-            "filename": "1.jpg",
-            "folder": "images",
-            "size": {
-                "nrows": 256,
-                "ncols": 256
-            },
+            "folder": "/home/pi/Documents/FindYourSister/sample/test", 
+            "filename": "test1.jpg", 
             "objects": [
                 {
-                    "name": "signal",
-                    "id": 0,
                     "region": {
-                        "xmin": 0,
-                        "xmax": 255,
-                        "ymin": 0,
-                        "ymax": 255
-                    }
+                        "xmin": 81, 
+                        "ymin": 76, 
+                        "ymax": 200, 
+                        "xmax": 448
+                    }, 
+                    "name": "rect", 
+                    "id": 0
                 }
-            ]
+            ], 
+            "size": {
+                "nrows": 333, 
+                "ncols": 500
+            }
         }
-    ],
-    "validate": [],
-    "test": []
+    ], 
+    "validate": [], 
+    "train": [
+        {
+            "folder": "/home/pi/Documents/FindYourSister/sample/train", 
+            "filename": "train1.jpg", 
+            "objects": [
+                {
+                    "region": {
+                        "xmin": 54, 
+                        "ymin": 100, 
+                        "ymax": 162, 
+                        "xmax": 193
+                    }, 
+                    "name": "rect", 
+                    "id": 0
+                }
+            ], 
+            "size": {
+                "nrows": 294, 
+                "ncols": 246
+            }
+        }
+    ]
 }
