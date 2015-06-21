@@ -149,13 +149,13 @@ def findInfo(imgDir, imgFile, refInfo):
                     getDirectFolder(info[u"folder"]) == imgDir):
                 return (u"train", info)
     if u"validate" in refInfo:
-        for info in refInfo[u"train"]:
+        for info in refInfo[u"validate"]:
             if info[u"filename"] == imgFile and \
                     (imgDir == "" or \
                     getDirectFolder(info[u"folder"]) == imgDir):
                 return (u"validate", info)
     if u"test" in refInfo:
-        for info in refInfo[u"train"]:
+        for info in refInfo[u"test"]:
             if info[u"filename"] == imgFile and \
                     (imgDir == "" or \
                     getDirectFolder(info[u"folder"]) == imgDir):
