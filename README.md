@@ -14,6 +14,7 @@ More information is provided in documentation.
 
 ## Sample Code
 
+```c++
 void testAlgoMatch(string featuresFile, string imagesFile)
 {
     FysAlgorithms app(featuresFile, imagesFile);
@@ -22,4 +23,5 @@ void testAlgoMatch(string featuresFile, string imagesFile)
     imshow("matching", app.visualizeMatch(0, 0));
     waitKey(5000);
 }
+```
 
